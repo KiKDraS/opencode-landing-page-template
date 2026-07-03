@@ -287,6 +287,54 @@ button:focus {
 - Provide name, role, value for all UI components
 - Ensure status messages can be programmatically determined
 
+**MUST REASON:**
+
+- **Tabindex on Containers — Reasoning Required:**
+
+  Adding `tabindex="0"` (or any positive integer) to a structural container
+  (`<div>`, `<section>`, `<article>`, `<nav>`, `<p>`, etc.) creates an explicit
+  tab stop in the focus order. Before adding it, you **MUST** reason through
+  each of the following questions:
+
+  **1. Does the container already contain native interactive elements?**
+  - `<button>`, `<a>`, `<input>`, `<select>`, `<textarea>`, `<details>`, etc.
+    are already focusable.
+  - If yes: `tabindex` on the container adds an extra tab stop the user must Tab
+    through before reaching those elements. Proceed to question 2.
+  - If no (the container has only static text/images): `tabindex` may be
+    appropriate (e.g., a clickable card wrapper). Proceed to question 3.
+
+  **2. Does a WAI-ARIA pattern mandate it?**
+  - Some ARIA patterns require `tabindex="0"` on non-interactive containers —
+    for example:
+    - `role="tabpanel"` that has **no** focusable children
+    - `role="dialog"` with no focusable close button
+    - `role="gridcell"` in interactive grids
+  - If the pattern **requires** it: document the reasoning in a code comment and
+    add `tabindex`.
+  - If the pattern **recommends** it but the container already has focusable
+    children: default to **no** `tabindex` to avoid the double-tab trap. The
+    native children provide sufficient keyboard access.
+
+  **3. Can keyboard users reach all interactive content efficiently without
+  it?**
+  - Mentally tab through the page. Count tab stops. Does `tabindex` on the
+    container add a redundant stop?
+  - If the container's children are already reachable in 1–2 Tab presses:
+    **omit** `tabindex`.
+  - If the container wraps a large block that the user would otherwise skip over
+    entirely: `tabindex` may be warranted.
+
+  **4. Are you using `tabindex` as a CSS hook or for event delegation?**
+  - **If yes: stop.** Use a different selector or `data-*` attribute. `tabindex`
+    must only be used for focus semantics, never for styling or scripting
+    convenience.
+
+  **Decision rule:** By default, **do not** add `tabindex` to containers that
+  have native interactive children. The only acceptable exceptions are
+  documented ARIA-mandated cases, and those must be justified with an inline
+  code comment.
+
 **ARIA Examples:**
 
 ```html

@@ -93,6 +93,38 @@ the project root. The file must include:
 </html>
 ```
 
+**Critical HTML Requirements:**
+
+- **Semantic HTML5 Only:** Use native HTML5 semantic elements (`<header>`,
+  `<nav>`, `<main>`, `<article>`, `<section>`, `<aside>`, `<footer>`,
+  `<h1>-<h6>`, `<button>`, `<a>`, `<figure>`, `<figcaption>`, `<time>`) instead
+  of generic `<div>` or `<span>` with ARIA roles
+- **No Inline Styles:** Never inject inline styles or `<style>` blocks into
+  `index.html`
+- **No Script Pollution:** No raw `<script>` blocks, inline JavaScript code, or
+  legacy inline DOM event handlers (`onclick`, `onchange`, `onload`) inside
+  `index.html`
+- **Single Entry Point:** Only one script tag allowed:
+  `<script type="module" src="/src/main.js"></script>`
+
+### Feature Cohesion Rule (Trinity Rule)
+
+Every feature must be delivered across all three architectural layers
+simultaneously:
+
+1. **HTML Layer:** Write the markup directly in the structural root
+   (`index.html`)
+2. **CSS Layer:** Isolate visual layout and components into scoped files within
+   `src/styles/` (under `/layout` or `/components`) and link them via `@import`
+   in `main.css`
+3. **JavaScript Layer:** Encapsulate interactivity inside dedicated JS modules
+   within `src/js/` (`layout/`, `components/`, or `utils/`) and initialize via
+   `src/main.js` using a scoped lifecycle wrapper
+
+**Definition of Done:** A feature is complete only when HTML is mapped, style
+layers are isolated, JS module is organized, its init hook is registered in
+`main.js`, and the entire block compiles under Vite.
+
 ### CSS Architecture
 
 CSS must follow a modular layered architecture:

@@ -117,8 +117,10 @@ rules:
      input validators, performance debouncers or throttlers).
 - **The Lifecycle Contract:** Every JS module inside `layout/` or `components/`
   must export a single initialization function (e.g., `initSlider()`). You must
-  import this function into `src/main.js` and execute it inside a native
-  DOMContentLoaded safety wrapper.
+  import this function into `src/main.js` and execute it directly, cleanly, and
+  sequentially. Do not wrap execution in `DOMContentLoaded` or load events, as
+  Vite compiles scripts as native ES modules, which are natively deferred by
+  default.
 
 ### 4. Asset Management (`src/assets/`)
 
