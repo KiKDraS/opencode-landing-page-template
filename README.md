@@ -1,14 +1,10 @@
 # opencode Landing Page Template
 
-A modern landing page template built with Vanilla HTML, CSS, and JavaScript,
-managed by Vite. This template serves as a foundation for creating professional
-landing pages with a focus on performance, accessibility, and maintainability.
-
-## Overview
-
-This repository provides a structured template for building landing pages
-following industry best practices. It includes a modular architecture, strict
-development guidelines, and a Git workflow designed for team collaboration.
+A modern **Landing Page Template** built with Vanilla HTML, CSS, and JavaScript,
+managed by Vite to be use with opencode. It serves as a foundation for creating
+professional **Landing Pages** with a focus on performance, accessibility, and
+maintainability. It includes a modular architecture, strict development
+guidelines, and a Git workflow designed for team collaboration.
 
 ## Tech Stack
 
@@ -18,47 +14,15 @@ development guidelines, and a Git workflow designed for team collaboration.
 - **Structure:** Semantic HTML5
 - **Testing:** Playwright
 
-## Quick Start
-
-### Prerequisites
-
-- Node.js (v18 or later)
-- Git
-
-### Installation
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd <repository-folder>
-
-# Install dependencies
-npm install
-```
-
-### Development
-
-```bash
-# Start the development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
-
 ## Project Structure
 
-```
-.
+```bash
 ├── src/
 │   ├── assets/              # Images, SVGs, Fonts, etc.
 │   ├── styles/              # CSS architectural root
 │   │   ├── layout/          # Structural layers
 │   │   ├── components/      # UI elements
-│   │   ├── boilerplate/    # Global design
+│   │   ├── boilerplate/     # Global design
 │   │   └── main.css         # Layer manifest entry point
 │   ├── js/                  # JavaScript modular root
 │   │   ├── layout/          # Layout interactivity
@@ -198,18 +162,6 @@ This project follows a Git Flow branching model:
 2. **Frontend Development:** Work in `feature/*` and `hotfix/*` branches only
 3. **Integration:** Only the orchestrator can merge into `develop` or `main`
 
-## Testing
-
-This project uses Playwright for end-to-end testing:
-
-```bash
-# Run tests
-npm test
-
-# Open test editor
-npx playwright test --ui
-```
-
 ## Deployment
 
 The project is configured for automatic deployment to GitHub Pages:
@@ -217,29 +169,6 @@ The project is configured for automatic deployment to GitHub Pages:
 - Uses dynamic base path based on repository folder name
 - Builds to `dist/` directory
 - Configured with GitHub Actions for automated deployment
-
-## Best Practices
-
-### Performance
-
-- Use mobile-first design
-- Optimize images (WebP format, lazy loading)
-- Minimize CSS file sizes
-- Leverage Vite + LightningCSS for processing
-
-### Accessibility
-
-- Use semantic HTML5 elements
-- Maintain 4.5:1 color contrast ratio for normal text
-- Provide alt text for all meaningful images
-- Ensure keyboard navigation support
-
-### Maintainability
-
-- Follow the modular architecture
-- Use descriptive class names
-- Comment complex sections
-- Validate HTML with W3C validator
 
 ## License
 
