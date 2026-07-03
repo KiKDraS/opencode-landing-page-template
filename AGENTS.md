@@ -52,7 +52,7 @@ files should be created outside of this schema without prior authorization.
 
 ```bash
   ├── src/
-  │   ├── assets/       # Images, SVGs, Fonts, etc.
+  │   ├── assets/       # Images, SVGs, Icons, etc. (Vite-processed)
   │   ├── styles/       # CSS Architectural Root
   │   │   ├── layout/   # Structural layers (header.css, main.css, footer.css)
   │   │   ├── components/ # UI elements layers (button.css, cards.css, etc.)
@@ -60,13 +60,17 @@ files should be created outside of this schema without prior authorization.
   │   │   │   ├── variables.css # Global Design Tokens / Custom Properties
   │   │   │   ├── reset.css     # Base normalization
   │   │   │   ├── base.css      # Global element overrides (html, body)
+  │   │   │   ├── fonts.css     # @font-face declarations
   │   │   │   ├── utilities.css # Atomic modifier utilities
   │   │   └── main.css      # Layer manifest entry point (aggregates via @import)
   │   ├── js/           # 📦 JavaScript Modular Root
   │   │   ├── layout/   # Interactivity tied to layout (e.g., navigation.js, sticky-header.js)
   │   │   ├── components/ # Isolated UI components logic (e.g., slider.js, modal.js, accordion.js)
   │   │   └── utils/    # Reusable pure functions & tools (e.g., debounce.js, validators.js, dom-helpers.js)
-  │   └── main.js       # Vite's JavaScript entry point (Imports styles & initializes JS modules)
+  │   └── main.js       # Vite's JavaScript entry point (Initializes JS modules only)
+  ├── public/
+  │   ├── fonts/        # Self-hosted font files (TTF, WOFF2) — served at /fonts/
+  │   └── favicon/      # Favicon bundle files
   ├── index.html        # Complete HTML structure for the Landing Page
   ├── vite.config.js    # Bundler configuration
   └── package.json      # Project dependencies and scripts
@@ -84,8 +88,10 @@ rules:
 - **The entire structure of the Landing Page must be written in the `index.html`
   file located at the root of the project.** Do not fragment the HTML into
   separate components unless explicitly requested.
+- The `index.html` file must include the CSS manifest entry point via a `<link>`
+  tag in the `<head>`: `<link rel="stylesheet" href="/src/styles/main.css" />`
 - The `index.html` file must include the script tag to connect the JS entry
-  point: <script type="module" src="/src/main.js"></script>
+  point: `<script type="module" src="/src/main.js"></script>`
 
 ### 2. Styles and CSS (`src/styles/`)
 
@@ -98,15 +104,15 @@ rules:
   stitch them together using native CSS `@import` statements inside
   `src/styles/main.css`.
 - Only the master manifest entry point (`src/styles/main.css`) must be imported
-  from `src/main.js` for Vite + LightningCSS to process the full cascaded bundle
-  accurately.
+  via a `<link rel="stylesheet">` tag inside `index.html` for Vite +
+  LightningCSS to process the full cascaded bundle accurately. CSS must NOT be
+  imported from `src/main.js`.
 
 ### 3. Logic and Scripts (`src/js/` and `src/main.js`)
 
 - `src/main.js` acts strictly as the orchestration layer. It must handle the
-  global import of `src/styles/main.css` and the central initialization of all
-  interactive modules. No raw DOM manipulations or direct feature logic should
-  be written here.
+  central initialization of all interactive modules. No raw DOM manipulations or
+  direct feature logic should be written here.
 - All interactivity must be modularized inside `src/js/` split strictly by
   responsibility:
   1. **`src/js/layout/`**: For scripts modifying structural behavior (e.g.,
@@ -122,11 +128,22 @@ rules:
   Vite compiles scripts as native ES modules, which are natively deferred by
   default.
 
-### 4. Asset Management (`src/assets/`)
+### 4. Asset Management (`src/assets/` and `public/`)
 
-- All images, icons, SVGs, and local fonts must be stored in `src/assets/`.
-- When referencing these assets in HTML or CSS, use consistent relative paths
-  (e.g., `/src/assets/logo.svg` or `./src/assets/hero.jpg`).
+- All images, icons, SVGs, and local fonts must be stored in either
+  `src/assets/` or `public/`, depending on how they need to be served:
+  - **`src/assets/`**: For assets that Vite should process, hash, and optimize
+    (images, SVGs, icons). Reference them with relative paths from CSS/HTML
+    (e.g., `/src/assets/logo.svg` or `./src/assets/hero.jpg`).
+  - **`public/`**: For assets that must be served as-is at the root URL path
+    without Vite processing. This is the standard location for:
+    - **Self-hosted font files** (TTF, WOFF2, etc.) — placed in `public/fonts/`
+      and referenced as `/fonts/filename.woff2`
+    - **Favicon bundles** and `site.webmanifest` — placed in `public/favicon/`
+- Font files are an exception to the `src/assets/` rule because Vite serves
+  `public/` content at the root URL, allowing clean `/fonts/` paths in
+  `@font-face` declarations and `<link rel="preload">` tags without content
+  hashing.
 
 ---
 
