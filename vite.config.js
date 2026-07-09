@@ -7,7 +7,7 @@ export default defineConfig(({ command }) => {
   const isProd = command === "build";
 
   return {
-    base: isProd ? `/${folderName}` : "/",
+    base: isProd ? `/${folderName}-page/` : "/",
     publicDir: "public",
     build: {
       outDir: "dist",

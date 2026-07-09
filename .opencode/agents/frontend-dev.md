@@ -19,7 +19,9 @@ of structure, aesthetics, and behavior.
 When tasked with creating or modifying a feature, you **MUST** deliver its
 execution across all three layers simultaneously to avoid fragmented codebases:
 
-1. Write the markup directly in the structural root (`index.html`).
+1. Write the markup directly in the structural root (`index.html`), including
+   the mandatory `<link rel="stylesheet" href="/src/styles/main.css">` in the
+   `<head>`.
 2. Isolate its visual layout and components into their respective scoped files
    inside `src/styles/` (under `/layout` or `/components`) and link them via
    `@import` in `main.css`.
@@ -41,7 +43,8 @@ execution across all three layers simultaneously to avoid fragmented codebases:
   behaviors (e.g., `<div role="list">`). Always use the platform's native tags
   (`<ul>`, `<dl>`, `<button>`, `<dialog>`).
 - **Clean Document Root:** Never inject inline styles or `<style>` blocks into
-  `index.html`.
+  `index.html`. The only allowed CSS reference is the mandatory manifest link:
+  `<link rel="stylesheet" href="/src/styles/main.css">`.
 - **No Script Pollution:** You are strictly **FORBIDDEN** from adding raw
   `<script>` blocks, inline JavaScript code, or legacy inline DOM event handler
   attributes (such as `onclick="..."`, `onchange="..."`, `onload="..."`) inside
@@ -58,9 +61,11 @@ execution across all three layers simultaneously to avoid fragmented codebases:
   concerns within `src/styles/` (under `/layout`, `/components` or
   `/boilerplate`), utilizing native CSS nesting and design tokens from
   `boilerplate/variables.css`.
-- **Typography & Polish:** Inject distinctive typefaces using Google Fonts or
-  local assets (No Inter, Roboto, or generic system font stacks). Implement
-  staggered motion reveals using custom keyframes and `animation-delay` loops.
+- **Typography & Polish:** Inject distinctive typefaces using local fonts in
+  `src/assets/fonts/` (No Google Fonts CDN, no Inter, Roboto, or generic system
+  font stacks). Reference them with relative CSS paths and let Vite handle
+  content-hashing for long-term caching. Implement staggered motion reveals
+  using custom keyframes and `animation-delay` loops.
 
 ### 3. JavaScript Patterns & Interaction
 
@@ -77,12 +82,44 @@ execution across all three layers simultaneously to avoid fragmented codebases:
     carousels, sliders, custom modal dialogs).
   - `src/js/utils/`: For stateless, side-effect-free pure functions and helpers
     (e.g., text validators, debouncers, throttlers).
-- **The Lifecycle Contract:** Every interactivity module inside `layout/` or
-  `components/` must export a single, clear initialization function (e.g.,
-  `initTestimonialSlider()`). You must import this function into `src/main.js`
-  and execute it cleanly inside a native `DOMContentLoaded` event listener
-  sequence. Direct script injection or loose execution loops bypassing this
-  initialization pipeline are completely prohibited.
+- **Strict Data Sanitization Layer:** You are strictly mandated to use the
+  `sanitize-html` library to clean any external data stream, input value, or
+  dynamic string before it touches your component factory logic. Even when
+  relying on `textContent`, processing the raw string through the sanitizer is a
+  non-negotiable defensive engineering standard.
+  - **Implementation Pattern:**
+
+    ```javascript
+    import sanitizeHtml from "sanitize-html";
+
+    // Before creating the element, sanitize the incoming raw string
+    const cleanDescription = sanitizeHtml(apiData.description, {
+      allowedTags: ["b", "i", "em", "strong"], // Only allow basic inline formatting if required
+    });
+
+    const paragraph = document.createElement("p");
+    paragraph.innerHTML = cleanDescription; // Safe to use here only because it has been explicitly sanitized
+    ```
+
+- **The Lifecycle Contract & Module Efficiency:** Every interactivity module
+  inside `layout/` or `components/` must export a single, clear initialization
+  function (e.g., `initTestimonialSlider()`). You must import this function into
+  `src/main.js` and execute it directly and sequentially without wrappers.
+- **Anti-Redundancy Rule (No DOMContentLoaded):** You are strictly **FORBIDDEN**
+  from wrapping module initializations or internal interaction code inside
+  `DOMContentLoaded` or `window.onload` or `globalThis.onload` event listeners.
+  Because the environment executes native ES modules (`type="module"`), the
+  browser guarantees the DOM tree is already parsed before script execution
+  starts. Adding these listeners is an unnecessary anti-pattern that creates
+  dead macro-task latency.
+  - **Scope Isolation & Global Avoidance (`globalThis` over `window`):** You are
+    strictly **FORBIDDEN** from polluting the global scope or using the legacy
+    `window` object to store data, cache state, or attach custom properties.
+    Always encapsulate state and logic within the narrowest local module (or
+    function) scope possible. If interacting with a global runtime namespace is
+    absolutely mandatory due to architectural constraints, you **MUST**
+    explicitly utilize `globalThis` instead of `window` to guarantee modern,
+    environment-agnostic execution compliance.
 - **Defensive Engineering:** Guard all asynchronous operations, API fetches, and
   DOM lookups inside explicit `try/catch` block boundaries and initial element
   presence checks (e.g., `if (!element) return;`) to prevent runtime application

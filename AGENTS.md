@@ -31,7 +31,7 @@ for a public repository.
     const isProd = command === "build";
 
     return {
-      base: isProd ? `/${folderName}/-page` : "/",
+      base: isProd ? `/${folderName}-page/` : "/",
       publicDir: "public",
       build: {
         outDir: "dist",
@@ -52,7 +52,8 @@ files should be created outside of this schema without prior authorization.
 
 ```bash
   ├── src/
-  │   ├── assets/       # Images, SVGs, Icons, etc. (Vite-processed)
+  │   ├── assets/       # Images, SVGs, Icons, Fonts (Vite-processed & hashed)
+  │   │   └── fonts/    # Self-hosted TTF/WOFF2 font files (content-hashed in dist/)
   │   ├── styles/       # CSS Architectural Root
   │   │   ├── layout/   # Structural layers (header.css, main.css, footer.css)
   │   │   ├── components/ # UI elements layers (button.css, cards.css, etc.)
@@ -61,7 +62,7 @@ files should be created outside of this schema without prior authorization.
   │   │   │   ├── reset.css     # Base normalization
   │   │   │   ├── base.css      # Global element overrides (html, body)
   │   │   │   ├── fonts.css     # @font-face declarations
-  │   │   │   ├── utilities.css # Atomic modifier utilities
+  │   │   │   └── utilities.css # Atomic modifier utilities
   │   │   └── main.css      # Layer manifest entry point (aggregates via @import)
   │   ├── js/           # 📦 JavaScript Modular Root
   │   │   ├── layout/   # Interactivity tied to layout (e.g., navigation.js, sticky-header.js)
@@ -69,8 +70,7 @@ files should be created outside of this schema without prior authorization.
   │   │   └── utils/    # Reusable pure functions & tools (e.g., debounce.js, validators.js, dom-helpers.js)
   │   └── main.js       # Vite's JavaScript entry point (Initializes JS modules only)
   ├── public/
-  │   ├── fonts/        # Self-hosted font files (TTF, WOFF2) — served at /fonts/
-  │   └── favicon/      # Favicon bundle files
+  │   └── favicon/      # Favicon bundle files (served as-is at /favicon/)
   ├── index.html        # Complete HTML structure for the Landing Page
   ├── vite.config.js    # Bundler configuration
   └── package.json      # Project dependencies and scripts
@@ -86,8 +86,12 @@ rules:
 ### 1. HTML Structure (`index.html`)
 
 - **The entire structure of the Landing Page must be written in the `index.html`
-  file located at the root of the project.** Do not fragment the HTML into
-  separate components unless explicitly requested.
+  file located at the root of the project.** Prioritize writing the core layout,
+  sections, and static text directly here to keep initial paint times low.
+- **Component Hybridization:** For repetitive UI patterns (cards, testimonial
+  items, accordion rows) or dynamic data feeds, you must build reusable
+  JavaScript components to minimize code redundancy rather than duplicating
+  large chunks of HTML.
 - The `index.html` file must include the CSS manifest entry point via a `<link>`
   tag in the `<head>`: `<link rel="stylesheet" href="/src/styles/main.css" />`
 - The `index.html` file must include the script tag to connect the JS entry
@@ -117,10 +121,27 @@ rules:
   responsibility:
   1. **`src/js/layout/`**: For scripts modifying structural behavior (e.g.,
      mobile menu toggles, viewport scroll-reveal triggers).
-  2. **`src/js/components/`**: For self-contained UI interaction units (e.g.,
-     custom sliders, testimonial carousels, accessible dialog popups).
-  3. **`src/js/utils/`**: For stateless, side-effect-free pure functions (e.g.,
-     input validators, performance debouncers or throttlers).
+  2. **`src/js/components/`**: For self-contained UI interaction units and
+     reusable element factory functions.
+  3. **`src/js/utils/`**: For stateless, side-effect-free pure functions &
+     tools.
+- **Accessible Component Factory:** All reusable components created via
+  JavaScript MUST be built imperatively using `document.createElement()`. The
+  use of `innerHTML` or `insertAdjacentHTML` for component creation is strictly
+  prohibited to guarantee that elements are correctly mapped to the browser's
+  accessibility tree (AOM) and to enforce absolute safety against XSS.
+- **Mandatory Content Sanitization (`sanitize-html`):** The project has the
+  `sanitize-html` package installed. The agent MUST pass all dynamic text,
+  third-party API payloads, and user inputs through the `sanitizeHtml()` utility
+  before processing it or binding it to any DOM element. This serves as a strict
+  double-layer defense mechanism alongside native browser behaviors to achieve
+  absolute protection against XSS injections.
+- **Performance & Event Delegation:** To optimize application performance and
+  minimize memory footprints, do not attach individual event listeners to
+  repeated elements or inside component factory functions. You must implement
+  event delegation by attaching a single event listener to the closest stable
+  layout or section container, filtering interactions utilizing
+  `event.target.closest()`.
 - **The Lifecycle Contract:** Every JS module inside `layout/` or `components/`
   must export a single initialization function (e.g., `initSlider()`). You must
   import this function into `src/main.js` and execute it directly, cleanly, and
@@ -133,17 +154,17 @@ rules:
 - All images, icons, SVGs, and local fonts must be stored in either
   `src/assets/` or `public/`, depending on how they need to be served:
   - **`src/assets/`**: For assets that Vite should process, hash, and optimize
-    (images, SVGs, icons). Reference them with relative paths from CSS/HTML
-    (e.g., `/src/assets/logo.svg` or `./src/assets/hero.jpg`).
+    (images, SVGs, icons, fonts). Reference them with relative paths from CSS
+    (e.g., `../../assets/fonts/file.ttf`) and Vite will rewrite the URLs with
+    content hashes in production builds.
   - **`public/`**: For assets that must be served as-is at the root URL path
     without Vite processing. This is the standard location for:
-    - **Self-hosted font files** (TTF, WOFF2, etc.) — placed in `public/fonts/`
-      and referenced as `/fonts/filename.woff2`
     - **Favicon bundles** and `site.webmanifest` — placed in `public/favicon/`
-- Font files are an exception to the `src/assets/` rule because Vite serves
-  `public/` content at the root URL, allowing clean `/fonts/` paths in
-  `@font-face` declarations and `<link rel="preload">` tags without content
-  hashing.
+- **Font files belong in `src/assets/fonts/`**, not in `public/`. By processing
+  fonts through Vite, they receive content-hashed filenames that enable
+  long-term caching and are automatically versioned when the file changes.
+  Reference them from `@font-face` declarations using relative CSS paths (e.g.,
+  `url('../../assets/fonts/Outfit-VariableFont_wght.ttf')`).
 
 ---
 
