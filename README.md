@@ -441,6 +441,22 @@ in `.opencode/skills/`:
 - Asymmetric layouts, grid-breaking structures, advanced CSS motion
 - Distinctive color palettes and background textures
 
+### SEO Optimization
+
+- Technical SEO: proper `robots.txt`, meta robots, canonical URLs
+- Structured data with JSON-LD (schema.org compliance)
+- Semantic headings hierarchy (single `<h1>`, logical nesting)
+- Descriptive `alt` attributes and optimized image assets
+- Sitemap.xml for search engine crawling
+
+### Playwright Best Practices
+
+- Reliable locators (user-facing attributes over implementation details)
+- Page Object Model for test maintainability
+- Web-first assertions with auto-retrying
+- Test isolation via fixtures and hooks
+- Accessibility testing integration (axe-core)
+
 ---
 
 ## Available Commands
