@@ -122,7 +122,7 @@ Or override in-session at any time with `/ponytail [lite|full|ultra|off]`.
 
 ---
 
-## Codegraph Pluggin
+## Codegraph Plugin
 
 This template uses **[Codegraph](https://github.com/colbymchenry/codegraph)** to
 provide AI agents with surgical code context — fewer tool calls, faster answers,
