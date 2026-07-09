@@ -30,8 +30,7 @@ quality gates. If a single item fails, the submission must be rejected.
 ### 2. HTML Architecture & Semantics Gate
 
 - **Skills Compliance:** Enforce strict compliance with
-  `.opencode/skills/html-css-best-practices.md` and
-  `.opencode/skills/accessibility-wcag.md`.
+  `html-css-best-practices` and `accessibility-wcag`.
 - **Anti-Fake Semantics:** You must fail any element layout using `<div>` or
   `<span>` combined with an ARIA `role` attribute to simulate native interactive
   behaviors (e.g., `<div role="list">`, `<span role="button">`). Demand the use
@@ -44,8 +43,8 @@ quality gates. If a single item fails, the submission must be rejected.
 
 ### 3. CSS Design & Aesthetics Gate
 
-- **Anti-AI Slop Verification:** Enforce `frontend-design.md` guidelines. Flag
-  and reject generic, boring vanilla grids, cookie-cutter templates, or clichéd
+- **Anti-AI Slop Verification:** Enforce `frontend-design` guidelines. Flag and
+  reject generic, boring vanilla grids, cookie-cutter templates, or clichéd
   color palettes (e.g., standard purple gradients on white backgrounds). Look
   for bold layout choices like intentional asymmetry, diagonal flows, and
   grid-breaking compositions.
@@ -62,17 +61,31 @@ quality gates. If a single item fails, the submission must be rejected.
   Nesting easly signal which element it's being animated. Do **NOT** dump the
   animations on a separated file.
 
-### 4. JavaScript Engineering Gate
+### 4. Technical SEO Gate
 
-- **Syntax and Patterns:** Enforce
-  `.opencode/skills/modern-javascript-patterns.md` criteria. Ensure code uses
-  immutability, pure functions, and modern ES6+ features. Reject traditional
-  imperative loops (`for`, `while`) if a declarative array pipeline (`.map()`,
-  `.filter()`, `.reduce()`) can handle the transformation.
+- **Metadata Inspection:** Check that the page titles and descriptions are
+  optimized (< 60 chars for titles, 150-160 chars for descriptions) and do not
+  contain generic placeholders.
+- **Asset Optimization:** Enforce that all images have meaningful `alt` text and
+  specific width/height dimensions. Verify that `JSON-LD` schemas are
+  syntactically valid and match page data structures.
+
+### 5. JavaScript Engineering Gate
+
+- **Syntax and Patterns:** Enforce `modern-javascript-patterns` criteria. Ensure
+  code uses immutability, pure functions, and modern ES6+ features. Reject
+  traditional imperative loops (`for`, `while`) if a declarative array pipeline
+  (`.map()`, `.filter()`, `.reduce()`) can handle the transformation.
 - **Defensive Guardrails:** Inspect all asynchronous flows, API fetches, and
   runtime events. They **MUST** be wrapped within structural `try/catch` block
   boundaries to guarantee that a failing execution cannot crash the browser
   runtime environment.
+- **Sanitization Check:** Scan all dynamic text assignments or API integrations.
+  If any data input touches the DOM without passing through `sanitizeHtml()`,
+  the build MUST fail immediately.
+- **Delegation Compliance:** Reject any script adding individual click or event
+  handlers to looping elements inside a component collection. Demand
+  parent-level event delegation using `.closest()`.
 
 ---
 

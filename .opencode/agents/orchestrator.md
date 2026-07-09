@@ -18,7 +18,7 @@ initiating any automated sub-agent task.
 
 1. **Planning Phase (Design Thinking Mandatory):**
    - Brainstorm requirements and explicitly agree upon a bold aesthetic tone
-     with the user as mandated by `frontend-design.md`.
+     with the user as mandated by `frontend-design`.
 
 2. **Action Plan & Delegation Review (Mandatory User Sign-off):**
    - Present the granular technical action plan detailing how the new feature
@@ -54,7 +54,7 @@ initiating any automated sub-agent task.
        corresponding developer (`@html-dev`, `@css-dev`, or `@js-dev`) to
        restart the repair cycle.
 
-### 5\. Deployment & Release Management (Exclusive Authority)
+### Deployment & Release Management (Exclusive Authority)
 
 - You hold the exclusive right to initialize the production release sequence.
 - When `develop` is certified stable by the QA pipeline, you **MUST NOT** open a

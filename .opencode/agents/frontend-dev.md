@@ -35,9 +35,8 @@ execution across all three layers simultaneously to avoid fragmented codebases:
 
 ### 1. HTML Architecture & Semantics
 
-- **Strict Semantic Delivery:** You must comply with
-  `.opencode/skills/html-css-best-practices.md` and
-  `.opencode/skills/accessibility-wcag.md`.
+- **Strict Semantic Delivery:** You must comply with `html-css-best-practices`
+  and `accessibility-wcag`.
 - **Anti-Fake Semantics:** You are strictly **FORBIDDEN** from using generic
   `<div>` or `<span>` elements combined with ARIA roles to simulate native
   behaviors (e.g., `<div role="list">`). Always use the platform's native tags
@@ -54,7 +53,7 @@ execution across all three layers simultaneously to avoid fragmented codebases:
 
 ### 2. CSS Design & Aesthetics
 
-- **Anti-AI Slop Aesthetics:** Bound strictly by `frontend-design.md`. Reject
+- **Anti-AI Slop Aesthetics:** Bound strictly by `frontend-design`. Reject
   vanilla grids, standard component layouts, or clichéd color schemes. Implement
   asymmetry, diagonal flows, and grid-breaking elements.
 - **Modular CSS Separation:** You must save your stylesheets strictly split by
@@ -69,7 +68,7 @@ execution across all three layers simultaneously to avoid fragmented codebases:
 
 ### 3. JavaScript Patterns & Interaction
 
-- **Clean ES6+ Logic:** Bound strictly by `modern-javascript-patterns.md`. Write
+- **Clean ES6+ Logic:** Bound strictly by `modern-javascript-patterns`. Write
   pure, declarative functions and immutable state transformations. Prefer native
   array pipelines over imperative loops.
 - **Strict Layered Module Isolation:** All interactivity logic, behavioral
@@ -82,25 +81,6 @@ execution across all three layers simultaneously to avoid fragmented codebases:
     carousels, sliders, custom modal dialogs).
   - `src/js/utils/`: For stateless, side-effect-free pure functions and helpers
     (e.g., text validators, debouncers, throttlers).
-- **Strict Data Sanitization Layer:** You are strictly mandated to use the
-  `sanitize-html` library to clean any external data stream, input value, or
-  dynamic string before it touches your component factory logic. Even when
-  relying on `textContent`, processing the raw string through the sanitizer is a
-  non-negotiable defensive engineering standard.
-  - **Implementation Pattern:**
-
-    ```javascript
-    import sanitizeHtml from "sanitize-html";
-
-    // Before creating the element, sanitize the incoming raw string
-    const cleanDescription = sanitizeHtml(apiData.description, {
-      allowedTags: ["b", "i", "em", "strong"], // Only allow basic inline formatting if required
-    });
-
-    const paragraph = document.createElement("p");
-    paragraph.innerHTML = cleanDescription; // Safe to use here only because it has been explicitly sanitized
-    ```
-
 - **The Lifecycle Contract & Module Efficiency:** Every interactivity module
   inside `layout/` or `components/` must export a single, clear initialization
   function (e.g., `initTestimonialSlider()`). You must import this function into
@@ -120,6 +100,10 @@ execution across all three layers simultaneously to avoid fragmented codebases:
     absolutely mandatory due to architectural constraints, you **MUST**
     explicitly utilize `globalThis` instead of `window` to guarantee modern,
     environment-agnostic execution compliance.
+- **Mandatory Event Delegation:** You are strictly **FORBIDDEN** from inserting
+  `.addEventListener()` within data iteration loops. You must bind listeners
+  once to stable parent layouts and trap targets utilizing
+  `const actionItem = event.target.closest('.target-selector')`
 - **Defensive Engineering:** Guard all asynchronous operations, API fetches, and
   DOM lookups inside explicit `try/catch` block boundaries and initial element
   presence checks (e.g., `if (!element) return;`) to prevent runtime application

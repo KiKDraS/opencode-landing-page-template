@@ -16,6 +16,11 @@
       "type": "local",
       "command": ["npx", "playwright", "run-test-mcp-server"],
       "enabled": true
+    },
+    "codegraph": {
+      "type": "local",
+      "command": ["npx", "@colbymchenry/codegraph", "serve", "--mcp"],
+      "enabled": true
     }
   },
   "default_agent": "orchestrator",
