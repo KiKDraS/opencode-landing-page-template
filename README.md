@@ -97,14 +97,15 @@ for full details.
 The plugin is already referenced in `opencode.json`. OpenCode will cache it
 automatically at startup.
 
-**Default mode:** Pre-configured to `full` via `.opencode/plugins/ponytail-mode.js`.
+**Default mode:** Pre-configured to `full` via
+`.opencode/plugins/ponytail-mode.js`.
 
 **Change the default mode:**
 
 Edit `.opencode/plugins/ponytail-mode.js` and change the value:
 
 ```js
-output.env.PONYTAIL_DEFAULT_MODE = "ultra"  // lite | full | ultra
+output.env.PONYTAIL_DEFAULT_MODE = "ultra"; // lite | full | ultra
 ```
 
 Or override in-session at any time with `/ponytail [lite|full|ultra|off]`.
@@ -118,6 +119,45 @@ Or override in-session at any time with `/ponytail [lite|full|ultra|off]`.
 | `/ponytail-audit`                    | Audit entire repo for over-engineering   |
 | `/ponytail-debt`                     | List deferred `ponytail:` shortcuts      |
 | `/ponytail-help`                     | Quick reference                          |
+
+---
+
+## Codegraph Pluggin
+
+This template uses **[Codegraph](https://github.com/colbymchenry/codegraph)** to
+provide AI agents with surgical code context — fewer tool calls, faster answers,
+and accurate cross-file dependency tracking.
+
+### Setup
+
+After cloning the repository, initialize the codegraph index:
+
+```bash
+npm install
+npm run setup
+```
+
+This runs `npx @colbymchenry/codegraph init`, which creates the `.codegraph/`
+directory and builds the full knowledge graph. The index auto-syncs on every
+file change — no manual re-indexing needed.
+
+### What Gets Indexed
+
+- All JavaScript, CSS, and HTML files in `src/`
+- Configuration files (`vite.config.js`, `opencode.json`, etc.)
+- Excludes `node_modules/`, `dist/`, and anything in `.gitignore`
+
+### MCP Integration
+
+The MCP server is configured in `opencode.json`. When an agent session starts,
+codegraph launches automatically and provides tools like `codegraph_explore` for
+semantic code queries.
+
+### Notes
+
+- `.codegraph/` is gitignored — each developer generates their own index
+- The index is a local SQLite database; no data leaves your machine
+- If the index gets stale, re-run `npm run setup` to rebuild it
 
 ---
 

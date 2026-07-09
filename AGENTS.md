@@ -276,45 +276,6 @@ NOT** compress the mandated modular CSS layers into a single flat asset file.
 
 ---
 
-## Codegraph (Code Intelligence)
-
-This project uses [Codegraph](https://github.com/colbymchenry/codegraph) to
-provide AI agents with surgical code context — fewer tool calls, faster answers,
-and accurate cross-file dependency tracking.
-
-### Setup
-
-After cloning the repository, initialize the codegraph index:
-
-```bash
-npm install
-npm run setup
-```
-
-This runs `npx @colbymchenry/codegraph init`, which creates the `.codegraph/`
-directory and builds the full knowledge graph. The index auto-syncs on every
-file change — no manual re-indexing needed.
-
-### What Gets Indexed
-
-- All JavaScript, CSS, and HTML files in `src/`
-- Configuration files (`vite.config.js`, `opencode.json`, etc.)
-- Excludes `node_modules/`, `dist/`, and anything in `.gitignore`
-
-### MCP Integration
-
-The MCP server is configured in `opencode.json`. When an agent session starts,
-codegraph launches automatically and provides tools like `codegraph_explore` for
-semantic code queries.
-
-### Notes
-
-- `.codegraph/` is gitignored — each developer generates their own index
-- The index is a local SQLite database; no data leaves your machine
-- If the index gets stale, re-run `npm run setup` to rebuild it
-
----
-
 ## Useful Commands
 
 - `npm run dev`: Starts the local development server.
