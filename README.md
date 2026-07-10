@@ -44,19 +44,7 @@ git push -u origin develop
 
 You now have `main` (production) and `develop` (integration) branches.
 
-### 4. Start Developing
-
-```bash
-npm run dev
-```
-
-Open `http://localhost:5173` and start building your landing page.
-
----
-
-## Configuration
-
-### LLM Provider
+### 4. Configure Provider
 
 OpenCode requires an LLM provider. Configure one before use:
 
@@ -70,7 +58,7 @@ paste it into the prompt. Alternatively, configure other providers (OpenAI,
 Anthropic, etc.) — see
 [OpenCode Providers](https://opencode.ai/docs/providers/).
 
-### Playwright (E2E Testing)
+### 5. Configure Playwright (E2E Testing)
 
 Install Playwright browsers to enable the automated testing pipeline:
 
@@ -83,7 +71,46 @@ This installs Chromium, Firefox, and WebKit browsers used by the
 See the [Playwright documentation](https://playwright.dev/docs/intro) for more
 details.
 
-### Ponytail Plugin
+Then enable the `playwright-test` MCP server in `opencode.json`:
+
+```json
+"playwright-test": {
+  "type": "local",
+  "command": ["npx", "playwright", "run-test-mcp-server"],
+  "enabled": true
+}
+```
+
+The MCP server is **disabled by default** (opt-in) to avoid launching
+unnecessary services on startup.
+
+### 6. Configure Context7 (Library Documentation — Optional but Recommended)
+
+This template uses Context7 to give AI agents real-time library documentation.
+Set up your API key:
+
+```bash
+echo "<your-api-key>" > .opencode/secrets/context7-api-key
+```
+
+Get a free key at [context7.com](https://context7.com).
+
+**Enable the MCP server** in `opencode.json` (disabled by default):
+
+```json
+"context7": {
+  "type": "remote",
+  "url": "https://mcp.context7.com/mcp",
+  "headers": {
+    "CONTEXT7_API_KEY": "{file:.opencode/secrets/context7-api-key}"
+  },
+  "enabled": true
+}
+```
+
+See the [Context7 section](#context7-mcp-library-documentation) for full details.
+
+### 7. Configure Ponytail Plugin (optional)
 
 This template comes pre-configured with the **Ponytail** plugin
 (`@dietrichgebert/ponytail`) — it makes your AI agent think like the laziest
@@ -130,7 +157,8 @@ and accurate cross-file dependency tracking.
 
 ### Setup
 
-After cloning the repository, initialize the codegraph index:
+After cloning the repository, initialize the codegraph index and enable the
+MCP server:
 
 ```bash
 npm install
@@ -141,6 +169,16 @@ This runs `npx @colbymchenry/codegraph init`, which creates the `.codegraph/`
 directory and builds the full knowledge graph. The index auto-syncs on every
 file change — no manual re-indexing needed.
 
+**Enable the MCP server** in `opencode.json` (disabled by default):
+
+```json
+"codegraph": {
+  "type": "local",
+  "command": ["npx", "@colbymchenry/codegraph", "serve", "--mcp"],
+  "enabled": true
+}
+```
+
 ### What Gets Indexed
 
 - All JavaScript, CSS, and HTML files in `src/`
@@ -149,15 +187,177 @@ file change — no manual re-indexing needed.
 
 ### MCP Integration
 
-The MCP server is configured in `opencode.json`. When an agent session starts,
-codegraph launches automatically and provides tools like `codegraph_explore` for
-semantic code queries.
+The MCP server is configured in `opencode.json`. Enable it by setting
+`"enabled": true`:
+
+```json
+"codegraph": {
+  "type": "local",
+  "command": ["npx", "@colbymchenry/codegraph", "serve", "--mcp"],
+  "enabled": true
+}
+```
+
+When enabled, codegraph launches automatically at session start and provides
+tools like `codegraph_explore` for semantic code queries.
 
 ### Notes
 
 - `.codegraph/` is gitignored — each developer generates their own index
 - The index is a local SQLite database; no data leaves your machine
 - If the index gets stale, re-run `npm run setup` to rebuild it
+
+---
+
+## Context7 MCP (Library Documentation)
+
+This template uses **[Context7](https://context7.com)** to give AI agents
+up-to-date documentation for libraries, frameworks, SDKs, and APIs — directly in
+their toolset. Instead of guessing API signatures or relying on stale training
+data, agents fetch current docs in real time (React, Next.js, Prisma, Express,
+Tailwind, Django, Playwright, etc.).
+
+### How It Works
+
+Context7 is configured as a remote MCP server in `opencode.json`. When an agent
+needs library docs (e.g., "How do I use `next/headers` in Next.js 15?"), it
+calls `resolve-library-id` → `query-docs` and gets back current, versioned
+documentation with code examples.
+
+The agent skill at `.opencode/skills/context7-mcp/SKILL.md` tells the AI
+**when** to use it (setup questions, API syntax, config, version migrations) and
+**when not to** (refactoring, debugging business logic, code review).
+
+### Setup
+
+Context7 requires a free API key. Set it up in one step:
+
+```bash
+echo "<your-context7-api-key>" > .opencode/secrets/context7-api-key
+```
+
+The MCP server reads the key from this file at startup via
+`{file:.opencode/secrets/context7-api-key}` in `opencode.json`.
+
+### Where to Get an API Key
+
+1. Go to [context7.com](https://context7.com)
+2. Sign up for a free account
+3. Copy your API key from the dashboard
+4. Paste it into the command above
+
+### How the File-Based Key Works
+
+OpenCode's `{file:path}` syntax reads the file content and substitutes it as a
+string at config parse time. This means:
+
+- **No environment variables needed** — the key stays inside the project
+- **Gitignored** — `.opencode/secrets/` is tracked but its contents are ignored
+  (see `.opencode/secrets/.gitignore`)
+- **Portable** — clone the repo, add your key, done. No global config required
+
+### Enabling Context7
+
+Context7 is **disabled by default** (opt-in). Enable it in `opencode.json`:
+
+```json
+"context7": {
+  "type": "remote",
+  "url": "https://mcp.context7.com/mcp",
+  "headers": {
+    "CONTEXT7_API_KEY": "{file:.opencode/secrets/context7-api-key}"
+  },
+  "enabled": true
+}
+```
+
+To disable it later, set `"enabled": false` or remove the block entirely.
+
+### Notes
+
+- The API key file must be **plain text** — no `.js` extension, no `export`, just
+  the raw key string
+- If the file doesn't exist, OpenCode will fail to parse the config with an
+  error like `bad file reference: "{file:...}" <path> does not exist`
+- Context7 uses `{file:...}` for the API key — the same pattern is also used
+  elsewhere in the project (e.g., prompts in agent definitions), so it's worth
+  understanding how it works
+
+---
+
+## Troubleshooting
+
+### `{file:...}` reference: "does not exist"
+
+```
+Error: bad file reference: "{file:.opencode/secrets/context7-api-key}" ... does not exist
+```
+
+OpenCode's `{file:path}` substitution reads the file and inlines its content.
+If the file doesn't exist, the config fails to load.
+
+**Fix:** Create the file as a plain text file (no `.js` extension, no `export`):
+
+```bash
+echo "<your-api-key>" > .opencode/secrets/context7-api-key
+```
+
+### Config file is not valid JSON
+
+```
+Error: Config file at .../opencode.json is not valid JSON
+```
+
+**Fix:** Validate your `opencode.json` syntax:
+
+```bash
+npx jsonlint opencode.json
+```
+
+Or use `jq`:
+
+```bash
+jq . opencode.json > /dev/null && echo "valid"
+```
+
+Common causes: trailing commas, missing commas between fields, unquoted keys.
+
+### MCP server not connecting
+
+If an agent reports that an MCP tool is unavailable (e.g., `codegraph_explore`,
+`playwright-test*`, or `query-docs`):
+
+1. **Check if the server is enabled** — verify `"enabled": true` for the
+   specific MCP server in `opencode.json`. All MCP servers are **opt-in** by
+   default.
+2. **Restart the session** — MCP server configuration is read at startup.
+   Changes require a new session.
+3. **Check the server is installed** — Playwright and Codegraph need local
+   dependencies:
+   - Playwright: `npx playwright install`
+   - Codegraph: `npm run setup` (runs `npx @colbymchenry/codegraph init`)
+
+### Playwright browsers not found
+
+```
+Error: browserType.launch: Executable doesn't exist at ...
+```
+
+**Fix:** Install Playwright browsers:
+
+```bash
+npx playwright install
+```
+
+### Port already in use
+
+If a local MCP server fails to start, another process may be using its port.
+Playwright MCP and Codegraph use ephemeral ports by default — if the issue
+persists, restart your terminal or check with:
+
+```bash
+lsof -i :<port>
+```
 
 ---
 
@@ -200,6 +400,22 @@ This template uses a multi-agent orchestration pipeline managed by OpenCode:
 | **playwright-test-planner**   | Explores the UI and creates test plans                      |
 | **playwright-test-generator** | Converts test plans into executable `.spec.ts` files        |
 | **playwright-test-healer**    | Runs, debugs, and auto-fixes failing tests                  |
+
+```mermaid
+flowchart LR
+    P[("📋 Plan")]
+    B["🛠️ Build<br/><i>@frontend-dev</i>"]
+    A["🔍 Audit<br/><i>@code-review</i>"]
+    T["🧪 Test<br/><i>Playwright Agents</i>"]
+    S["🚀 Ship<br/><i>@orchestrator</i>"]
+
+    P --> B
+    B --> A
+    A -->|REJECTED| B
+    A -->|APPROVED| T
+    T --> S
+    S -.->|User Approval| R>"Release"]
+```
 
 ### Pipeline Flow
 
@@ -448,6 +664,13 @@ in `.opencode/skills/`:
 - Semantic headings hierarchy (single `<h1>`, logical nesting)
 - Descriptive `alt` attributes and optimized image assets
 - Sitemap.xml for search engine crawling
+
+### Context7 MCP (Library Documentation)
+
+- Fetches live, versioned documentation for libraries and frameworks
+- Priority use: setup questions, API syntax, config, version migrations
+- **Do not use for**: refactoring, debugging business logic, code review
+- Uses `resolve-library-id` → `query-docs` pipeline for accurate results
 
 ### Playwright Best Practices
 

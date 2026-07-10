@@ -15,12 +15,12 @@
     "playwright-test": {
       "type": "local",
       "command": ["npx", "playwright", "run-test-mcp-server"],
-      "enabled": true
+      "enabled": false
     },
     "codegraph": {
       "type": "local",
       "command": ["npx", "@colbymchenry/codegraph", "serve", "--mcp"],
-      "enabled": true
+      "enabled": false
     },
     "context7": {
       "type": "remote",
@@ -28,7 +28,7 @@
       "headers": {
         "CONTEXT7_API_KEY": "{file:.opencode/secrets/context7-api-key}"
       },
-      "enabled": true
+      "enabled": false
     }
   },
   "default_agent": "orchestrator",
