@@ -235,6 +235,11 @@ Every PR created by this agent **MUST** follow this exact structure:
    git push origin --tags
    ```
 
+   **Creating a GitHub Release:**
+   ```bash
+   gh release create vX.X.X --title "Release vX.X.X" --notes "Release notes and changelog"
+   ```
+
    **Creating a back-merge PR to develop:**
    ```bash
    # Recreate the branch from main for back-merge
@@ -272,6 +277,15 @@ Every PR created by this agent **MUST** follow this exact structure:
    git checkout main && git pull origin main
    git tag -a vX.X.X -m "Release vX.X.X"
    git push origin --tags
+   ```
+
+   **Creating a GitHub Release:**
+   ```bash
+   curl -s -X POST \
+     -H "Authorization: token $TOKEN" \
+     -H "Accept: application/vnd.github.v3+json" \
+     "https://api.github.com/repos/$OWNER_REPO/releases" \
+     -d '{"tag_name":"vX.X.X","name":"Release vX.X.X","body":"Release notes and changelog"}'
    ```
 
    **Back-merge to develop:**
@@ -317,6 +331,11 @@ Every PR created by this agent **MUST** follow this exact structure:
    git push origin --tags
    ```
 
+   **Creating a GitHub Release:**
+   ```bash
+   gh release create vX.X.X --title "Hotfix vX.X.X" --notes "Hotfix description and impact"
+   ```
+
    **Creating a back-merge PR to develop:**
    ```bash
    git checkout -b hotfix/fix-name-backmerge
@@ -353,6 +372,15 @@ Every PR created by this agent **MUST** follow this exact structure:
    git checkout main && git pull origin main
    git tag -a vX.X.X -m "Hotfix vX.X.X"
    git push origin --tags
+   ```
+
+   **Creating a GitHub Release:**
+   ```bash
+   curl -s -X POST \
+     -H "Authorization: token $TOKEN" \
+     -H "Accept: application/vnd.github.v3+json" \
+     "https://api.github.com/repos/$OWNER_REPO/releases" \
+     -d '{"tag_name":"vX.X.X","name":"Hotfix vX.X.X","body":"Hotfix description and impact"}'
    ```
 
    **Back-merge to develop:**
