@@ -142,52 +142,20 @@ testing framework — it provides the browser context that the
 `@playwright-test-*` agents need to explore your UI, generate tests, and
 self-heal failures without human intervention.
 
-### Why Playwright Is Part of the Template
+### How It Works
 
 The agent pipeline doesn't just lint your code — it **opens a real browser and
-tests the actual application**. The Playwright MCP server gives agents access to:
+tests the actual application**. The Playwright MCP server gives agents access
+to:
 
 - **Browser automation tools** — launch browsers, navigate, click, type, assert
-- **Page exploration** — agents can inspect your rendered UI to generate accurate
-  test plans
+- **Page exploration** — agents can inspect your rendered UI to generate
+  accurate test plans
 - **Self-healing tests** — when selectors break due to UI changes, agents can
   diagnose and repair the tests automatically
 
 Without Playwright, the QA phase of the pipeline (`@playwright-test-planner` →
 `@playwright-test-generator` → `@playwright-test-healer`) cannot run.
-
-### Setup
-
-Browsers are installed automatically by `npm run setup`. The `playwright-test`
-MCP server is **enabled by default** in `opencode.json`. No additional
-configuration is needed.
-
-If browsers go missing, re-run:
-
-```bash
-npm run setup
-```
-
-Or install Playwright browsers directly:
-
-```bash
-npx playwright install
-```
-
-### What Gets Tested
-
-The Playwright agents focus on:
-
-- **Component isolation** — testing individual UI components in isolation
-- **End-to-end flows** — simulating real user journeys through the application
-- **Accessibility** — running axe-core audits via Playwright for WCAG compliance
-- **Visual regression** — capturing screenshots for visual diff testing (future)
-
-Test files are generated inside `tests/` and can be run independently:
-
-```bash
-npx playwright test
-```
 
 ---
 
