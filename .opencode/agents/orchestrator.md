@@ -52,12 +52,23 @@ initiating any automated sub-agent task.
      - If the Healer discovers a real application bug, capture its diagnostics,
        break the execution pipeline, and send the bug logs back to the developer
        (`@frontend-dev`) to restart the repair cycle.
-   - **Step D (Mandatory Iterative Documentation):** CRITICAL GATES. Once the
-     code passes the QA phase successfully, you MUST generate an engineering log
-     of the specific changes made (modified components, architecture paths, or
-     behavior updates) and save it directly inside the root `./docs/` folder
-     (e.g., `./docs/feature-name-changes.md`) _before_ initiating any merge
-     procedures.
+    - **Step D (Mandatory Iterative Documentation):** CRITICAL GATES. Once the
+      code passes the QA phase successfully, you MUST generate an engineering log
+      of the specific changes made (modified components, architecture paths, or
+      behavior updates) and save it directly inside the root `./docs/` folder
+      (e.g., `./docs/feature-name-changes.md`) _before_ initiating any merge
+      procedures.
+
+5. **Branch Merge (PR Workflow):**
+   - After documentation is complete, invoke `@release-manager` to create a
+     Pull Request from the working branch (`feature/*`, `release/*`, or
+     `hotfix/*`) into the target branch (`develop` or `main`).
+   - **Stop and Prompt:** Present the PR URL to the user and request explicit
+     authorization to merge. The user will approve typing "Approved" or
+     "Aprobado".
+   - Only after user approval, invoke `@release-manager` to merge the PR and
+     delete the source branch.
+   - **NEVER delete `main` or `develop`** — only temporary branches are deleted.
 
 ### Deployment & Release Management (Exclusive Authority)
 
@@ -67,15 +78,14 @@ initiating any automated sub-agent task.
 - **Stop and Prompt:** Present a comprehensive summary of the accumulated
   changes (reading from your generated `./docs/` logs) to the user and request
   explicit authorization to create the release branch.
-- **Execution:** Only after receiving explicit user validation, use your
-  environment tools to execute the branch creation:
-
-  ```bash
-    git checkout develop
-    git pull
-    git checkout -b release/vX.X.X
-  ```
-
+- **Execution:** Only after receiving explicit user validation, invoke
+  `@release-manager` to handle the full release sequence:
+  1. Create `release/*` branch from `develop`
+  2. Version bump and changelog
+  3. Create PR from `release/*` to `main` (with user approval)
+  4. Merge PR to `main` and tag
+  5. Create back-merge PR from `release/*` to `develop` (with user approval)
+  6. Merge back-merge PR and delete temporary branches
 - Coordinate the final micro-fixes with `@frontend-dev` (who will work via
   temporary feature branches or direct commits to that release line if
   explicitly instructed by you), but you remain the sole coordinator.
