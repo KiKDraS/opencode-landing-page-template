@@ -40,3 +40,9 @@ Interpret creatively and make unexpected choices that feel genuinely designed fo
 **IMPORTANT**: Match implementation complexity to the aesthetic vision. Maximalist designs need elaborate code with extensive animations and effects. Minimalist or refined designs need restraint, precision, and careful attention to spacing, typography, and subtle details. Elegance comes from executing the vision well.
 
 Remember: Claude is capable of extraordinary creative work. Don't hold back, show what can truly be created when thinking outside the box and committing fully to a distinctive vision.
+
+> **Project contract:** This project has a `DESIGN.md` at the root directory.
+> Read it before generating any code. Every design decision — color, type,
+> spacing, motion, atmosphere — must conform to the contract defined there.
+> If `DESIGN.md` does not exist yet, the design direction has not been
+> established and must be agreed upon with the user before writing code.

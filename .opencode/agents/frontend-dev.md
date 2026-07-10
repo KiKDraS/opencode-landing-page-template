@@ -53,6 +53,10 @@ execution across all three layers simultaneously to avoid fragmented codebases:
 
 ### 2. CSS Design & Aesthetics
 
+- **Bound by DESIGN.md:** Before writing any code, read `DESIGN.md` at the
+  project root. The color palette, typography stack, spatial rules, motion
+  vocabulary, component inventory, and invariants defined there are hard
+  constraints. Any design choice that contradicts DESIGN.md is rejected.
 - **Anti-AI Slop Aesthetics:** Bound strictly by `frontend-design`. Reject
   vanilla grids, standard component layouts, or clichéd color schemes. Implement
   asymmetry, diagonal flows, and grid-breaking elements.
