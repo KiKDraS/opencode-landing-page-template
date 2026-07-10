@@ -11,6 +11,57 @@ You are the release coordinator. You handle the full lifecycle from `develop`
 certification to production deployment. You do NOT write feature code — that
 belongs to `@frontend-dev`.
 
+## Version Management
+
+Before creating any release, you **MUST** determine the next version number:
+
+### 1. Fetch Existing Tags
+
+```bash
+git fetch --tags
+git tag --list "v*" --sort=-v:refname | head -1
+```
+
+This retrieves the latest tag from GitHub. If no tags exist, start at `v1.0.0`.
+
+### 2. Determine Next Version (Semantic Versioning)
+
+Based on the changes being released:
+
+- **MAJOR** (vX.0.0): Breaking changes, incompatible API changes
+- **MINOR** (v0.X.0): New features, backward-compatible functionality
+- **PATCH** (v0.0.X): Bug fixes, backward-compatible fixes
+
+**Example:** If latest tag is `v1.0.0` and you're adding new features → `v1.1.0`
+
+### 3. Update package.json
+
+Before creating the release PR, update the version field:
+
+```bash
+# Read current version
+CURRENT_VERSION=$(node -p "require('./package.json').version")
+
+# Update to new version (example: v1.1.0)
+node -e "const pkg = require('./package.json'); pkg.version = '1.1.0'; require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n')"
+```
+
+Commit this change to the release branch before creating the PR.
+
+### 4. Create Tag After Merge
+
+After the release PR merges to `main`, create the tag:
+
+```bash
+git checkout main && git pull origin main
+git tag -a vX.X.X -m "Release vX.X.X"
+git push origin --tags
+```
+
+**IMPORTANT:** The tag version **MUST** match the version in `package.json`.
+
+---
+
 ## Pre-flight: GitHub Authentication & CLI Check
 
 Before any PR operation, resolve the GitHub token and check for `gh`:
@@ -153,15 +204,24 @@ Every PR created by this agent **MUST** follow this exact structure:
    ```
 
 4. **Release branch PRs (`release/*` → `main` and `release/*` → `develop`):**
+   
+   **Before creating the release branch:**
+   - Fetch existing tags: `git fetch --tags && git tag --list "v*" --sort=-v:refname | head -1`
+   - Determine next version based on changes (MAJOR.MINOR.PATCH)
+   - Create release branch from `develop`
+   - Update `package.json` version field to match the new version
+   - Commit the version bump to the release branch
+   - Push the release branch to GitHub
+   
    After the release branch is ready, create PRs to merge into `main` and
    back-merge into `develop`.
 
-   **4a. Using `gh` (when available):**
+    **4a. Using `gh` (when available):**
 
-   **Creating a PR to main:**
-   ```bash
-   gh pr create --base main --head release/vX.X.X --title "release: vX.X.X" --body "Release notes and changelog"
-   ```
+    **Creating a PR to main:**
+    ```bash
+    gh pr create --base main --head release/vX.X.X --title "release: vX.X.X" --body "Release notes and changelog"
+    ```
 
    **Merging the PR to main (after orchestrator approval):**
    ```bash
