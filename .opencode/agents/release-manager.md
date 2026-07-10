@@ -235,9 +235,14 @@ Every PR created by this agent **MUST** follow this exact structure:
    git push origin --tags
    ```
 
-   **Creating a GitHub Release:**
+   **Creating a GitHub Release (MANDATORY — do not skip):**
    ```bash
    gh release create vX.X.X --title "Release vX.X.X" --notes "Release notes and changelog"
+   ```
+
+   **Verify GitHub Release exists:**
+   ```bash
+   gh release view vX.X.X --json tagName
    ```
 
    **Creating a back-merge PR to develop:**
@@ -279,13 +284,20 @@ Every PR created by this agent **MUST** follow this exact structure:
    git push origin --tags
    ```
 
-   **Creating a GitHub Release:**
+   **Creating a GitHub Release (MANDATORY — do not skip):**
    ```bash
    curl -s -X POST \
      -H "Authorization: token $TOKEN" \
      -H "Accept: application/vnd.github.v3+json" \
      "https://api.github.com/repos/$OWNER_REPO/releases" \
      -d '{"tag_name":"vX.X.X","name":"Release vX.X.X","body":"Release notes and changelog"}'
+   ```
+
+   **Verify GitHub Release exists:**
+   ```bash
+   curl -s -H "Authorization: token $TOKEN" \
+     -H "Accept: application/vnd.github.v3+json" \
+     "https://api.github.com/repos/$OWNER_REPO/releases/tags/vX.X.X" | grep -q '"tag_name"'
    ```
 
    **Back-merge to develop:**
