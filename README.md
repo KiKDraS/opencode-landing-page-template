@@ -379,6 +379,7 @@ lsof -i :<port>
 │   └── main.js              # Vite JS entry point (initializes modules)
 ├── public/
 │   └── favicon/             # Favicon bundle (served as-is)
+├── docs/                    # Session documentation (auto-generated)
 ├── index.html               # Complete HTML structure
 ├── vite.config.js           # Bundler config (dynamic base path for GH Pages)
 ├── playwright.config.ts     # E2E test configuration
