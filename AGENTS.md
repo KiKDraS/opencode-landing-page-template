@@ -75,6 +75,7 @@ files should be created outside of this schema without prior authorization.
   ├── public/
   │   ├── favicon/      # Favicon bundle files (served as-is at /favicon/)
   │   └── robots.txt    # Search Engine crawl directives
+  ├── docs/             # Session documentation (auto-generated)
   ├── index.html        # Complete HTML structure & SEO Core for the Landing Page
   ├── sitemap.xml       # Canonical XML mapping for search indices
   ├── playwright.config.js # Testing framework configuration
