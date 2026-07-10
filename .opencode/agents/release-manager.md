@@ -45,8 +45,34 @@ fi
 command -v gh
 ```
 
-- **If `gh` is available:** Use the `gh`-based PR workflow (Section 4a).
-- **If `gh` is missing:** Use the `curl` + GitHub REST API fallback (Section 4b).
+- **If `gh` is available:** Use the `gh`-based PR workflow (Section 3a, 4a, 5a).
+- **If `gh` is missing:** Use the `curl` + GitHub REST API fallback (Section 3b, 4b, 5b).
+
+---
+
+## PR Template (Mandatory Structure)
+
+Every PR created by this agent **MUST** follow this exact structure:
+
+```markdown
+## What Changed
+
+[Brief summary of the changes being merged. List new agents, modified files, and key features.]
+
+## Why It Changed
+
+[Explain the motivation behind the change. What problem does it solve? What workflow does it improve?]
+
+## How to Use It
+
+[Setup instructions if applicable. For GitHub token: explain the three authentication methods. For new features: explain how to invoke or configure them.]
+```
+
+**Rules:**
+- No testing checklists or verification steps — those belong in code review, not PR descriptions
+- No boilerplate sections — only include information relevant to the change
+- Keep it concise — focus on what, why, and how
+- Include file list if multiple files were modified
 
 ---
 
