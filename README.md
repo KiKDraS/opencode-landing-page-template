@@ -21,6 +21,15 @@ strict modular architecture and enforced development guidelines.
 
 ## Getting Started
 
+The template is ready to use after **two commands**:
+
+```bash
+npm install && npm run setup    # install deps + init codegraph + install browsers
+opencode                        # start coding with AI agents
+```
+
+Only Context7 requires an extra step (free API key, see step 6).
+
 ### 1. Create Your Repository
 
 Click the green **"Use this template"** button on GitHub (or visit
@@ -58,15 +67,11 @@ paste it into the prompt. Alternatively, configure other providers (OpenAI,
 Anthropic, etc.) — see
 [OpenCode Providers](https://opencode.ai/docs/providers/).
 
-### 5. Configure Playwright (E2E Testing - optional)
+### 5. Playwright (E2E Testing)
 
-Playwright browsers are installed automatically by `npm run setup` (step 2).
-Chromium, Firefox, and WebKit are used by the `@playwright-test-*` agents to
-explore, test, and self-heal your application. See the
-[Playwright documentation](https://playwright.dev/docs/intro) for more details.
-
-The `playwright-test` MCP server is **enabled by default** in `opencode.json`.
-No additional configuration is needed.
+Already set up — browsers installed by `npm run setup` (step 2), MCP server
+enabled by default. The `@playwright-test-*` agents use Chromium, Firefox, and
+WebKit to explore, test, and self-heal your application.
 
 ### 6. Configure Context7 (Library Documentation — Optional but Recommended)
 
@@ -286,14 +291,13 @@ If an agent reports that an MCP tool is unavailable (e.g., `codegraph_explore`,
 `playwright-test*`, or `query-docs`):
 
 1. **Check if the server is enabled** — verify `"enabled": true` for the
-   specific MCP server in `opencode.json`. All MCP servers are **opt-in** by
-   default.
+   specific MCP server in `opencode.json`. Only `context7` is opt-in by default.
 2. **Restart the session** — MCP server configuration is read at startup.
    Changes require a new session.
 3. **Check the server is installed** — Playwright and Codegraph need local
-   dependencies:
-   - Playwright: `npx playwright install`
-   - Codegraph: `npm run setup` initializes the codegraph index
+   dependencies (both installed by `npm run setup`):
+   - Playwright: `npm run setup` (or `npx playwright install` directly)
+   - Codegraph: `npm run setup` (`npx @colbymchenry/codegraph init`)
 
 ### Playwright browsers not found
 
@@ -301,10 +305,10 @@ If an agent reports that an MCP tool is unavailable (e.g., `codegraph_explore`,
 Error: browserType.launch: Executable doesn't exist at ...
 ```
 
-**Fix:** Install Playwright browsers:
+**Fix:** Run the setup command to install Playwright browsers:
 
 ```bash
-npx playwright install
+npm run setup
 ```
 
 ### Port already in use
