@@ -250,6 +250,13 @@ branching model. Making direct commits to the main stability branches is
 
 ---
 
+## Documentation Rules
+
+- When creating documentation files, use the current date from your
+  environment context (ISO 8601 format: YYYY-MM-DD).
+
+---
+
 ## Mandatory Skills (Skills Compliance)
 
 The agent is prohibited from generating code based on general assumptions. It
