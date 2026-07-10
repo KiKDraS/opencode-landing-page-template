@@ -75,6 +75,7 @@ files should be created outside of this schema without prior authorization.
   ├── public/
   │   ├── favicon/      # Favicon bundle files (served as-is at /favicon/)
   │   └── robots.txt    # Search Engine crawl directives
+  ├── docs/             # Session documentation (auto-generated)
   ├── index.html        # Complete HTML structure & SEO Core for the Landing Page
   ├── sitemap.xml       # Canonical XML mapping for search indices
   ├── playwright.config.js # Testing framework configuration
@@ -247,6 +248,20 @@ branching model. Making direct commits to the main stability branches is
      explicitly explain the release scope to the user and halt operations until
      the user provides a verbatim text confirmation (e.g., "Approved" or
      "Aprobar release").
+
+---
+
+## Documentation Rules
+
+- When creating documentation files, use the current date from your
+  environment context (ISO 8601 format: YYYY-MM-DD).
+
+- Summaries in documentation must be concise. Use this structure:
+  - **What:** One sentence — what was built or changed
+  - **Why:** Key decisions and reasoning (not implementation details)
+  - **Next:** Active items, blockers, pending approvals
+  - **Files:** Only modified files with purpose (not every line changed)
+  - Skip: commit hashes, PR numbers (unless blocked), repetitive lists
 
 ---
 
