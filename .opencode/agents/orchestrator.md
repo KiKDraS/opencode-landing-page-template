@@ -121,8 +121,9 @@ decisions. The workflow is:
   2. Version bump and changelog
   3. Create PR from `release/*` to `main` (with user approval)
   4. Merge PR to `main` and tag
-  5. Create back-merge PR from `release/*` to `develop` (with user approval)
-  6. Merge back-merge PR and delete temporary branches
+  5. **Verify GitHub Release exists** — if not, create it immediately
+  6. Create back-merge PR from `release/*` to `develop` (with user approval)
+  7. Merge back-merge PR and delete temporary branches
 - Coordinate the final micro-fixes with `@frontend-dev` (who will work via
   temporary feature branches or direct commits to that release line if
   explicitly instructed by you), but you remain the sole coordinator.
