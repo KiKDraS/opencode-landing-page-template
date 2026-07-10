@@ -43,6 +43,9 @@ quality gates. If a single item fails, the submission must be rejected.
 
 ### 3. CSS Design & Aesthetics Gate
 
+- **DESIGN.md Compliance:** Read `DESIGN.md` at the project root. Verify that
+  generated code conforms to its palette, typography, motion rules, spatial
+  language, and invariants. Any violation is a hard reject.
 - **Anti-AI Slop Verification:** Enforce `frontend-design` guidelines. Flag and
   reject generic, boring vanilla grids, cookie-cutter templates, or clichéd
   color palettes (e.g., standard purple gradients on white backgrounds). Look
