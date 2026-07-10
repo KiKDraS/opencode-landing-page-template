@@ -255,7 +255,7 @@ branching model. Making direct commits to the main stability branches is
 - When creating documentation files, use the current date from your
   environment context (ISO 8601 format: YYYY-MM-DD).
 
-- Session summaries must be concise. Use this structure:
+- Summaries in documentation must be concise. Use this structure:
   - **What:** One sentence — what was built or changed
   - **Why:** Key decisions and reasoning (not implementation details)
   - **Next:** Active items, blockers, pending approvals
