@@ -77,6 +77,11 @@
         "playwright-test*generator_*": true
       }
     },
+    "release-manager": {
+      "description": "Release coordinator. Creates release branches, runs pre-release checks, merges to main, tags versions, and generates changelogs.",
+      "mode": "subagent",
+      "tools": { "bash": true, "read": true, "write": true, "edit": true }
+    },
     "playwright-test-healer": {
       "description": "Use this agent to run, debug, and auto-heal/fix failing Playwright tests dynamically.",
       "mode": "subagent",

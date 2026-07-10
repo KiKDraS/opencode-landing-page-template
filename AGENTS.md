@@ -207,14 +207,41 @@ branching model. Making direct commits to the main stability branches is
    - When a task is assigned, it must check out `develop`, pull the latest
      changes, and spawn its working branch from there
      (`git checkout -b feature/name`).
+   - After completing and committing a feature, `@frontend-dev` **MUST** push
+     the branch to GitHub (`git push -u origin feature/name`) so it is
+     available for Pull Request creation.
    - It is completely forbidden for `@frontend-dev` to check out, commit to, or
      merge into `main` or `develop`.
-3. **@orchestrator Exclusivity & Integration Powers:**
-   - The `@orchestrator` is the **ONLY** entity authorized to execute branch
-     merges into `develop` or `main`, and to manage `release/*` branches.
-   - **Merge Guardrail:** The orchestrator will only merge a `feature/*` or
-     `hotfix/*` branch into `develop` once `@code-review` returns
-     `STATUS: APPROVED`.
+3. **@release-manager Authority & Remote Sync:**
+   - The `@release-manager` is the **ONLY** entity authorized to execute git
+     operations that modify branch state on GitHub (pushes, PR creation, PR
+     merges, tagging, branch deletion).
+   - All branch operations (create, merge, delete) **MUST** be mirrored to
+     GitHub immediately — never leave a branch only on one side (local or
+     remote).
+   - **ALL merges MUST use Pull Requests** — no direct `git merge` to `main`
+     or `develop`. This applies to:
+     - `feature/*` → `develop`
+     - `release/*` → `main` and `release/*` → `develop` (back-merge)
+     - `hotfix/*` → `main` and `hotfix/*` → `develop` (back-merge)
+   - The `@release-manager` uses a hybrid approach for PR operations:
+     - **Primary:** `gh` CLI (GitHub's official command-line tool)
+     - **Fallback:** `curl` + GitHub REST API (when `gh` is not installed)
+   - Token resolution follows this priority:
+     1. `.opencode/secrets/github-token` file (explicit secret)
+     2. Git credential helper (zero config — works if `git push` works)
+     3. `GITHUB_TOKEN` environment variable
+   - **NEVER delete `main` or `develop` branches** — only temporary branches
+     (`feature/*`, `release/*`, `hotfix/*`, and their back-merge variants) are
+     deleted after merge.
+   - Release and hotfix merges into `main` include annotated tags pushed to
+     GitHub.
+4. **@orchestrator Exclusivity & Integration Powers:**
+   - The `@orchestrator` is the **ONLY** entity authorized to decide when to
+     initiate merges or releases. It delegates execution to `@release-manager`.
+   - **Merge Guardrail:** The orchestrator will only instruct `@release-manager`
+     to merge a `feature/*` or `hotfix/*` branch into `develop` once
+     `@code-review` returns `STATUS: APPROVED` and the QA pipeline passes.
    - **Mandatory User Checkpoint:** The orchestrator is strictly prohibited from
      creating a `release/*` branch or merging into `main` automatically. It must
      explicitly explain the release scope to the user and halt operations until

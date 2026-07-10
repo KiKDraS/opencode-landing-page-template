@@ -236,6 +236,56 @@ To disable it later, set `"enabled": false` or remove the block entirely.
 
 ---
 
+## GitHub Token (PR Creation)
+
+The `@release-manager` agent creates Pull Requests to merge feature branches
+into `develop`. It uses a hybrid approach: the `gh` CLI when available, or
+`curl` + GitHub REST API as a portable fallback.
+
+### How It Works
+
+The agent resolves the GitHub token in this priority order:
+
+1. **`.opencode/secrets/github-token`** — explicit secret file (recommended)
+2. **Git credential helper** — zero config, works if `git push` already works
+3. **`GITHUB_TOKEN` environment variable** — shell profile export
+
+If none are found, the agent will report a clear error with setup instructions.
+
+### Setup (Option 1: Secret File)
+
+Create a [GitHub personal access token](https://github.com/settings/tokens)
+with `repo` scope, then:
+
+```bash
+echo "<your-github-token>" > .opencode/secrets/github-token
+```
+
+The file is gitignored — your token stays local.
+
+### Setup (Option 2: Zero Config)
+
+If you can already `git push` to GitHub, the agent will use your existing
+credentials automatically via the git credential helper. No additional setup
+needed.
+
+### Setup (Option 3: Environment Variable)
+
+Add to your `~/.zshrc` or `~/.bashrc`:
+
+```bash
+export GITHUB_TOKEN="ghp_xxxxxxxxxxxx"
+```
+
+### Do I Need the `gh` CLI?
+
+No. The `gh` CLI ([GitHub's official tool](https://cli.github.com/)) is optional.
+If installed, the agent uses it for cleaner PR commands. If not, it falls back to
+`curl` + GitHub REST API — which works on any system with `curl` (macOS, Linux,
+Windows Git Bash).
+
+---
+
 ## Troubleshooting
 
 ### `{file:...}` reference: "does not exist"
@@ -347,6 +397,7 @@ This template uses a multi-agent orchestration pipeline managed by OpenCode:
 | **orchestrator**              | Plans architecture, delegates tasks, manages releases       |
 | **frontend-dev**              | Builds features across HTML, CSS, and JS layers             |
 | **code-review**               | Audits code against skills checklists (APPROVED / REJECTED) |
+| **release-manager**           | Creates PRs, manages branches, merges to develop/main       |
 | **playwright-test-planner**   | Explores the UI and creates test plans                      |
 | **playwright-test-generator** | Converts test plans into executable `.spec.ts` files        |
 | **playwright-test-healer**    | Runs, debugs, and auto-fixes failing tests                  |
@@ -389,11 +440,25 @@ This project follows a strict **Git Flow** branching model:
 | `release/*` | Deployment prep | Branch from `develop`, merge to `main` + `develop` |
 | `hotfix/*`  | Urgent fixes    | Branch from `main`, merge to `main` + `develop`    |
 
+**PR-Only Merge Policy:**
+
+ALL merges use Pull Requests — no direct `git merge` to `main` or `develop`:
+- `feature/*` → `develop` (PR with documented changes)
+- `release/*` → `main` (PR with release notes)
+- `release/*` → `develop` (back-merge PR)
+- `hotfix/*` → `main` (PR with hotfix description)
+- `hotfix/*` → `develop` (back-merge PR)
+
+After merge, the source branch is deleted (local + remote). **`main` and
+`develop` are never deleted.**
+
 **Agent Permissions:**
 
 - `@frontend-dev` can ONLY work on `feature/*` and `hotfix/*` branches
-- `@orchestrator` is the ONLY entity authorized to merge into `develop` or
-  `main`
+- `@release-manager` handles all remote git operations (PRs, pushes, merges,
+  tags, branch deletion)
+- `@orchestrator` is the ONLY entity authorized to decide when to merge or
+  release
 - All merges require `@code-review` approval first
 
 ---
