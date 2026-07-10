@@ -21,6 +21,14 @@
       "type": "local",
       "command": ["npx", "@colbymchenry/codegraph", "serve", "--mcp"],
       "enabled": true
+    },
+    "context7": {
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{file:.opencode/secrets/context7-api-key}"
+      },
+      "enabled": true
     }
   },
   "default_agent": "orchestrator",

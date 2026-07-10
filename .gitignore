@@ -27,3 +27,6 @@ dist-ssr
 test-results
 /.DS_Store
 .codegraph/
+
+# Environment variables
+.env
