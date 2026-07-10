@@ -28,7 +28,7 @@
       "headers": {
         "CONTEXT7_API_KEY": "{file:.opencode/secrets/context7-api-key}"
       },
-      "enabled": true
+      "enabled": false
     }
   },
   "default_agent": "orchestrator",

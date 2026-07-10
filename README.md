@@ -21,6 +21,13 @@ strict modular architecture and enforced development guidelines.
 
 ## Getting Started
 
+The template is ready to use after **two commands**:
+
+```bash
+npm install && npm run setup    # install deps + init codegraph + install browsers
+opencode                        # start coding with AI agents
+```
+
 ### 1. Create Your Repository
 
 Click the green **"Use this template"** button on GitHub (or visit
@@ -32,7 +39,7 @@ a new repository from this template.
 ```bash
 git clone https://github.com/<your-username>/<your-new-repo>.git
 cd <your-new-repo>
-npm install
+npm install && npm run setup
 ```
 
 ### 3. Set Up Git Flow Branches
@@ -44,19 +51,7 @@ git push -u origin develop
 
 You now have `main` (production) and `develop` (integration) branches.
 
-### 4. Start Developing
-
-```bash
-npm run dev
-```
-
-Open `http://localhost:5173` and start building your landing page.
-
----
-
-## Configuration
-
-### LLM Provider
+### 4. Configure Provider
 
 OpenCode requires an LLM provider. Configure one before use:
 
@@ -70,18 +65,15 @@ paste it into the prompt. Alternatively, configure other providers (OpenAI,
 Anthropic, etc.) — see
 [OpenCode Providers](https://opencode.ai/docs/providers/).
 
-### Playwright (E2E Testing)
-
-Install Playwright browsers to enable the automated testing pipeline:
+### 5. Start Developing
 
 ```bash
-npx playwright install
+npm run dev
 ```
 
-This installs Chromium, Firefox, and WebKit browsers used by the
-`@playwright-test-*` agents to explore, test, and self-heal your application.
-See the [Playwright documentation](https://playwright.dev/docs/intro) for more
-details.
+Open `http://localhost:5173` and start building your landing page.
+
+---
 
 ### Ponytail Plugin
 
@@ -122,24 +114,11 @@ Or override in-session at any time with `/ponytail [lite|full|ultra|off]`.
 
 ---
 
-## Codegraph Plugin
+## Codegraph Plugin (Context Reduce)
 
 This template uses **[Codegraph](https://github.com/colbymchenry/codegraph)** to
 provide AI agents with surgical code context — fewer tool calls, faster answers,
 and accurate cross-file dependency tracking.
-
-### Setup
-
-After cloning the repository, initialize the codegraph index:
-
-```bash
-npm install
-npm run setup
-```
-
-This runs `npx @colbymchenry/codegraph init`, which creates the `.codegraph/`
-directory and builds the full knowledge graph. The index auto-syncs on every
-file change — no manual re-indexing needed.
 
 ### What Gets Indexed
 
@@ -147,17 +126,188 @@ file change — no manual re-indexing needed.
 - Configuration files (`vite.config.js`, `opencode.json`, etc.)
 - Excludes `node_modules/`, `dist/`, and anything in `.gitignore`
 
-### MCP Integration
-
-The MCP server is configured in `opencode.json`. When an agent session starts,
-codegraph launches automatically and provides tools like `codegraph_explore` for
-semantic code queries.
-
 ### Notes
 
 - `.codegraph/` is gitignored — each developer generates their own index
 - The index is a local SQLite database; no data leaves your machine
 - If the index gets stale, re-run `npm run setup` to rebuild it
+
+---
+
+## Playwright (E2E Testing)
+
+This template uses **[Playwright](https://playwright.dev)** as the browser
+automation engine for the automated testing pipeline. Playwright is not just a
+testing framework — it provides the browser context that the
+`@playwright-test-*` agents need to explore your UI, generate tests, and
+self-heal failures without human intervention.
+
+### How It Works
+
+The agent pipeline doesn't just lint your code — it **opens a real browser and
+tests the actual application**. The Playwright MCP server gives agents access
+to:
+
+- **Browser automation tools** — launch browsers, navigate, click, type, assert
+- **Page exploration** — agents can inspect your rendered UI to generate
+  accurate test plans
+- **Self-healing tests** — when selectors break due to UI changes, agents can
+  diagnose and repair the tests automatically
+
+Without Playwright, the QA phase of the pipeline (`@playwright-test-planner` →
+`@playwright-test-generator` → `@playwright-test-healer`) cannot run.
+
+---
+
+## Context7 MCP (Library Documentation)
+
+This template uses **[Context7](https://context7.com)** to give AI agents
+up-to-date documentation for libraries, frameworks, SDKs, and APIs — directly in
+their toolset. Instead of guessing API signatures or relying on stale training
+data, agents fetch current docs in real time (React, Next.js, Prisma, Express,
+Tailwind, Django, Playwright, etc.).
+
+### How It Works
+
+Context7 is configured as a remote MCP server in `opencode.json`. When an agent
+needs library docs (e.g., "How do I use `next/headers` in Next.js 15?"), it
+calls `resolve-library-id` → `query-docs` and gets back current, versioned
+documentation with code examples.
+
+The agent skill at `.opencode/skills/context7-mcp/SKILL.md` tells the AI
+**when** to use it (setup questions, API syntax, config, version migrations) and
+**when not to** (refactoring, debugging business logic, code review).
+
+### Setup
+
+Context7 requires a free API key. Set it up in one step:
+
+```bash
+echo "<your-context7-api-key>" > .opencode/secrets/context7-api-key
+```
+
+The MCP server reads the key from this file at startup via
+`{file:.opencode/secrets/context7-api-key}` in `opencode.json`.
+
+### Where to Get an API Key
+
+1. Go to [context7.com](https://context7.com)
+2. Sign up for a free account
+3. Copy your API key from the dashboard
+4. Paste it into the command above
+
+### How the File-Based Key Works
+
+OpenCode's `{file:path}` syntax reads the file content and substitutes it as a
+string at config parse time. This means:
+
+- **No environment variables needed** — the key stays inside the project
+- **Gitignored** — `.opencode/secrets/` is tracked but its contents are ignored
+  (see `.opencode/secrets/.gitignore`)
+- **Portable** — clone the repo, add your key, done. No global config required
+
+### Enabling Context7
+
+Context7 is the **only MCP server disabled by default** (requires an API key).
+Enable it in `opencode.json`:
+
+```json
+"context7": {
+  "type": "remote",
+  "url": "https://mcp.context7.com/mcp",
+  "headers": {
+    "CONTEXT7_API_KEY": "{file:.opencode/secrets/context7-api-key}"
+  },
+  "enabled": true
+}
+```
+
+To disable it later, set `"enabled": false` or remove the block entirely.
+
+### Notes
+
+- The API key file must be **plain text** — no `.js` extension, no `export`,
+  just the raw key string
+- If the file doesn't exist, OpenCode will fail to parse the config with an
+  error like `bad file reference: "{file:...}" <path> does not exist`
+- Context7 uses `{file:...}` for the API key — the same pattern is also used
+  elsewhere in the project (e.g., prompts in agent definitions), so it's worth
+  understanding how it works
+
+---
+
+## Troubleshooting
+
+### `{file:...}` reference: "does not exist"
+
+```
+Error: bad file reference: "{file:.opencode/secrets/context7-api-key}" ... does not exist
+```
+
+OpenCode's `{file:path}` substitution reads the file and inlines its content. If
+the file doesn't exist, the config fails to load.
+
+**Fix:** Create the file as a plain text file (no `.js` extension, no `export`):
+
+```bash
+echo "<your-api-key>" > .opencode/secrets/context7-api-key
+```
+
+### Config file is not valid JSON
+
+```
+Error: Config file at .../opencode.json is not valid JSON
+```
+
+**Fix:** Validate your `opencode.json` syntax:
+
+```bash
+npx jsonlint opencode.json
+```
+
+Or use `jq`:
+
+```bash
+jq . opencode.json > /dev/null && echo "valid"
+```
+
+Common causes: trailing commas, missing commas between fields, unquoted keys.
+
+### MCP server not connecting
+
+If an agent reports that an MCP tool is unavailable (e.g., `codegraph_explore`,
+`playwright-test*`, or `query-docs`):
+
+1. **Check if the server is enabled** — verify `"enabled": true` for the
+   specific MCP server in `opencode.json`. Only `context7` is opt-in by default.
+2. **Restart the session** — MCP server configuration is read at startup.
+   Changes require a new session.
+3. **Check the server is installed** — Playwright and Codegraph need local
+   dependencies (both installed by `npm run setup`):
+   - Playwright: `npm run setup` (or `npx playwright install` directly)
+   - Codegraph: `npm run setup` (`npx @colbymchenry/codegraph init`)
+
+### Playwright browsers not found
+
+```
+Error: browserType.launch: Executable doesn't exist at ...
+```
+
+**Fix:** Run the setup command to install Playwright browsers:
+
+```bash
+npm run setup
+```
+
+### Port already in use
+
+If a local MCP server fails to start, another process may be using its port.
+Playwright MCP and Codegraph use ephemeral ports by default — if the issue
+persists, restart your terminal or check with:
+
+```bash
+lsof -i :<port>
+```
 
 ---
 
@@ -200,6 +350,22 @@ This template uses a multi-agent orchestration pipeline managed by OpenCode:
 | **playwright-test-planner**   | Explores the UI and creates test plans                      |
 | **playwright-test-generator** | Converts test plans into executable `.spec.ts` files        |
 | **playwright-test-healer**    | Runs, debugs, and auto-fixes failing tests                  |
+
+```mermaid
+flowchart LR
+    P[("Plan")]
+    B["Build<br/><i>@frontend-dev</i>"]
+    A["Audit<br/><i>@code-review</i>"]
+    T["Test<br/><i>Playwright Agents</i>"]
+    S["Ship<br/><i>@orchestrator</i>"]
+
+    P --> B
+    B --> A
+    A -->|REJECTED| B
+    A -->|APPROVED| T
+    T --> S
+    S -.->|User Approval| R>"Release"]
+```
 
 ### Pipeline Flow
 
@@ -448,6 +614,13 @@ in `.opencode/skills/`:
 - Semantic headings hierarchy (single `<h1>`, logical nesting)
 - Descriptive `alt` attributes and optimized image assets
 - Sitemap.xml for search engine crawling
+
+### Context7 MCP (Library Documentation)
+
+- Fetches live, versioned documentation for libraries and frameworks
+- Priority use: setup questions, API syntax, config, version migrations
+- **Do not use for**: refactoring, debugging business logic, code review
+- Uses `resolve-library-id` → `query-docs` pipeline for accurate results
 
 ### Playwright Best Practices
 

@@ -50,24 +50,31 @@ initiating any automated sub-agent task.
      - If the Healer fixes a test configuration constraint natively, let it
        pass.
      - If the Healer discovers a real application bug, capture its diagnostics,
-       break the execution pipeline, and send the bug logs back to the
-       corresponding developer (`@html-dev`, `@css-dev`, or `@js-dev`) to
-       restart the repair cycle.
+       break the execution pipeline, and send the bug logs back to the developer
+       (`@frontend-dev`) to restart the repair cycle.
+   - **Step D (Mandatory Iterative Documentation):** CRITICAL GATES. Once the
+     code passes the QA phase successfully, you MUST generate an engineering log
+     of the specific changes made (modified components, architecture paths, or
+     behavior updates) and save it directly inside the root `./docs/` folder
+     (e.g., `./docs/feature-name-changes.md`) _before_ initiating any merge
+     procedures.
 
 ### Deployment & Release Management (Exclusive Authority)
 
 - You hold the exclusive right to initialize the production release sequence.
 - When `develop` is certified stable by the QA pipeline, you **MUST NOT** open a
   `release/*` branch automatically.
-- **Stop and Prompt:** Present a comprehensive summary of the changes
-  accumulated in `develop` to the user and request explicit authorization to
-  create the release branch.
+- **Stop and Prompt:** Present a comprehensive summary of the accumulated
+  changes (reading from your generated `./docs/` logs) to the user and request
+  explicit authorization to create the release branch.
 - **Execution:** Only after receiving explicit user validation, use your
   environment tools to execute the branch creation:
 
-      git checkout develop
-      git pull
-      git checkout -b release/vX.X.X
+  ```bash
+    git checkout develop
+    git pull
+    git checkout -b release/vX.X.X
+  ```
 
 - Coordinate the final micro-fixes with `@frontend-dev` (who will work via
   temporary feature branches or direct commits to that release line if
