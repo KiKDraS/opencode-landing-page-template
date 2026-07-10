@@ -265,6 +265,22 @@ branching model. Making direct commits to the main stability branches is
   - **Files:** Only modified files with purpose (not every line changed)
   - Skip: commit hashes, PR numbers (unless blocked), repetitive lists
 
+- **Release Changelog:** Before merging a release PR to `main`, generate
+  `./docs/release-vX.X.X-changelog.md` summarizing all feature docs since the
+  last release. This provides stakeholders with an aggregate view of what shipped.
+
+### Release Documentation Sequence
+
+When creating a release, the orchestrator must follow this updated sequence:
+
+1. Create `release/*` branch from `develop`
+2. Version bump and changelog
+3. **Generate `./docs/release-vX.X.X-changelog.md`** summarizing all feature docs since the last release
+4. Create PR from `release/*` to `main` (with user approval)
+5. Merge PR to `main` and tag
+6. Create back-merge PR from `release/*` to `develop` (with user approval)
+7. Merge back-merge PR and delete temporary branches
+
 ---
 
 ## Mandatory Skills (Skills Compliance)
