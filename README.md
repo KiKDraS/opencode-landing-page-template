@@ -32,7 +32,7 @@ a new repository from this template.
 ```bash
 git clone https://github.com/<your-username>/<your-new-repo>.git
 cd <your-new-repo>
-npm install
+npm install && npm run setup
 ```
 
 ### 3. Set Up Git Flow Branches
@@ -58,31 +58,15 @@ paste it into the prompt. Alternatively, configure other providers (OpenAI,
 Anthropic, etc.) — see
 [OpenCode Providers](https://opencode.ai/docs/providers/).
 
-### 5. Configure Playwright (E2E Testing)
+### 5. Configure Playwright (E2E Testing - optional)
 
-Install Playwright browsers to enable the automated testing pipeline:
+Playwright browsers are installed automatically by `npm run setup` (step 2).
+Chromium, Firefox, and WebKit are used by the `@playwright-test-*` agents to
+explore, test, and self-heal your application. See the
+[Playwright documentation](https://playwright.dev/docs/intro) for more details.
 
-```bash
-npx playwright install
-```
-
-This installs Chromium, Firefox, and WebKit browsers used by the
-`@playwright-test-*` agents to explore, test, and self-heal your application.
-See the [Playwright documentation](https://playwright.dev/docs/intro) for more
-details.
-
-Then enable the `playwright-test` MCP server in `opencode.json`:
-
-```json
-"playwright-test": {
-  "type": "local",
-  "command": ["npx", "playwright", "run-test-mcp-server"],
-  "enabled": true
-}
-```
-
-The MCP server is **disabled by default** (opt-in) to avoid launching
-unnecessary services on startup.
+The `playwright-test` MCP server is **enabled by default** in `opencode.json`.
+No additional configuration is needed.
 
 ### 6. Configure Context7 (Library Documentation — Optional but Recommended)
 
@@ -108,7 +92,8 @@ Get a free key at [context7.com](https://context7.com).
 }
 ```
 
-See the [Context7 section](#context7-mcp-library-documentation) for full details.
+See the [Context7 section](#context7-mcp-library-documentation) for full
+details.
 
 ### 7. Configure Ponytail Plugin (optional)
 
@@ -149,7 +134,7 @@ Or override in-session at any time with `/ponytail [lite|full|ultra|off]`.
 
 ---
 
-## Codegraph Plugin
+## 7. Configure Codegraph Plugin (Context Reduce - Optional but Recommended)
 
 This template uses **[Codegraph](https://github.com/colbymchenry/codegraph)** to
 provide AI agents with surgical code context — fewer tool calls, faster answers,
@@ -157,49 +142,21 @@ and accurate cross-file dependency tracking.
 
 ### Setup
 
-After cloning the repository, initialize the codegraph index and enable the
-MCP server:
+Initialized automatically by `npm run setup` during install. It creates the
+`.codegraph/` directory and builds the full knowledge graph. The index
+auto-syncs on every file change — no manual re-indexing needed.
 
-```bash
-npm install
-npm run setup
-```
+To rebuild manually: `npm run setup`.
 
-This runs `npx @colbymchenry/codegraph init`, which creates the `.codegraph/`
-directory and builds the full knowledge graph. The index auto-syncs on every
-file change — no manual re-indexing needed.
-
-**Enable the MCP server** in `opencode.json` (disabled by default):
-
-```json
-"codegraph": {
-  "type": "local",
-  "command": ["npx", "@colbymchenry/codegraph", "serve", "--mcp"],
-  "enabled": true
-}
-```
+The `codegraph` MCP server is **enabled by default** in `opencode.json`. It
+launches automatically at session start and provides tools like
+`codegraph_explore` for semantic code queries.
 
 ### What Gets Indexed
 
 - All JavaScript, CSS, and HTML files in `src/`
 - Configuration files (`vite.config.js`, `opencode.json`, etc.)
 - Excludes `node_modules/`, `dist/`, and anything in `.gitignore`
-
-### MCP Integration
-
-The MCP server is configured in `opencode.json`. Enable it by setting
-`"enabled": true`:
-
-```json
-"codegraph": {
-  "type": "local",
-  "command": ["npx", "@colbymchenry/codegraph", "serve", "--mcp"],
-  "enabled": true
-}
-```
-
-When enabled, codegraph launches automatically at session start and provides
-tools like `codegraph_explore` for semantic code queries.
 
 ### Notes
 
@@ -258,7 +215,8 @@ string at config parse time. This means:
 
 ### Enabling Context7
 
-Context7 is **disabled by default** (opt-in). Enable it in `opencode.json`:
+Context7 is the **only MCP server disabled by default** (requires an API key).
+Enable it in `opencode.json`:
 
 ```json
 "context7": {
@@ -275,8 +233,8 @@ To disable it later, set `"enabled": false` or remove the block entirely.
 
 ### Notes
 
-- The API key file must be **plain text** — no `.js` extension, no `export`, just
-  the raw key string
+- The API key file must be **plain text** — no `.js` extension, no `export`,
+  just the raw key string
 - If the file doesn't exist, OpenCode will fail to parse the config with an
   error like `bad file reference: "{file:...}" <path> does not exist`
 - Context7 uses `{file:...}` for the API key — the same pattern is also used
@@ -293,8 +251,8 @@ To disable it later, set `"enabled": false` or remove the block entirely.
 Error: bad file reference: "{file:.opencode/secrets/context7-api-key}" ... does not exist
 ```
 
-OpenCode's `{file:path}` substitution reads the file and inlines its content.
-If the file doesn't exist, the config fails to load.
+OpenCode's `{file:path}` substitution reads the file and inlines its content. If
+the file doesn't exist, the config fails to load.
 
 **Fix:** Create the file as a plain text file (no `.js` extension, no `export`):
 
@@ -335,7 +293,7 @@ If an agent reports that an MCP tool is unavailable (e.g., `codegraph_explore`,
 3. **Check the server is installed** — Playwright and Codegraph need local
    dependencies:
    - Playwright: `npx playwright install`
-   - Codegraph: `npm run setup` (runs `npx @colbymchenry/codegraph init`)
+   - Codegraph: `npm run setup` initializes the codegraph index
 
 ### Playwright browsers not found
 
@@ -403,11 +361,11 @@ This template uses a multi-agent orchestration pipeline managed by OpenCode:
 
 ```mermaid
 flowchart LR
-    P[("📋 Plan")]
-    B["🛠️ Build<br/><i>@frontend-dev</i>"]
-    A["🔍 Audit<br/><i>@code-review</i>"]
-    T["🧪 Test<br/><i>Playwright Agents</i>"]
-    S["🚀 Ship<br/><i>@orchestrator</i>"]
+    P[("Plan")]
+    B["Build<br/><i>@frontend-dev</i>"]
+    A["Audit<br/><i>@code-review</i>"]
+    T["Test<br/><i>Playwright Agents</i>"]
+    S["Ship<br/><i>@orchestrator</i>"]
 
     P --> B
     B --> A

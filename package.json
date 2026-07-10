@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "setup": "npx @colbymchenry/codegraph init"
+    "setup": "npx @colbymchenry/codegraph init && npx playwright install"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
