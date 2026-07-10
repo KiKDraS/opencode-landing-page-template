@@ -28,8 +28,6 @@ npm install && npm run setup    # install deps + init codegraph + install browse
 opencode                        # start coding with AI agents
 ```
 
-Only Context7 requires an extra step (free API key, see step 6).
-
 ### 1. Create Your Repository
 
 Click the green **"Use this template"** button on GitHub (or visit
@@ -67,40 +65,15 @@ paste it into the prompt. Alternatively, configure other providers (OpenAI,
 Anthropic, etc.) — see
 [OpenCode Providers](https://opencode.ai/docs/providers/).
 
-### 5. Playwright (E2E Testing)
-
-Already set up — browsers installed by `npm run setup` (step 2), MCP server
-enabled by default. The `@playwright-test-*` agents use Chromium, Firefox, and
-WebKit to explore, test, and self-heal your application.
-
-### 6. Configure Context7 (Library Documentation — Optional but Recommended)
-
-This template uses Context7 to give AI agents real-time library documentation.
-Set up your API key:
+### 5. Start Developing
 
 ```bash
-echo "<your-api-key>" > .opencode/secrets/context7-api-key
+npm run dev
 ```
 
-Get a free key at [context7.com](https://context7.com).
+Open `http://localhost:5173` and start building your landing page.
 
-**Enable the MCP server** in `opencode.json` (disabled by default):
-
-```json
-"context7": {
-  "type": "remote",
-  "url": "https://mcp.context7.com/mcp",
-  "headers": {
-    "CONTEXT7_API_KEY": "{file:.opencode/secrets/context7-api-key}"
-  },
-  "enabled": true
-}
-```
-
-See the [Context7 section](#context7-mcp-library-documentation) for full
-details.
-
-### 7. Configure Ponytail Plugin (optional)
+### Ponytail Plugin
 
 This template comes pre-configured with the **Ponytail** plugin
 (`@dietrichgebert/ponytail`) — it makes your AI agent think like the laziest
@@ -139,23 +112,11 @@ Or override in-session at any time with `/ponytail [lite|full|ultra|off]`.
 
 ---
 
-## 7. Configure Codegraph Plugin (Context Reduce - Optional but Recommended)
+## Codegraph Plugin (Context Reduce)
 
 This template uses **[Codegraph](https://github.com/colbymchenry/codegraph)** to
 provide AI agents with surgical code context — fewer tool calls, faster answers,
 and accurate cross-file dependency tracking.
-
-### Setup
-
-Initialized automatically by `npm run setup` during install. It creates the
-`.codegraph/` directory and builds the full knowledge graph. The index
-auto-syncs on every file change — no manual re-indexing needed.
-
-To rebuild manually: `npm run setup`.
-
-The `codegraph` MCP server is **enabled by default** in `opencode.json`. It
-launches automatically at session start and provides tools like
-`codegraph_explore` for semantic code queries.
 
 ### What Gets Indexed
 
