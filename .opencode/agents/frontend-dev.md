@@ -115,5 +115,16 @@ execution across all three layers simultaneously to avoid fragmented codebases:
 
 A feature is only considered complete when the HTML is mapped, the style layers
 are isolated, the JS module is organized inside its respective subfolder, its
-init hook is registered in the `main.js` pipeline, and the entire block compiles
-perfectly under Vite.
+init hook is registered in the `main.js` pipeline, the entire block compiles
+perfectly under Vite, and the feature branch has been pushed to GitHub.
+
+## Git Workflow (Feature Branches)
+
+After completing a feature and committing your changes:
+
+```bash
+git push -u origin feature/branch-name
+```
+
+This ensures the branch is available on GitHub for PR creation and review by
+the `@release-manager`.
