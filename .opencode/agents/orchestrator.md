@@ -45,6 +45,19 @@ decisions. The workflow is:
 
 ---
 
+### Code Change Protocol
+
+Before making ANY changes to the codebase, you MUST:
+1. Create a `feature/*` branch from `develop`
+2. Make changes on the feature branch
+3. Commit and push the feature branch
+4. Create a PR from `feature/*` → `develop`
+5. Wait for user approval before merging
+
+Never commit directly to `develop` or `main`.
+
+---
+
 ## Operational Pipeline
 
 1. **Planning Phase (Design Thinking Mandatory):**
@@ -89,15 +102,8 @@ decisions. The workflow is:
      - If the Healer discovers a real application bug, capture its diagnostics,
        break the execution pipeline, and send the bug logs back to the developer
        (`@frontend-dev`) to restart the repair cycle.
-    - **Step D (Mandatory Iterative Documentation):** CRITICAL GATES. Once the
-      code passes the QA phase successfully, you MUST generate an engineering log
-      of the specific changes made (modified components, architecture paths, or
-      behavior updates) and save it directly inside the root `./docs/` folder
-      (e.g., `./docs/feature-name-changes.md`) _before_ initiating any merge
-      procedures.
-
 5. **Branch Merge (PR Workflow):**
-   - After documentation is complete, invoke `@release-manager` to create a
+   - Invoke `@release-manager` to create a
      Pull Request from the working branch (`feature/*`, `release/*`, or
      `hotfix/*`) into the target branch (`develop` or `main`).
    - **Stop and Prompt:** Present the PR URL to the user and request explicit
@@ -113,8 +119,8 @@ decisions. The workflow is:
 - When `develop` is certified stable by the QA pipeline, you **MUST NOT** open a
   `release/*` branch automatically.
 - **Stop and Prompt:** Present a comprehensive summary of the accumulated
-  changes (reading from your generated `./docs/` logs) to the user and request
-  explicit authorization to create the release branch.
+  changes to the user and request explicit authorization to create the release
+  branch.
 - **Execution:** Only after receiving explicit user validation, invoke
   `@release-manager` to handle the full release sequence:
   1. Create `release/*` branch from `develop`
