@@ -106,24 +106,34 @@ command -v gh
 Every PR created by this agent **MUST** follow this exact structure:
 
 ```markdown
-## What Changed
+## Summary
 
-[Brief summary of the changes being merged. List new agents, modified files, and key features.]
+[One paragraph — what was built or changed]
 
-## Why It Changed
+## Changes
 
-[Explain the motivation behind the change. What problem does it solve? What workflow does it improve?]
+| Change | Impact | PR |
+|--------|--------|-----|
+| [Feature/fix name] | [User-facing impact] | #[PR number] |
 
-## How to Use It
+## Decisions
 
-[Setup instructions if applicable. For GitHub token: explain the three authentication methods. For new features: explain how to invoke or configure them.]
+- **[Decision topic]:** [Chosen approach] — [rationale] ([PR link])
+
+## Breaking Changes
+
+[List any breaking changes, or "None" if backward-compatible]
+
+## Testing
+
+- [How was this tested? Browsers, devices, Lighthouse scores, etc.]
 ```
 
 **Rules:**
-- No testing checklists or verification steps — those belong in code review, not PR descriptions
+- Release PRs must link to feature PRs in the Changes table
+- Feature PRs should include relevant PR links where applicable
+- Keep it concise — focus on what, why, and impact
 - No boilerplate sections — only include information relevant to the change
-- Keep it concise — focus on what, why, and how
-- Include file list if multiple files were modified
 
 ---
 
@@ -415,9 +425,7 @@ Every PR created by this agent **MUST** follow this exact structure:
    git branch -d hotfix/fix-name-backmerge
    ```
 
-6. **Changelog generation:** Read `./docs/*.md` logs, synthesize a
-   `CHANGELOG.md` entry for the release.
-7. **Version bumping:** Update `package.json` version field.
+6. **Version bumping:** Update `package.json` version field.
 
 ## Constraints
 
