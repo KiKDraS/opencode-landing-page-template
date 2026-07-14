@@ -166,7 +166,7 @@ Every PR created by this agent **MUST** follow this exact structure:
 
    **Creating a PR:**
    ```bash
-   gh pr create --base develop --head feature/branch-name --title "feat: description" --body $'| | |\n|---|---|\n| 🏗️ **Feature** | 🟢 **Ready** |\n| `feature/branch-name` → `develop` | |\n\n---\n\n## Summary\n\n[Orchestrator summary]'
+   gh pr create --base develop --head feature/branch-name --title "feat: description" --body $'| | |\n|---|---|\n| 🏗️ **Feature** | 🟢 **Ready** |\n| `feature/branch-name` → `develop` | |\n---\n## Summary\n\n[Orchestrator summary]'
    ```
 
    **Merging a PR (after orchestrator approval):**
@@ -190,7 +190,7 @@ Every PR created by this agent **MUST** follow this exact structure:
      -H "Authorization: token $TOKEN" \
      -H "Accept: application/vnd.github.v3+json" \
      "https://api.github.com/repos/$OWNER_REPO/pulls" \
-     -d '{"title":"feat: description","head":"feature/branch-name","base":"develop","body":"| | |\n|---|---|\n| 🏗️ Feature | 🟢 Ready |\n| `feature/branch-name` → `develop` | |\n\n---\n\n## Summary\n\n[Orchestrator summary]"}'
+     -d '{"title":"feat: description","head":"feature/branch-name","base":"develop","body":"| | |\n|---|---|\n| 🏗️ Feature | 🟢 Ready |\n| `feature/branch-name` → `develop` | |\n---\n## Summary\n\n[Orchestrator summary]"}'
    ```
 
    **Merging a PR (after orchestrator approval):**
@@ -230,7 +230,7 @@ Every PR created by this agent **MUST** follow this exact structure:
 
     **Creating a PR to main:**
    ```bash
-   gh pr create --base main --head release/vX.X.X --title "release: vX.X.X" --body $'| | |\n|---|---|\n| 📦 **Release vX.X.X** | 🔵 **Ready to Deploy** |\n| `release/vX.X.X` → `main` | |\n\n---\n\n## Summary\n\n[Release notes and changelog]'
+   gh pr create --base main --head release/vX.X.X --title "release: vX.X.X" --body $'| | |\n|---|---|\n| 📦 **Release vX.X.X** | 🔵 **Ready to Deploy** |\n| `release/vX.X.X` → `main` | |\n---\n## Summary\n\n[Release notes and changelog]'
    ```
 
    **Merging the PR to main (after orchestrator approval):**
@@ -260,7 +260,7 @@ Every PR created by this agent **MUST** follow this exact structure:
    # Recreate the branch from main for back-merge
    git checkout -b release/vX.X.X-backmerge
    git push -u origin release/vX.X.X-backmerge
-   gh pr create --base develop --head release/vX.X.X-backmerge --title "chore: back-merge release vX.X.X to develop" --body $'| | |\n|---|---|\n| 🔄 **Back-Merge** | ⚪ **Sync** |\n| `release/vX.X.X` → `develop` | |\n\n---\n\nSync release vX.X.X changes back to develop.'
+   gh pr create --base develop --head release/vX.X.X-backmerge --title "chore: back-merge release vX.X.X to develop" --body $'| | |\n|---|---|\n| 🔄 **Back-Merge** | ⚪ **Sync** |\n| `release/vX.X.X` → `develop` | |\n---\nSync release vX.X.X changes back to develop.'
    gh pr merge release/vX.X.X-backmerge --merge --delete-branch
    ```
 
@@ -272,7 +272,7 @@ Every PR created by this agent **MUST** follow this exact structure:
      -H "Authorization: token $TOKEN" \
      -H "Accept: application/vnd.github.v3+json" \
      "https://api.github.com/repos/$OWNER_REPO/pulls" \
-     -d '{"title":"release: vX.X.X","head":"release/vX.X.X","base":"main","body":"| | |\n|---|---|\n| 📦 Release vX.X.X | 🔵 Ready to Deploy |\n| `release/vX.X.X` → `main` | |\n\n---\n\n## Summary\n\n[Release notes and changelog]"}'
+     -d '{"title":"release: vX.X.X","head":"release/vX.X.X","base":"main","body":"| | |\n|---|---|\n| 📦 Release vX.X.X | 🔵 Ready to Deploy |\n| `release/vX.X.X` → `main` | |\n---\n## Summary\n\n[Release notes and changelog]"}'
    ```
 
    **Merging the PR to main:**
@@ -318,7 +318,7 @@ Every PR created by this agent **MUST** follow this exact structure:
      -H "Authorization: token $TOKEN" \
      -H "Accept: application/vnd.github.v3+json" \
      "https://api.github.com/repos/$OWNER_REPO/pulls" \
-     -d '{"title":"chore: back-merge release vX.X.X to develop","head":"release/vX.X.X-backmerge","base":"develop","body":"| | |\n|---|---|\n| 🔄 Back-Merge | ⚪ Sync |\n| `release/vX.X.X` → `develop` | |\n\n---\n\nSync release vX.X.X changes back to develop."}'
+     -d '{"title":"chore: back-merge release vX.X.X to develop","head":"release/vX.X.X-backmerge","base":"develop","body":"| | |\n|---|---|\n| 🔄 Back-Merge | ⚪ Sync |\n| `release/vX.X.X` → `develop` | |\n---\nSync release vX.X.X changes back to develop."}'
    PR_NUMBER=$(curl -s -H "Authorization: token $TOKEN" \
      "https://api.github.com/repos/$OWNER_REPO/pulls?head=release/vX.X.X-backmerge" \
      | grep -m1 '"number"' | cut -d':' -f2 | tr -d ' ,')
@@ -338,7 +338,7 @@ Every PR created by this agent **MUST** follow this exact structure:
 
    **Creating a PR to main:**
    ```bash
-   gh pr create --base main --head hotfix/fix-name --title "hotfix: description" --body $'| | |\n|---|---|\n| 🚑 **Hotfix** | 🔴 **Urgent** |\n| `hotfix/fix-name` → `main` | |\n\n---\n\n## Summary\n\n[Hotfix description and impact]'
+   gh pr create --base main --head hotfix/fix-name --title "hotfix: description" --body $'| | |\n|---|---|\n| 🚑 **Hotfix** | 🔴 **Urgent** |\n| `hotfix/fix-name` → `main` | |\n---\n## Summary\n\n[Hotfix description and impact]'
    ```
 
    **Merging the PR to main (after orchestrator approval):**
@@ -362,7 +362,7 @@ Every PR created by this agent **MUST** follow this exact structure:
    ```bash
    git checkout -b hotfix/fix-name-backmerge
    git push -u origin hotfix/fix-name-backmerge
-   gh pr create --base develop --head hotfix/fix-name-backmerge --title "chore: back-merge hotfix to develop" --body $'| | |\n|---|---|\n| 🔄 **Back-Merge** | ⚪ **Sync** |\n| `hotfix/fix-name` → `develop` | |\n\n---\n\nSync hotfix changes back to develop.'
+   gh pr create --base develop --head hotfix/fix-name-backmerge --title "chore: back-merge hotfix to develop" --body $'| | |\n|---|---|\n| 🔄 **Back-Merge** | ⚪ **Sync** |\n| `hotfix/fix-name` → `develop` | |\n---\nSync hotfix changes back to develop.'
    gh pr merge hotfix/fix-name-backmerge --merge --delete-branch
    ```
 
@@ -374,7 +374,7 @@ Every PR created by this agent **MUST** follow this exact structure:
      -H "Authorization: token $TOKEN" \
      -H "Accept: application/vnd.github.v3+json" \
      "https://api.github.com/repos/$OWNER_REPO/pulls" \
-     -d '{"title":"hotfix: description","head":"hotfix/fix-name","base":"main","body":"| | |\n|---|---|\n| 🚑 Hotfix | 🔴 Urgent |\n| `hotfix/fix-name` → `main` | |\n\n---\n\n## Summary\n\n[Hotfix description and impact]"}'
+     -d '{"title":"hotfix: description","head":"hotfix/fix-name","base":"main","body":"| | |\n|---|---|\n| 🚑 Hotfix | 🔴 Urgent |\n| `hotfix/fix-name` → `main` | |\n---\n## Summary\n\n[Hotfix description and impact]"}'
    ```
 
    **Merging the PR to main:**
@@ -413,7 +413,7 @@ Every PR created by this agent **MUST** follow this exact structure:
      -H "Authorization: token $TOKEN" \
      -H "Accept: application/vnd.github.v3+json" \
      "https://api.github.com/repos/$OWNER_REPO/pulls" \
-     -d '{"title":"chore: back-merge hotfix to develop","head":"hotfix/fix-name-backmerge","base":"develop","body":"| | |\n|---|---|\n| 🔄 Back-Merge | ⚪ Sync |\n| `hotfix/fix-name` → `develop` | |\n\n---\n\nSync hotfix changes back to develop."}'
+     -d '{"title":"chore: back-merge hotfix to develop","head":"hotfix/fix-name-backmerge","base":"develop","body":"| | |\n|---|---|\n| 🔄 Back-Merge | ⚪ Sync |\n| `hotfix/fix-name` → `develop` | |\n---\nSync hotfix changes back to develop."}'
    PR_NUMBER=$(curl -s -H "Authorization: token $TOKEN" \
      "https://api.github.com/repos/$OWNER_REPO/pulls?head=hotfix/fix-name-backmerge" \
      | grep -m1 '"number"' | cut -d':' -f2 | tr -d ' ,')
