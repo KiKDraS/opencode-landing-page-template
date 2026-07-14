@@ -92,51 +92,22 @@ To disable it later, set `"enabled": false` or remove the block entirely.
 
 ## GitHub Token (PR Creation)
 
-The `@release-manager` agent creates Pull Requests to merge feature branches
-into `develop`. It uses a hybrid approach: the `gh` CLI when available, or
-`curl` + GitHub REST API as a portable fallback.
+`@release-manager` needs a GitHub token to create and merge PRs. The `gh` CLI
+is optional — it falls back to `curl` + REST API.
 
-### How It Works
+Token resolution priority (first found wins):
 
-The agent resolves the GitHub token in this priority order:
-
-1. **`.opencode/secrets/github-token`** — explicit secret file (recommended)
-2. **Git credential helper** — zero config, works if `git push` already works
-3. **`GITHUB_TOKEN` environment variable** — shell profile export
-
-If none are found, the agent will report a clear error with setup instructions.
-
-### Setup (Option 1: Secret File)
-
-Create a [GitHub personal access token](https://github.com/settings/tokens) with
-`repo` scope, then:
+1. **`.opencode/secrets/github-token`** — recommended setup
+2. **Git credential helper** — works if `git push` does
+3. **`GITHUB_TOKEN` environment variable**
 
 ```bash
+# Quick setup (option 1):
 echo "<your-github-token>" > .opencode/secrets/github-token
 ```
 
-The file is gitignored — your token stays local.
-
-### Setup (Option 2: Zero Config)
-
-If you can already `git push` to GitHub, the agent will use your existing
-credentials automatically via the git credential helper. No additional setup
-needed.
-
-### Setup (Option 3: Environment Variable)
-
-Add to your `~/.zshrc` or `~/.bashrc`:
-
-```bash
-export GITHUB_TOKEN="ghp_xxxxxxxxxxxx"
-```
-
-### Do I Need the `gh` CLI?
-
-No. The `gh` CLI ([GitHub's official tool](https://cli.github.com/)) is
-optional. If installed, the agent uses it for cleaner PR commands. If not, it
-falls back to `curl` + GitHub REST API — which works on any system with `curl`
-(macOS, Linux, Windows Git Bash).
+The secret file is gitignored. If none are found, the agent prints setup
+instructions in the error message.
 
 ---
 
