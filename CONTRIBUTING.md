@@ -100,17 +100,24 @@ Before contributing, read these files:
 
 ## Code Review Expectations
 
-Changes are reviewed against these criteria:
+Since this project is about the **agent infrastructure** (not a user-facing
+application), reviews focus on:
 
-1. **Does the change improve the agent infrastructure?** (vs. the demo page)
-2. **Does it follow the architectural contracts?** (CSS layering, JS patterns,
-   agent prompts)
-3. **Is it the simplest working solution?** (YAGNI, stdlib-first, native
-   features)
-4. **Do the Playwright tests still pass?** (if applicable)
+1. **Does the change improve the agent infrastructure?** (skills, prompts,
+   pipeline, MCP, configs — not the demo page)
+2. **Is the change self-consistent?** Do skill enforcement rules match the
+   stated intent? Are agent prompts clear and unambiguous?
+3. **Is it the simplest working solution?** (Ponytail-aligned: YAGNI,
+   stdlib-first, native features)
+4. **Is the config valid?** JSON validity, MCP server reachability, no broken
+   references
+5. **Are agent behavior changes reflected in agent files?** If you change what
+   an agent does, update its prompt or definition
 
-This project uses an AI agent pipeline. Your PR may be reviewed by `@code-review`
-(automated) in addition to human maintainers.
+This project uses an AI agent pipeline. Since the template's output is the
+agent configuration itself (not a user-facing app), the automated review and
+testing pipeline (`@code-review`, Playwright) does **not** apply to
+contributions — they are scoped to the demo landing page content.
 
 ---
 

@@ -16,12 +16,13 @@ List the key files changed and briefly why:
 ## Checklist
 
 - [ ] Feature branch is based on `develop`
-- [ ] Changes follow the architectural contracts (CSS layering, JS modules,
-      agent prompts)
-- [ ] If this changes agent behavior, `AGENTS.md` or relevant prompts are
-      updated
-- [ ] `@code-review` has been run (if applicable)
-- [ ] Playwright tests pass (if applicable)
+- [ ] This change improves the **agent infrastructure** — not the demo landing
+      page content
+- [ ] If this changes agent behavior, `AGENTS.md` or relevant agent prompts
+      are updated
+- [ ] Config changes are valid (valid JSON, MCP endpoints reachable, no broken
+      `{file:...}` references)
+- [ ] Changes follow Ponytail principles: simplest solution, no over-engineering
 - [ ] I've considered whether this needs documentation updates
 
 ## Related Issues
