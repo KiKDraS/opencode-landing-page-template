@@ -2,11 +2,15 @@
 |---|---|
 | **Type:** 🏗️ Feature | **Status:** 🟢 Ready for Review |
 | **From:** `feature/*` | **To:** `develop` |
+
 ---
+
 ## Summary
 
 One paragraph — what this PR changes and why.
+
 ---
+
 ## Changes
 
 | File | Change |
@@ -31,9 +35,13 @@ One paragraph — what this PR changes and why.
 - [ ] Documentation considered and updated if needed
 
 </details>
+
 ---
+
 ## Related
 
 Closes #...
+
 ---
+
 > **Reviewer:** See [CONTRIBUTING.md](../CONTRIBUTING.md) for review expectations.
