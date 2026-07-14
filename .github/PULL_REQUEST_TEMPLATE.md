@@ -1,30 +1,46 @@
+| **Type:** 🏗️ Feature | **Status:** 🟢 Ready for Review |
+|---|---|
+| **From:** `feature/*` | **To:** `develop` |
+
+---
+
 ## Summary
 
-One paragraph describing what this PR changes and why.
+One paragraph — what this PR changes and why.
 
-## Scope
+---
 
-- [ ] This change improves the **agent infrastructure** (skills, prompts,
-      pipeline, config) — not the demo landing page content.
+## Changes
 
-## Affected Files
+| File | Change |
+|------|--------|
+| `path/to/file` | What changed and why |
 
-List the key files changed and briefly why:
+<details>
+<summary><b>📋 Review Checklist</b></summary>
 
-- `path/to/file` — what changed and why
-
-## Checklist
-
+**Branch Hygiene**
 - [ ] Feature branch is based on `develop`
-- [ ] This change improves the **agent infrastructure** — not the demo landing
-      page content
-- [ ] If this changes agent behavior, `AGENTS.md` or relevant agent prompts
-      are updated
-- [ ] Config changes are valid (valid JSON, MCP endpoints reachable, no broken
-      `{file:...}` references)
+- [ ] No direct commits to `main` or `develop`
+
+**Scope Check**
+- [ ] This change improves the **agent infrastructure** (skills, prompts, pipeline, config)
+- [ ] This is a demo landing page change (template demo, not the infrastructure)
+
+**Quality**
+- [ ] If this changes agent behavior, `AGENTS.md` or relevant agent prompts are updated
+- [ ] Config changes are valid (valid JSON, MCP endpoints reachable, no broken references)
 - [ ] Changes follow Ponytail principles: simplest solution, no over-engineering
-- [ ] I've considered whether this needs documentation updates
+- [ ] Documentation considered and updated if needed
 
-## Related Issues
+</details>
 
-Link any related issues (e.g. "Closes #12").
+---
+
+## Related
+
+Closes #...
+
+---
+
+> **Reviewer:** See [CONTRIBUTING.md](../CONTRIBUTING.md) for review expectations.
