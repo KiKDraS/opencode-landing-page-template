@@ -26,6 +26,16 @@ opencode                        # start building with AI agents
 
 ---
 
+## Commands
+
+```bash
+npm run dev       # Start dev server
+npm run build     # Production build → dist/
+npm run preview   # Preview production build locally
+```
+
+---
+
 ## Project Structure
 
 ```
@@ -44,21 +54,6 @@ opencode                        # start building with AI agents
 ├── opencode.json         # Agent definitions, plugins & MCP servers
 └── package.json
 ```
-
----
-
-## Tools & Configuration
-
-| Tool | What it does | Setup |
-|------|-------------|-------|
-| **[Ponytail](https://github.com/DietrichGebert/ponytail)** | Makes AI write minimal code — YAGNI, stdlib-first, shortest diff | Pre-configured. Commands: `/ponytail [lite\|full\|ultra\|off]`, `/ponytail-review`, `/ponytail-audit`, `/ponytail-debt`, `/ponytail-help` |
-| **[Codegraph](https://github.com/colbymchenry/codegraph)** | SQLite code graph — AI gets surgical context, fewer round-trips | `npm run setup` builds the index. Re-run if stale. `.codegraph/` is gitignored. |
-| **[Playwright](https://playwright.dev)** | Browser automation — agents explore UI, generate tests, self-heal failures | Pre-configured. Tests live in `tests/e2e/` and `tests/components/`. |
-| **[Context7](https://context7.com)** | Live library docs for AI (React, Next.js, Prisma, Tailwind, etc.) | Needs API key. [Sign up](https://context7.com), then `echo "<key>" > .opencode/secrets/context7-api-key` and enable in `opencode.json`. |
-| **GitHub Token** | PR automation for `@release-manager` | Optional. Auto-detects `gh` CLI → git credentials → `GITHUB_TOKEN`. |
-
-> **Note:** Context7 is the only tool disabled by default (needs an API key).
-> Everything else works after `npm install && npm run setup`.
 
 ---
 
@@ -88,6 +83,21 @@ flowchart LR
 ```
 
 **Pipeline:** Plan → Build → Audit (loops if rejected) → Test (plan → generate → execute → self-heal) → Ship (user approval required for release).
+
+---
+
+## Tools & Configuration
+
+| Tool | What it does | Setup |
+|------|-------------|-------|
+| **[Ponytail](https://github.com/DietrichGebert/ponytail)** | Makes AI write minimal code — YAGNI, stdlib-first, shortest diff | Pre-configured. Commands: `/ponytail [lite\|full\|ultra\|off]`, `/ponytail-review`, `/ponytail-audit`, `/ponytail-debt`, `/ponytail-help` |
+| **[Codegraph](https://github.com/colbymchenry/codegraph)** | SQLite code graph — AI gets surgical context, fewer round-trips | `npm run setup` builds index. Re-run if stale. `.codegraph/` is gitignored. |
+| **[Playwright](https://playwright.dev)** | Browser automation — agents explore UI, generate tests, self-heal failures | Pre-configured. Tests in `tests/e2e/` and `tests/components/`. |
+| **[Context7](https://context7.com)** | Live library docs for AI (React, Next.js, Prisma, Tailwind, etc.) | Needs API key. [Sign up](https://context7.com), then `echo "<key>" > .opencode/secrets/context7-api-key` and enable in `opencode.json`. |
+| **GitHub Token** | PR automation for `@release-manager` | Optional. Auto-detects `gh` CLI → git credentials → `GITHUB_TOKEN`. |
+
+> **Note:** Context7 is the only tool disabled by default (needs an API key).
+> Everything else works after `npm install && npm run setup`.
 
 ---
 
@@ -163,17 +173,6 @@ public repo name.
 
 ---
 
-## Troubleshooting
-
-| Error | Fix |
-|-------|-----|
-| `bad file reference: "{file:...}"` | `echo "<your-key>" > .opencode/secrets/context7-api-key` |
-| `opencode.json is not valid JSON` | `npx jsonlint opencode.json` — check for trailing commas, unquoted keys |
-| `browserType.launch: Executable doesn't exist` | `npm run setup` (installs Playwright browsers) |
-| MCP server tool unavailable | Check `"enabled": true` in `opencode.json`, restart session, run `npm run setup` |
-
----
-
 ## Skills & Guidelines
 
 All generated code complies with these skills (defined in `.opencode/skills/`):
@@ -190,10 +189,11 @@ All generated code complies with these skills (defined in `.opencode/skills/`):
 
 ---
 
-## Commands
+## Troubleshooting
 
-```bash
-npm run dev       # Start dev server
-npm run build     # Production build → dist/
-npm run preview   # Preview production build locally
-```
+| Error | Fix |
+|-------|-----|
+| `bad file reference: "{file:...}"` | `echo "<your-key>" > .opencode/secrets/context7-api-key` |
+| `opencode.json is not valid JSON` | `npx jsonlint opencode.json` — check for trailing commas, unquoted keys |
+| `browserType.launch: Executable doesn't exist` | `npm run setup` (installs Playwright browsers) |
+| MCP server tool unavailable | Check `"enabled": true` in `opencode.json`, restart session, run `npm run setup` |
