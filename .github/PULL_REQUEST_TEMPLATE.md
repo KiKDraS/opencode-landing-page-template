@@ -1,6 +1,5 @@
-| | |
-|---|---|
 | **Type:** 🏗️ Feature | **Status:** 🟢 Ready for Review |
+|---|---|
 | **From:** `feature/*` | **To:** `develop` |
 
 ---
