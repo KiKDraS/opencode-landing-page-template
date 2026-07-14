@@ -1,5 +1,9 @@
 # OpenCode Landing Page Template
 
+![Version](https://img.shields.io/badge/version-1.4.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen)
+
 A modern **Landing Page Template** built with Vanilla HTML, CSS, and JavaScript,
 managed by Vite. Designed to work with [OpenCode](https://opencode.ai) — an
 open-source AI coding agent — using a multi-agent orchestration pipeline for
@@ -8,14 +12,37 @@ planning, development, code review, and automated E2E testing.
 Built for performance, accessibility (WCAG 2.1 AA), and maintainability with a
 strict modular architecture and enforced development guidelines.
 
+---
+
+## Table of Contents
+
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Ponytail Plugin](#ponytail-plugin)
+- [Codegraph Plugin (Context Reduce)](#codegraph-plugin-context-reduce)
+- [Playwright (E2E Testing)](#playwright-e2e-testing)
+- [Context7 MCP (Library Documentation)](#context7-mcp-library-documentation)
+- [GitHub Token (PR Creation)](#github-token-pr-creation)
+- [Troubleshooting](#troubleshooting)
+- [Project Structure](#project-structure)
+- [AI Agent System](#ai-agent-system)
+- [Git Workflow](#git-workflow)
+- [Deployment to GitHub Pages](#deployment-to-github-pages)
+- [Skills & Guidelines](#skills--guidelines)
+- [Available Commands](#available-commands)
+
+---
+
 ## Tech Stack
 
-- **Bundler:** Vite
-- **Styles:** Native CSS with LightningCSS processing
-- **JavaScript:** ES6+ modules (no framework)
-- **Structure:** Semantic HTML5
-- **Testing:** Playwright
-- **Security:** `sanitize-html` for XSS protection
+| Category | Technology |
+|----------|------------|
+| **Bundler** | Vite |
+| **Styles** | Native CSS + LightningCSS |
+| **JavaScript** | ES6+ modules (no framework) |
+| **Structure** | Semantic HTML5 |
+| **Testing** | Playwright |
+| **Security** | `sanitize-html` for XSS protection |
 
 ---
 
@@ -84,10 +111,8 @@ See the
 [Ponytail documentation](https://github.com/DietrichGebert/ponytail#opencode)
 for full details.
 
-**Install the plugin:**
-
-The plugin is already referenced in `opencode.json`. OpenCode will cache it
-automatically at startup.
+> **Note:** The plugin is already referenced in `opencode.json`. OpenCode will
+> cache it automatically at startup. No manual install needed.
 
 **Default mode:** Pre-configured to `full` via
 `.opencode/plugins/ponytail-mode.js`.
@@ -126,11 +151,9 @@ and accurate cross-file dependency tracking.
 - Configuration files (`vite.config.js`, `opencode.json`, etc.)
 - Excludes `node_modules/`, `dist/`, and anything in `.gitignore`
 
-### Notes
-
-- `.codegraph/` is gitignored — each developer generates their own index
-- The index is a local SQLite database; no data leaves your machine
-- If the index gets stale, re-run `npm run setup` to rebuild it
+> **Note:** `.codegraph/` is gitignored — each developer generates their own
+> local index. The index is a SQLite database; no data leaves your machine. If
+> the index gets stale, re-run `npm run setup` to rebuild it.
 
 ---
 
@@ -206,10 +229,8 @@ string at config parse time. This means:
   (see `.opencode/secrets/.gitignore`)
 - **Portable** — clone the repo, add your key, done. No global config required
 
-### Enabling Context7
-
-Context7 is the **only MCP server disabled by default** (requires an API key).
-Enable it in `opencode.json`:
+> **Note:** Context7 is the **only MCP server disabled by default** (requires an
+> API key). Enable it in `opencode.json`:
 
 ```json
 "context7": {
@@ -246,9 +267,11 @@ into `develop`. It uses a hybrid approach: the `gh` CLI when available, or
 
 The agent resolves the GitHub token in this priority order:
 
-1. **`.opencode/secrets/github-token`** — explicit secret file (recommended)
-2. **Git credential helper** — zero config, works if `git push` already works
-3. **`GITHUB_TOKEN` environment variable** — shell profile export
+| Priority | Method | Setup |
+|----------|--------|-------|
+| 1 (best) | `.opencode/secrets/github-token` | Create a plain-text file with your token |
+| 2 (zero config) | Git credential helper | Works automatically if `git push` works |
+| 3 (fallback) | `GITHUB_TOKEN` environment variable | Export in `~/.zshrc` or `~/.bashrc` |
 
 If none are found, the agent will report a clear error with setup instructions.
 
@@ -288,76 +311,47 @@ falls back to `curl` + GitHub REST API — which works on any system with `curl`
 
 ## Troubleshooting
 
-### `{file:...}` reference: "does not exist"
+> **Error:** `bad file reference: "{file:.opencode/secrets/context7-api-key}" ... does not exist`
+>
+> OpenCode's `{file:path}` substitution reads the file and inlines its content.
+> If the file doesn't exist, the config fails to load.
+>
+> **Fix:** Create the file as plain text:
+> ```bash
+> echo "<your-api-key>" > .opencode/secrets/context7-api-key
+> ```
 
-```
-Error: bad file reference: "{file:.opencode/secrets/context7-api-key}" ... does not exist
-```
+> **Error:** `Config file at .../opencode.json is not valid JSON`
+>
+> **Fix:** Validate your JSON:
+> ```bash
+> npx jsonlint opencode.json
+> # or
+> jq . opencode.json > /dev/null && echo "valid"
+> ```
+>
+> Common causes: trailing commas, missing commas, unquoted keys.
 
-OpenCode's `{file:path}` substitution reads the file and inlines its content. If
-the file doesn't exist, the config fails to load.
+> **Error:** MCP server not connecting (`codegraph_explore`, `playwright-test*`,
+> `query-docs` unavailable)
+>
+> 1. **Check enabled** — verify `"enabled": true` for the MCP server in
+>    `opencode.json` (only `context7` is opt-in)
+> 2. **Restart session** — MCP config is read at startup, changes need a new
+>    session
+> 3. **Check installed** — Playwright and Codegraph need local deps (both
+>    installed by `npm run setup`)
 
-**Fix:** Create the file as a plain text file (no `.js` extension, no `export`):
+> **Error:** `browserType.launch: Executable doesn't exist at ...`
+>
+> **Fix:** Install Playwright browsers:
+> ```bash
+> npm run setup
+> ```
 
-```bash
-echo "<your-api-key>" > .opencode/secrets/context7-api-key
-```
-
-### Config file is not valid JSON
-
-```
-Error: Config file at .../opencode.json is not valid JSON
-```
-
-**Fix:** Validate your `opencode.json` syntax:
-
-```bash
-npx jsonlint opencode.json
-```
-
-Or use `jq`:
-
-```bash
-jq . opencode.json > /dev/null && echo "valid"
-```
-
-Common causes: trailing commas, missing commas between fields, unquoted keys.
-
-### MCP server not connecting
-
-If an agent reports that an MCP tool is unavailable (e.g., `codegraph_explore`,
-`playwright-test*`, or `query-docs`):
-
-1. **Check if the server is enabled** — verify `"enabled": true` for the
-   specific MCP server in `opencode.json`. Only `context7` is opt-in by default.
-2. **Restart the session** — MCP server configuration is read at startup.
-   Changes require a new session.
-3. **Check the server is installed** — Playwright and Codegraph need local
-   dependencies (both installed by `npm run setup`):
-   - Playwright: `npm run setup` (or `npx playwright install` directly)
-   - Codegraph: `npm run setup` (`npx @colbymchenry/codegraph init`)
-
-### Playwright browsers not found
-
-```
-Error: browserType.launch: Executable doesn't exist at ...
-```
-
-**Fix:** Run the setup command to install Playwright browsers:
-
-```bash
-npm run setup
-```
-
-### Port already in use
-
-If a local MCP server fails to start, another process may be using its port.
-Playwright MCP and Codegraph use ephemeral ports by default — if the issue
-persists, restart your terminal or check with:
-
-```bash
-lsof -i :<port>
-```
+> **Tip:** If a local MCP server fails to start, another process may be using
+> its port. Playwright MCP and Codegraph use ephemeral ports — if the issue
+> persists, restart your terminal or check with `lsof -i :<port>`.
 
 ---
 
@@ -455,12 +449,12 @@ After merge, the source branch is deleted (local + remote). **`main` and
 
 **Agent Permissions:**
 
-- `@frontend-dev` can ONLY work on `feature/*` and `hotfix/*` branches
-- `@release-manager` handles all remote git operations (PRs, pushes, merges,
-  tags, branch deletion)
-- `@orchestrator` is the ONLY entity authorized to decide when to merge or
-  release
-- All merges require `@code-review` approval first
+| Agent | Authority |
+|-------|-----------|
+| `@frontend-dev` | `feature/*` and `hotfix/*` branches ONLY |
+| `@release-manager` | ALL remote git operations (PRs, pushes, merges, tags, branch deletion) |
+| `@orchestrator` | **ONLY** entity authorized to decide when to merge or release |
+| `@code-review` | ALL merges require approval first |
 
 ---
 
@@ -491,8 +485,8 @@ base: isProd ? `/${folderName}/` : "/";
    serve from `/dist` on `main`
 3. Your site will be available at `https://<username>.github.io/<repo-name>/`
 
-**Why this is not recommended:** Your source code becomes public (if the repo is
-public), and you lose the clean separation between development and deployment.
+> **Warning:** Not recommended — your source code becomes public (if the repo is
+> public) and you lose the clean separation between development and deployment.
 
 ---
 
