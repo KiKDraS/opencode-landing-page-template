@@ -124,6 +124,14 @@ After merge, the source branch is deleted (local + remote). **`main` and `develo
 
 ---
 
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines — scope (agent
+infrastructure only, not demo content), Git Flow, review criteria, and how to
+submit changes.
+
+---
+
 ## Deployment
 
 **Recommended: dual-repo flow** — private source repo, public deploy repo.
