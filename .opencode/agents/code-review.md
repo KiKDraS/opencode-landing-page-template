@@ -55,6 +55,16 @@ quality gates. If a single item fails, the submission must be rejected.
   `src/styles/layout/`, `src/styles/components/` or `src/styles/boilerplate/`.
   They must use native CSS nesting and utilize design tokens from
   `boilerplate/variables.css`.
+- **CSS Nesting Audit:** Scan every modified `.css` file for flat selector
+  repetition that should be nested. Flag any top-level pseudo-class or
+  pseudo-element rule that belongs inside a parent block (e.g., `.card { }`
+  followed later by `.card:hover { }` at the root level — these must be
+  collapsed using `&`). Flag any `@media` rule that repeats the parent selector
+  when the query could live inside the parent's nested block. Reject if flat
+  repetition can be replaced by nesting without exceeding 3 levels of depth.
+  Accept sibling pseudo-elements (`::-webkit-scrollbar`,
+  `::-webkit-scrollbar-thumb`) that cannot be nested because they are siblings,
+  not descendants.
 - **Typography & Motion Gates:** Reject standard overused typography stacks
   (Inter, Arial, Roboto, generic system-ui). Verify the use of characterful,
   distinctive typefaces. Check that entering components implement high-impact
