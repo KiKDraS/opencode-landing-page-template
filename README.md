@@ -1,4 +1,4 @@
-# opencode Landing Page Template
+# OpenCode Landing Page Template
 
 A modern **Landing Page Template** built with Vanilla HTML, CSS, and JavaScript,
 managed by Vite. Designed to work with [OpenCode](https://opencode.ai) — an
@@ -254,8 +254,8 @@ If none are found, the agent will report a clear error with setup instructions.
 
 ### Setup (Option 1: Secret File)
 
-Create a [GitHub personal access token](https://github.com/settings/tokens)
-with `repo` scope, then:
+Create a [GitHub personal access token](https://github.com/settings/tokens) with
+`repo` scope, then:
 
 ```bash
 echo "<your-github-token>" > .opencode/secrets/github-token
@@ -279,10 +279,10 @@ export GITHUB_TOKEN="ghp_xxxxxxxxxxxx"
 
 ### Do I Need the `gh` CLI?
 
-No. The `gh` CLI ([GitHub's official tool](https://cli.github.com/)) is optional.
-If installed, the agent uses it for cleaner PR commands. If not, it falls back to
-`curl` + GitHub REST API — which works on any system with `curl` (macOS, Linux,
-Windows Git Bash).
+No. The `gh` CLI ([GitHub's official tool](https://cli.github.com/)) is
+optional. If installed, the agent uses it for cleaner PR commands. If not, it
+falls back to `curl` + GitHub REST API — which works on any system with `curl`
+(macOS, Linux, Windows Git Bash).
 
 ---
 
@@ -443,6 +443,7 @@ This project follows a strict **Git Flow** branching model:
 **PR-Only Merge Policy:**
 
 ALL merges use Pull Requests — no direct `git merge` to `main` or `develop`:
+
 - `feature/*` → `develop` (PR with documented changes)
 - `release/*` → `main` (PR with release notes)
 - `release/*` → `develop` (back-merge PR)

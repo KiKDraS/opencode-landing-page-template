@@ -11,6 +11,7 @@ export default defineConfig(({ command }) => {
     publicDir: "public",
     build: {
       outDir: "dist",
+      cssMinify: "lightningcss",
     },
     css: {
       transformer: "lightningcss",

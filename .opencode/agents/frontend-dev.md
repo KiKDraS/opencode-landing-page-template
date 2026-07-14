@@ -64,6 +64,15 @@ execution across all three layers simultaneously to avoid fragmented codebases:
   concerns within `src/styles/` (under `/layout`, `/components` or
   `/boilerplate`), utilizing native CSS nesting and design tokens from
   `boilerplate/variables.css`.
+- **CSS Nesting Self-Check:** Before committing, scan every `.css` file you
+  created or modified. Any pseudo-class, pseudo-element, or `@media` rule that
+  repeats the parent selector outside its block **MUST** be collapsed into a
+  single nested block. If you see the same selector name repeated across
+  multiple top-level rules (e.g., `.card { }` … `.card:hover { }` …
+  `.card::after { }`), rewrite them using the `&` prefix for pseudo-classes,
+  pseudo-elements, and child selectors. Use the `&` suffix only for
+  parent-context overrides (e.g., `.card--featured &`). Never exceed 3 levels of
+  nesting depth. See the `html-css-best-practices` skill for full examples.
 - **Typography & Polish:** Inject distinctive typefaces using local fonts in
   `src/assets/fonts/` (No Google Fonts CDN, no Inter, Roboto, or generic system
   font stacks). Reference them with relative CSS paths and let Vite handle
@@ -130,5 +139,5 @@ After completing a feature and committing your changes:
 git push -u origin feature/branch-name
 ```
 
-This ensures the branch is available on GitHub for PR creation and review by
-the `@release-manager`.
+This ensures the branch is available on GitHub for PR creation and review by the
+`@release-manager`.
