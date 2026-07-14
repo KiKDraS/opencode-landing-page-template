@@ -102,12 +102,87 @@ development using Vite.
   5.  **Utilities:** Single-purpose global modifiers (`utilities.css`)
 - Use an entry point file `src/styles/main.css` that aggregates all modules
   using standard `@import` statements.
-- Use CSS Nesting natively for structural scope hierarchy.
+- Use CSS Nesting natively for structural scope hierarchy (see "CSS Nesting"
+  subsection below for rules and examples).
 - Use meaningful class names following a flat, component-scoped convention.
 - Avoid `!important` (solve styling conflicts using CSS specificity or cascading
   order layers).
 - Use shorthand properties where appropriate
 - Comment complex sections
+
+### CSS Nesting
+
+CSS Nesting replaces flat selector repetition by colocating pseudo-classes,
+pseudo-elements, media queries, and child selectors inside their parent block.
+This eliminates selector duplication, improves readability, and enforces
+structural scope.
+
+**MUST nest the following inside their parent selector:**
+
+- Pseudo-classes (`&:hover`, `&:focus-visible`, `&:nth-child()`, `&:not()`)
+- Pseudo-elements (`&::before`, `&::after`)
+- Media queries (`@media`) that modify the parent component at a breakpoint
+- Child selectors that exist only as descendants of the parent
+
+**MUST NOT:**
+
+- Nest sibling components inside each other (e.g., `.header` rules inside
+  `.footer`)
+- Exceed 3 levels of nesting depth
+- Nest unrelated selectors just to colocate them in the same file
+
+**Before (flat repetition — REJECTED):**
+
+```css
+.card {
+  padding: var(--space-md);
+}
+.card:hover {
+  transform: translateY(-2px);
+}
+.card::after {
+  content: "";
+}
+@media (min-width: 768px) {
+  .card {
+    padding: var(--space-lg);
+  }
+}
+```
+
+**After (nested — APPROVED):**
+
+```css
+.card {
+  padding: var(--space-md);
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &::after {
+    content: "";
+  }
+
+  @media (min-width: 768px) {
+    padding: var(--space-lg);
+  }
+}
+```
+
+**Parent-referencing suffix (`&` at the end):** When a child element needs
+different styling based on a modifier on an ancestor, place `&` after the
+ancestor selector:
+
+```css
+.badge {
+  color: var(--color-text-muted);
+
+  .card--featured & {
+    color: var(--color-primary);
+  }
+}
+```
 
 ### CSS Custom Properties (Variables)
 
