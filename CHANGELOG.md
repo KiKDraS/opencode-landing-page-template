@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.6.1] - 2026-07-14
+
+### Changed
+- README.md — compacted GitHub Token setup section, removed redundant setup guides
+
 ## [1.4.0] - 2026-07-14
 
 ### Added
