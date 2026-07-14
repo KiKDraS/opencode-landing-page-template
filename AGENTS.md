@@ -35,6 +35,7 @@ for a public repository.
       publicDir: "public",
       build: {
         outDir: "dist",
+        cssMinify: "lightningcss",
       },
       css: {
         transformer: "lightningcss",
@@ -210,8 +211,8 @@ branching model. Making direct commits to the main stability branches is
      changes, and spawn its working branch from there
      (`git checkout -b feature/name`).
    - After completing and committing a feature, `@frontend-dev` **MUST** push
-     the branch to GitHub (`git push -u origin feature/name`) so it is
-     available for Pull Request creation.
+     the branch to GitHub (`git push -u origin feature/name`) so it is available
+     for Pull Request creation.
    - It is completely forbidden for `@frontend-dev` to check out, commit to, or
      merge into `main` or `develop`.
 3. **@release-manager Authority & Remote Sync:**
@@ -221,8 +222,8 @@ branching model. Making direct commits to the main stability branches is
    - All branch operations (create, merge, delete) **MUST** be mirrored to
      GitHub immediately — never leave a branch only on one side (local or
      remote).
-   - **ALL merges MUST use Pull Requests** — no direct `git merge` to `main`
-     or `develop`. This applies to:
+   - **ALL merges MUST use Pull Requests** — no direct `git merge` to `main` or
+     `develop`. This applies to:
      - `feature/*` → `develop`
      - `release/*` → `main` and `release/*` → `develop` (back-merge)
      - `hotfix/*` → `main` and `hotfix/*` → `develop` (back-merge)
