@@ -135,12 +135,34 @@ rules:
      custom sliders, testimonial carousels, accessible dialog popups).
   3. **`src/js/utils/`**: For stateless, side-effect-free pure functions (e.g.,
      input validators, performance debouncers or throttlers).
-- **The Lifecycle Contract:** Every JS module inside `layout/` or `components/`
-  must export a single initialization function (e.g., `initSlider()`). You must
-  import this function into `src/main.js` and execute it directly, cleanly, and
-  sequentially. Do not wrap execution in `DOMContentLoaded` or load events, as
-  Vite compiles scripts as native ES modules, which are natively deferred by
-  default.
+- **Module Contract:** Every JS module inside `layout/` or `components/` must
+  export a single initialization function (e.g., `initSlider()`). The function
+  accepts an optional config object, uses a guard clause to bail when no
+  matching DOM elements exist, and optionally returns a cleanup/destroy
+  function. No side effects on import.
+
+  ```javascript
+  export function initComponent(config = {}) {
+    const { selector = '.component' } = config;
+    const elements = document.querySelectorAll(selector);
+    if (!elements.length) return;
+    // Implementation using native browser APIs
+    return () => { /* cleanup listeners */ };
+  }
+  ```
+
+- **Entry Point Rules (`src/main.js`):** Import and call init functions
+  sequentially, top to bottom. No DOM manipulation, no event listeners, no
+  logic — only initialization calls. Do not wrap in `DOMContentLoaded` or load
+  events; ES modules are natively deferred by default.
+
+  ```javascript
+  import { initNavigation } from './js/layout/navigation.js';
+  import { initScrollReveal } from './js/layout/scroll-reveal.js';
+
+  initNavigation();
+  initScrollReveal({ threshold: 0.1 });
+  ```
 
 ### 4. Asset Management (`src/assets/` and `public/`)
 
