@@ -25,7 +25,6 @@ dist-ssr
 
 .playwright-mcp
 test-results
-/.DS_Store
 .codegraph/
 
 # Environment variables
