@@ -166,6 +166,7 @@ flowchart LR
 | Tool | What it does | Setup |
 |------|-------------|-------|
 | **[Ponytail](https://github.com/DietrichGebert/ponytail)** | Makes AI write minimal code — YAGNI, stdlib-first, shortest diff | Pre-configured. Commands: `/ponytail [lite\|full\|ultra\|off]`, `/ponytail-review`, `/ponytail-audit`, `/ponytail-debt`, `/ponytail-help` |
+| **[Caveman](https://github.com/anthonystepvoy/caveman-opencode)** | Ultra-compressed communication mode — drops filler, saves ~75% tokens. Converted to OpenCode from [caveman-opencode](https://github.com/anthonystepvoy/caveman-opencode) (MIT). See upstream repo for usage guide. | Pre-configured active by default. Commands: `/caveman [lite\|full\|ultra]`, `/caveman-commit`, `/caveman-review`, `/caveman-compress`, `/caveman-help`. Disable with "stop caveman". |
 | **[Codegraph](https://github.com/colbymchenry/codegraph)** | SQLite code graph — AI gets surgical context, fewer round-trips | `npm run setup` builds index. Re-run if stale. `.codegraph/` is gitignored. |
 | **[Playwright](https://playwright.dev)** | Browser automation — agents explore UI, generate tests, self-heal failures | Pre-configured. Tests in `tests/e2e/` and `tests/components/`. |
 | **[Context7](https://context7.com)** | Live library docs for AI (React, Next.js, Prisma, Tailwind, etc.) | Needs API key. [Sign up](https://context7.com), then `echo "<key>" > .opencode/secrets/context7-api-key` and enable in `opencode.json`. |
@@ -269,6 +270,7 @@ All generated code complies with these skills (defined in `.opencode/skills/`):
 | **SEO** | JSON-LD structured data, semantic headings, `robots.txt`, sitemap, canonical URLs |
 | **Context7 MCP** | Live library docs for setup, API syntax, migrations (not for refactoring/debugging) |
 | **Playwright** | User-facing locators, Page Object Model, web-first assertions, test isolation |
+| **Caveman** | Terse communication mode — drops articles, filler, hedging. Active by default for all agents. Converted from [caveman-opencode](https://github.com/anthonystepvoy/caveman-opencode) (MIT). Full usage docs in the upstream repo. |
 
 ---
 
