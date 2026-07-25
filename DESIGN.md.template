@@ -1,280 +1,156 @@
 # DESIGN.md — Project Design Contract
 
-**Version:** 1.0  
-**Date:** {{DATE}}  
-**Status:** Active Contract — All agents MUST comply  
-**Location:** `/DESIGN.md` (project root)  
-**Template:** `DESIGN.md.template` (this file — DO NOT EDIT, copy to DESIGN.md)
-
----
-
-## ⚠️ TEMPLATE INSTRUCTIONS
-
-> **This is a template.** The orchestrator fills in project-specific values
-> during the Design Thinking phase. Never edit this template directly.
->
-> Universal architecture rules live in `AGENTS.md`. Skill-level rules
-> (CSS patterns, accessibility, JS patterns, SEO, anti-patterns) are
-> enforced by `.opencode/skills/`. This document covers ONLY what is
-> unique to THIS project.
+**Status:** Active — all agents MUST comply  
+**Source:** `DESIGN.md.template` (this file — copy to `DESIGN.md`, fill project values)
 
 ---
 
 ## 1. PROJECT IDENTITY & DESIGN PHILOSOPHY
 
 ### 1.1 Project Purpose
-**{{PROJECT_PURPOSE}}** — *What problem does this landing page solve? Who uses it?*
+**{{PROJECT_PURPOSE}}** — problem solved? who uses it?
 
 ### 1.2 Primary Audience
 **{{PRIMARY_AUDIENCE}}**
 
 ### 1.3 Primary Conversion Goal
-**{{PRIMARY_GOAL}}** — *The ONE action you want visitors to take*
+**{{PRIMARY_GOAL}}** — one action visitor must take
 
-### 1.4 Design Philosophy (MANDATORY — from `frontend-design` skill)
-> **"Bold editorial design with distinctive character — no generic AI aesthetics."**
+### 1.4 Design Philosophy (mandated by `frontend-design`)
 
 | Principle | Project Decision |
-|-----------|------------------|
-| **Aesthetic Direction** | **{{AESTHETIC_DIRECTION}}** |
-| **Typography** | **{{FONT_DISPLAY}}** (display) + **{{FONT_BODY}}** (body) |
-| **Color Strategy** | **{{COLOR_STRATEGY}}** |
-| **Layout Approach** | **{{LAYOUT_APPROACH}}** |
-| **Background Treatment** | **{{BACKGROUND_TREATMENT}}** |
-| **Motion Choreography** | **{{MOTION_CHOREOGRAPHY}}** |
-| **Differentiation** | **{{DIFFERENTIATION}}** — *The ONE thing visitors will remember* |
+|---|---|
+| **Aesthetic Direction** | {{AESTHETIC_DIRECTION}} |
+| **Typography** | {{FONT_DISPLAY}} (display) + {{FONT_BODY}} (body) |
+| **Color Strategy** | {{COLOR_STRATEGY}} |
+| **Layout Approach** | {{LAYOUT_APPROACH}} |
+| **Background Treatment** | {{BACKGROUND_TREATMENT}} |
+| **Motion Choreography** | {{MOTION_CHOREOGRAPHY}} |
+| **Differentiator** | {{DIFFERENTIATION}} — one thing visitors remember |
 
 ---
 
-## 2. CSS ARCHITECTURE
+## 2. DESIGN TOKENS
 
-### 2.1 Import Order (IMMUTABLE — in `src/styles/main.css`)
-```css
-/* 1. Config & Boilerplate */
-@import "./boilerplate/variables.css";
-@import "./boilerplate/reset.css";
-@import "./boilerplate/base.css";
-@import "./boilerplate/fonts.css";
-@import "./boilerplate/utilities.css";
+Fill these into `src/styles/boilerplate/variables.css`. Each category maps to CSS custom properties in that file.
 
-/* 2. Layout */
-@import "./layout/header.css";
-@import "./layout/main.css";
-@import "./layout/footer.css";
+### 2.1 Color Palette
 
-/* 3. Components */
-@import "./components/button.css";
-@import "./components/card.css";
-
-/* 4. Utilities */
-@import "./boilerplate/utilities.css";
-```
-
-### 2.2 CSS Custom Properties Contract — `variables.css`
-
-**Required Token Categories (all mandatory):**
-
-```css
-:root {
-  /* ── Color System ── */
-  --color-bg: ;
-  --color-bg-alt: ;
-  --color-bg-elevated: ;
-  --color-text: ;
-  --color-text-muted: ;
-  --color-text-inverse: ;
-  --color-primary: ;
-  --color-primary-hover: ;
-  --color-primary-active: ;
-  --color-accent: ;
-  --color-accent-hover: ;
-  --color-border: ;
-  --color-border-strong: ;
-  --color-focus: ;
-  --color-error: ;
-  --color-success: ;
-  --color-warning: ;
-
-  /* ── Typography ── */
-  --font-display: ;
-  --font-body: ;
-  --font-mono: ;
-  --font-size-fluid-base: ;
-  --font-size-display-1: ;
-  --font-size-display-2: ;
-  --font-size-display-3: ;
-  --font-size-heading-1: ;
-  --font-size-heading-2: ;
-  --font-size-heading-3: ;
-  --font-size-body: ;
-  --font-size-body-sm: ;
-  --font-size-caption: ;
-  --line-height-tight: ;
-  --line-height-base: ;
-  --line-height-relaxed: ;
-  --letter-spacing-tight: ;
-  --letter-spacing-normal: ;
-  --letter-spacing-wide: ;
-
-  /* ── Spacing System (8px base scale) ── */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-7: 3rem;
-  --space-8: 4rem;
-  --space-9: 6rem;
-  --space-10: 8rem;
-
-  /* ── Layout ── */
-  --container-max: ;
-  --container-padding: ;
-  --header-height: ;
-  --footer-height: ;
-
-  /* ── Motion ── */
-  --duration-fast: 150ms;
-  --duration-base: 250ms;
-  --duration-slow: 400ms;
-  --duration-slower: 600ms;
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-expressive: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-  /* ── Z-Index Scale ── */
-  --z-base: 1;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-modal-backdrop: 300;
-  --z-modal: 400;
-  --z-toast: 500;
-  --z-tooltip: 600;
-
-  /* ── Breakpoints (mobile-first) ── */
-  --bp-sm: 480px;
-  --bp-md: 768px;
-  --bp-lg: 1024px;
-  --bp-xl: 1440px;
-  --bp-2xl: 1920px;
-}
-
-/* Dark Mode Override (REQUIRED) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Override ONLY color tokens */
-    --color-bg: ;
-    --color-bg-alt: ;
-    --color-bg-elevated: ;
-    --color-text: ;
-    --color-text-muted: ;
-    --color-text-inverse: ;
-    --color-primary: ;
-    --color-primary-hover: ;
-    --color-accent: ;
-    --color-border: ;
-    --color-border-strong: ;
-  }
-}
-```
-
----
-
-## 3. DESIGN TOKENS — PROJECT SPECIFIC
-
-> **This section is EMPTY in the template.** The orchestrator fills it in
-> during the Design Thinking phase after user approval.
-
-### 3.1 Color Palette
 | Token | Light Value | Dark Value | Usage |
 |-------|-------------|------------|-------|
-| `--color-bg` | | | Page background |
-| `--color-bg-alt` | | | Alternate sections |
-| `--color-bg-elevated` | | | Cards, modals |
-| `--color-text` | | | Primary text |
-| `--color-text-muted` | | | Secondary text |
-| `--color-primary` | | | Brand dominant |
-| `--color-accent` | | | CTAs, links |
-| `--color-border` | | | Subtle borders |
-| `--color-focus` | | | Focus rings |
+| `--color-bg` | {{hex}} | {{hex}} | Page background |
+| `--color-bg-alt` | {{hex}} | {{hex}} | Alternate sections |
+| `--color-bg-elevated` | {{hex}} | {{hex}} | Cards, modals |
+| `--color-text` | {{hex}} | {{hex}} | Primary text |
+| `--color-text-muted` | {{hex}} | {{hex}} | Secondary text |
+| `--color-text-inverse` | {{hex}} | {{hex}} | Text on dark backgrounds |
+| `--color-primary` | {{hex}} | {{hex}} | Brand dominant |
+| `--color-primary-hover` | {{hex}} | {{hex}} | Brand hover state |
+| `--color-primary-active` | {{hex}} | {{hex}} | Brand active state |
+| `--color-accent` | {{hex}} | {{hex}} | CTAs, links |
+| `--color-accent-hover` | {{hex}} | {{hex}} | Accent hover |
+| `--color-border` | {{hex}} | {{hex}} | Subtle borders |
+| `--color-border-strong` | {{hex}} | {{hex}} | Emphasized borders |
+| `--color-focus` | {{hex}} | {{hex}} | Focus rings |
+| `--color-error` | {{hex}} | — | Error states |
+| `--color-success` | {{hex}} | — | Success states |
+| `--color-warning` | {{hex}} | — | Warning states |
 
-### 3.2 Typography Scale (using `clamp()`)
+**Dark mode:** copy color tokens into `@media (prefers-color-scheme: dark) { :root { ... } }`. Override only color tokens.
+
+### 2.2 Typography Scale (use `clamp()` for fluid sizing)
+
+| Token | Value | Font Family |
+|-------|-------|-------------|
+| `--font-display` | — | {{font-name}} |
+| `--font-body` | — | {{font-name}} |
+| `--font-mono` | — | {{font-name}} |
+| `--font-size-fluid-base` | {{clamp()}} | Base for body |
+| `--font-size-display-1` | {{clamp()}} | Largest heading |
+| `--font-size-display-2` | {{clamp()}} | |
+| `--font-size-display-3` | {{clamp()}} | |
+| `--font-size-heading-1` | {{clamp()}} | |
+| `--font-size-heading-2` | {{clamp()}} | |
+| `--font-size-heading-3` | {{clamp()}} | |
+| `--font-size-body` | `var(--font-size-fluid-base)` | |
+| `--font-size-body-sm` | {{clamp()}} | |
+| `--font-size-caption` | {{clamp()}} | |
+| `--line-height-tight` | {{value}} | Headings |
+| `--line-height-base` | {{value}} | Body |
+| `--line-height-relaxed` | {{value}} | Long-form |
+| `--letter-spacing-tight` | {{value}} | |
+| `--letter-spacing-normal` | {{value}} | |
+| `--letter-spacing-wide` | {{value}} | |
+
+**Font files:** place TTF/WOFF2 in `src/assets/fonts/`. Declare `@font-face` in `boilerplate/fonts.css` with relative CSS paths. No Google Fonts CDN.
+
+### 2.3 Spacing (8px base scale)
+
+`--space-1` through `--space-10` = 0.25rem through 8rem (step). Defaults in `variables.css`. Override only if project needs non-8px rhythm.
+
+| Token | Default |
+|-------|---------|
+| `--space-1` | `0.25rem` |
+| `--space-2` | `0.5rem` |
+| `--space-3` | `0.75rem` |
+| `--space-4` | `1rem` |
+| `--space-5` | `1.5rem` |
+| `--space-6` | `2rem` |
+| `--space-7` | `3rem` |
+| `--space-8` | `4rem` |
+| `--space-9` | `6rem` |
+| `--space-10` | `8rem` |
+
+### 2.4 Section Dimensions
+
 | Token | Value |
 |-------|-------|
-| `--font-size-fluid-base` | |
-| `--font-size-display-1` | |
-| `--font-size-display-2` | |
-| `--font-size-display-3` | |
-| `--font-size-heading-1` | |
-| `--font-size-heading-2` | |
-| `--font-size-heading-3` | |
-| `--font-size-body` | `var(--font-size-fluid-base)` |
-| `--font-size-body-sm` | |
-| `--font-size-caption` | |
+| `--container-max` | {{value}} |
+| `--container-padding` | {{value}} |
+| `--header-height` | {{value}} |
+| `--footer-height` | {{value}} |
 
-### 3.3 Spacing Scale
-| Token | Value |
-|-------|-------|
-| `--space-1` | `0.25rem` (4px) |
-| `--space-2` | `0.5rem` (8px) |
-| `--space-3` | `0.75rem` (12px) |
-| `--space-4` | `1rem` (16px) |
-| `--space-5` | `1.5rem` (24px) |
-| `--space-6` | `2rem` (32px) |
-| `--space-7` | `3rem` (48px) |
-| `--space-8` | `4rem` (64px) |
-| `--space-9` | `6rem` (96px) |
-| `--space-10` | `8rem` (128px) |
+### 2.5 Motion (defaults in `variables.css` — override per project)
 
-### 3.4 Motion Tokens
-| Token | Value |
-|-------|-------|
-| `--duration-fast` | `150ms` |
-| `--duration-base` | `250ms` |
-| `--duration-slow` | `400ms` |
-| `--duration-slower` | `600ms` |
-| `--ease-standard` | `cubic-bezier(0.4, 0, 0.2, 1)` |
-| `--ease-expressive` | `cubic-bezier(0.34, 1.56, 0.64, 1)` |
-| `--ease-spring` | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` |
+| Token | Default | Use |
+|-------|---------|-----|
+| `--duration-fast` | `150ms` | Micro-interactions |
+| `--duration-base` | `250ms` | Standard transitions |
+| `--duration-slow` | `400ms` | Page transitions |
+| `--duration-slower` | `600ms` | Hero reveals |
+| `--ease-standard` | `cubic-bezier(0.4, 0, 0.2, 1)` | UI transitions |
+| `--ease-expressive` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Entrances, emphasis |
+| `--ease-spring` | `cubic-bezier(0.175, 0.885, 0.32, 1.275)` | Bouncy micro-interactions |
+
+### 2.6 Z-Index Scale (defaults — override if conflicts arise)
+
+| Token | Default | Usage |
+|-------|---------|-------|
+| `--z-base` | `1` | Base layer |
+| `--z-dropdown` | `100` | Dropdown menus |
+| `--z-sticky` | `200` | Sticky headers |
+| `--z-modal-backdrop` | `300` | Modal backdrops |
+| `--z-modal` | `400` | Modal dialogs |
+| `--z-toast` | `500` | Toast notifications |
+| `--z-tooltip` | `600` | Tooltips |
 
 ---
 
-## 4. COMPONENT INVENTORY
+## 3. COMPONENT INVENTORY
 
-> **This section is EMPTY in the template.** The orchestrator fills it in
-> during the Design Thinking phase.
-
-| Component | Status | CSS File | JS Module | Tests |
-|-----------|--------|----------|-----------|-------|
-| Button | ☐ Planned | `button.css` | — | `button.spec.ts` |
-| Card | ☐ Planned | `card.css` | — | `card.spec.ts` |
-| Navigation | ☐ Planned | `header.css` | `navigation.js` | `navigation.spec.ts` |
-| Hero | ☐ Planned | `main.css` | `scroll-reveal.js` | `hero.spec.ts` |
+| Component | Status | CSS File | JS Module |
+|-----------|--------|----------|-----------|
+| | ☐ Planned | | |
+| | ☐ Planned | | |
+| | ☐ Planned | | |
+| | ☐ Planned | | |
 
 ---
 
-## 5. CHANGE LOG
+## 4. ENFORCEMENT
 
-| Version | Date | Author | Changes |
-|---------|------|--------|---------|
-| 1.0 | {{DATE}} | @orchestrator | Initial contract from template |
+Binding contract. `@code-review` rejects violations. Propose changes: `@orchestrator` → user approval → update.
 
 ---
 
-## 6. ENFORCEMENT
-
-> **This document is a binding contract.** Any agent violating these rules
-> will have their output rejected by `@code-review` and the pipeline will
-> halt. No exceptions, no "pragmatic" deviations.
->
-> Universal rules live in `AGENTS.md` and `.opencode/skills/`. This
-> document governs ONLY project-specific design decisions and token values.
-
-**To propose a change:** `@orchestrator` presents the change to the user,
-receives explicit approval ("Approved" or "Aprobado"), then updates this
-document and notifies all agents.
-
----
-
-*End of DESIGN.md.template*
+*End of DESIGN.md.template — copy to DESIGN.md and fill project values.*
