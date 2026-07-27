@@ -68,6 +68,8 @@ Strict. No files outside schema.
 
 **Caveman ON.** Sub-agents inherit. Off: "stop caveman". Drop articles/filler/pleasantries/hedging. Fragments OK. Pattern: `[thing] [action] [reason].` Spec: `.opencode/skills/caveman/SKILL.md`
 
+**Caveman ultra enforced** on edits to `AGENTS.md`, `DESIGN.md*`, `.opencode/agents/*.md`. Max compression. These are meta files — no prose, no explanations, no pleasantries. If reading: caveman ultra. If writing: caveman ultra.
+
 **Context7 MCP mandatory.** `resolve-library-id` → `query-docs` for lib/framework/API/CLI questions. Spec: `.opencode/skills/context7-mcp/SKILL.md`
 
 **Ponytail override.** CSS split into modular layers. Ponytail "fewest files" does NOT flatten CSS. HTML in `index.html`, CSS in `src/styles/`, JS in `src/js/`.
