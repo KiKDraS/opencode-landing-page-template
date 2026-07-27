@@ -27,6 +27,14 @@ dist-ssr
 test-results
 .codegraph/
 
+# Local opencode tooling (not project files)
+.opencode/commands/
+.opencode/skills/caveman/
+.opencode/skills/caveman-commit/
+.opencode/skills/caveman-compress/
+.opencode/skills/caveman-help/
+.opencode/skills/caveman-review/
+
 # Environment variables
 .env
 
