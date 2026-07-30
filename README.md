@@ -1,284 +1,120 @@
-# OpenCode Landing Page Template
+![OpenCode Landing Page Header](https://capsule-render.vercel.app/api?type=waving&color=1e293b&height=200&section=header&text=OpenCode%20Landing%20Page&fontSize=42&fontColor=ffffff&fontAlignY=38)
 
-![Version](https://img.shields.io/badge/version-1.4.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen)
+![Version](https://img.shields.io/badge/version-1.4.0-blue?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)
 
-Vanilla HTML/CSS/JS landing page, powered by [Vite](https://vitejs.dev) and
-built for the [OpenCode](https://opencode.ai) multi-agent pipeline — planning,
-code generation, review, and automated E2E testing. WCAG 2.1 AA, modular
-architecture, no framework lock-in.
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat-square&logo=playwright&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 
-```bash
-npm install && npm run setup    # deps + codegraph index + playwright browsers
-opencode                        # start building with AI agents
-```
-
----
-
-## Getting Started
-
-1. **Create repo** — Click ["Use this template"](https://github.com/KiKDraS/opencode-landing-page-template/generate) on GitHub
-2. **Clone & install** — `git clone <your-repo> && cd <your-repo> && npm install && npm run setup`
-3. **Git Flow branches** — `git checkout -b develop && git push -u origin develop`
-4. **Connect OpenCode** — `opencode` then `/connect` → sign in at [opencode.ai/auth](https://opencode.ai/auth)
-5. **Start dev server** — `npm run dev` → open `http://localhost:5173`
+Vanilla HTML/CSS/JS landing page template powered by Vite for the OpenCode
+multi-agent pipeline.  
+WCAG 2.1 AA compliant, modular architecture, and zero framework lock-in.
 
 ---
 
-## Commands
+## Quick Start
 
-```bash
-npm run dev       # Start dev server
-npm run build     # Production build → dist/
-npm run preview   # Preview production build locally
-```
+npm install && npm run setup # Dependencies + Codegraph index + Playwright
+browsers opencode # Launch AI agents pipeline
 
-### Context7 API Key
+### Step-by-Step Setup
 
-```bash
-echo "<your-context7-api-key>" > .opencode/secrets/context7-api-key
-```
-
-The MCP server reads the key from this file at startup via
-`{file:.opencode/secrets/context7-api-key}` in `opencode.json`.
-
-#### Where to Get an API Key
-
-1. Go to [context7.com](https://context7.com)
-2. Sign up for a free account
-3. Copy your API key from the dashboard
-4. Paste it into the command above
-
-#### How the File-Based Key Works
-
-OpenCode's `{file:path}` syntax reads the file content and substitutes it as a
-string at config parse time. This means:
-
-- **No environment variables needed** — the key stays inside the project
-- **Gitignored** — `.opencode/secrets/` is tracked but its contents are ignored
-  (see `.opencode/secrets/.gitignore`)
-- **Portable** — clone the repo, add your key, done. No global config required
-
-#### Enabling Context7
-
-Context7 is the **only MCP server disabled by default** (requires an API key).
-Enable it in `opencode.json`:
-
-```json
-"context7": {
-  "type": "remote",
-  "url": "https://mcp.context7.com/mcp",
-  "headers": {
-    "CONTEXT7_API_KEY": "{file:.opencode/secrets/context7-api-key}"
-  },
-  "enabled": true
-}
-```
-
-To disable it later, set `"enabled": false` or remove the block entirely.
-
-#### Notes
-
-- The API key file must be **plain text** — no `.js` extension, no `export`,
-  just the raw key string
-- If the file doesn't exist, OpenCode will fail to parse the config with an
-  error like `bad file reference: "{file:...}" <path> does not exist`
-- Context7 uses `{file:...}` for the API key — the same pattern is also used
-  elsewhere in the project (e.g., prompts in agent definitions), so it's worth
-  understanding how it works
+1.  **Create Repository:** Use the
+    [GitHub Template](https://github.com/KiKDraS/opencode-landing-page-template/generate).
+2.  **Clone & Install:**
+    `git clone <your-repo> && cd <your-repo> && npm install && npm run setup`
+3.  **Git Flow Setup:** `git checkout -b develop && git push -u origin develop`
+4.  **Authenticate:** Run `opencode` then `/connect` → sign in at
+    [opencode.ai/auth](https://opencode.ai/auth)
+5.  **Development:** `npm run dev` → open `http://localhost:5173`
 
 ---
 
-## GitHub Token (PR Creation)
+## Secrets & Authentication
 
-`@release-manager` needs a GitHub token to create and merge PRs. The `gh` CLI
-is optional — it falls back to `curl` + REST API.
+Configure your local secrets in `.opencode/secrets/`. Files in this folder are
+gitignored and read dynamically at runtime via `{file:path}`—no global
+environment variables required.
 
-Token resolution priority (first found wins):
-
-1. **`.opencode/secrets/github-token`** — recommended setup
-2. **Git credential helper** — works if `git push` does
-3. **`GITHUB_TOKEN` environment variable**
-
-```bash
-# Quick setup (option 1):
-echo "<your-github-token>" > .opencode/secrets/github-token
-```
-
-The secret file is gitignored. If none are found, the agent prints setup
-instructions in the error message.
-
----
-
-## Project Structure
-
-```
-├── src/
-│   ├── assets/           # Images, SVGs, fonts (Vite-processed)
-│   ├── styles/           # CSS layers: boilerplate/ → layout/ → components/
-│   │   └── main.css      # Entry point (@import aggregator)
-│   ├── js/               # JS modules: layout/ → components/ → utils/
-│   └── main.js           # Vite entry (initializes modules)
-├── public/favicon/       # Favicon bundle (served as-is)
-├── tests/                # Playwright specs (e2e/ + components/)
-├── index.html            # HTML + SEO + JSON-LD structured data
-├── specs/                # Test plans (written by playwright-test-planner)
-├── vite.config.js        # Dynamic base path for GitHub Pages deploy
-├── playwright.config.ts  # E2E test runner config
-├── opencode.json         # Agent definitions, plugins & MCP servers
-└── package.json
-```
+| Secret / Token       | Setup Command                                       | Purpose & Notes                                                                                            |
+| -------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| **Context7 API Key** | `echo "<key>" > .opencode/secrets/context7-api-key` | Required for live docs. Enable `"enabled": true` under `"context7"` in `opencode.json`.                    |
+| **GitHub Token**     | `echo "<token>" > .opencode/secrets/github-token`   | Required by `@release-manager` for automated PRs. _(Fallback: Git credential helper → `GITHUB_TOKEN` env)_ |
 
 ---
 
 ## AI Agent Pipeline
 
-| Agent | Role |
-|-------|------|
-| **orchestrator** | Plans architecture, delegates tasks, manages releases |
-| **frontend-dev** | Builds features across HTML, CSS, JS layers |
-| **code-review** | Audits against skill checklists (APPROVED / REJECTED) |
-| **release-manager** | Creates PRs, branches, merges, tags |
-| **playwright-test-planner** | Explores live UI, writes test plans to `specs/` |
-| **playwright-test-generator** | Converts plans → executable `.spec.ts` files |
-| **playwright-test-healer** | Runs tests, debugs, auto-fixes failures |
+| Agent                       | Role                                                       | Branch Scope                              |
+| --------------------------- | ---------------------------------------------------------- | ----------------------------------------- |
+| `orchestrator`              | Architecture planning, task delegation, release management | Global decisions (requires user approval) |
+| `frontend-dev`              | Builds features across HTML, CSS, and JS layers            | `feature/*`, `hotfix/*`                   |
+| `code-review`               | Audits code quality against checklist criteria             | Reviewer authority                        |
+| `release-manager`           | Manages PRs, branches, merges, tags, and releases          | Remote Git execution                      |
+| `playwright-test-planner`   | Explores UI and generates test plans in `specs/`           | Testing phase                             |
+| `playwright-test-generator` | Converts test plans to executable `.spec.ts` files         | Testing phase                             |
+| `playwright-test-healer`    | Executes tests, debugs, and auto-fixes failures            | Testing phase                             |
 
 ```mermaid
 flowchart LR
-    P[("Plan")]
-    B["Build<br/><i>@frontend-dev</i>"]
-    A["Audit<br/><i>@code-review</i>"]
-    T["Test<br/><i>Playwright Agents</i>"]
-    S["Ship<br/><i>@orchestrator</i>"]
-    P --> B --> A
-    A -->|REJECTED| B
-    A -->|APPROVED| T --> S
-    S -.->|User Approval| R>"Release"]
+    subgraph Test_Phase["Test"]
+        direction LR
+        TP["<i>Plan</i>"]
+        TG["<i>Generates</i>"]
+        TE["<i>Execute &amp; Self-Heal</i>"]
+    end
+
+    TP --> TG
+    TG --> TE
+    P[("Plan")] --> B["Build"]
+    B --> A["Audit"]
+    A -- REJECTED --> B
+    A -- APPROVED --> TP
+    TE --> S["Ship"]
+    S -. "User Approval" .-> R>"Release"]
 ```
 
-**Pipeline:** Plan → Build → Audit (loops if rejected) → Test (plan → generate → execute → self-heal) → Ship (user approval required for release).
+### Git Flow & Agent Governance
+
+**All AI agents are policy-bound to follow Git Flow**—no direct commits to
+`main` or `develop` are allowed, and all changes must go through Pull Requests.
+
+Autonomous agents operate within strict authority boundaries across the
+workflow:
+
+- **`@frontend-dev`** — Confined to `feature/*` and `hotfix/*` branches for
+  feature implementation and bug fixes.
+- **`@code-review`** — Acts as a quality gate; blocks merges until code meets
+  all checklist criteria (`APPROVED`).
+- **`@orchestrator`** — Decides when to advance the pipeline or request a
+  release (always requires explicit user approval).
+- **`@release-manager`** — Exclusively handles remote Git lifecycle operations:
+  PR creation, branch merges, version tagging, and post-merge branch cleanup.
 
 ---
 
-## Tools & Configuration
+## Integrations & Tooling
 
-| Tool | What it does | Setup |
-|------|-------------|-------|
-| **[Ponytail](https://github.com/DietrichGebert/ponytail)** | Makes AI write minimal code — YAGNI, stdlib-first, shortest diff | Pre-configured. Commands: `/ponytail [lite\|full\|ultra\|off]`, `/ponytail-review`, `/ponytail-audit`, `/ponytail-debt`, `/ponytail-help` |
-| **[Caveman](https://github.com/anthonystepvoy/caveman-opencode)** | Ultra-compressed communication mode — drops filler, saves ~75% tokens. Converted to OpenCode from [caveman-opencode](https://github.com/anthonystepvoy/caveman-opencode) (MIT). See upstream repo for usage guide. | Pre-configured active by default. Commands: `/caveman [lite\|full\|ultra]`, `/caveman-commit`, `/caveman-review`, `/caveman-compress`, `/caveman-help`. Disable with "stop caveman". |
-| **[Codegraph](https://github.com/colbymchenry/codegraph)** | SQLite code graph — AI gets surgical context, fewer round-trips | `npm run setup` builds index. Re-run if stale. `.codegraph/` is gitignored. |
-| **[Playwright](https://playwright.dev)** | Browser automation — agents explore UI, generate tests, self-heal failures | Pre-configured. Tests in `tests/e2e/` and `tests/components/`. |
-| **[Context7](https://context7.com)** | Live library docs for AI (React, Next.js, Prisma, Tailwind, etc.) | Needs API key. [Sign up](https://context7.com), then `echo "<key>" > .opencode/secrets/context7-api-key` and enable in `opencode.json`. |
-| **GitHub Token** | PR automation for `@release-manager` | Optional. Auto-detects `gh` CLI → git credentials → `GITHUB_TOKEN`. |
-
-> **Note:** Context7 is the only tool disabled by default (needs an API key).
-> Everything else works after `npm install && npm run setup`.
-
----
-
-## Git Workflow
-
-Strict **Git Flow**. All merges through Pull Requests — no direct commits to `main` or `develop`.
-
-| Branch | From → To | Purpose |
-|--------|-----------|---------|
-| `main` | — | Production (merge only from `release/*` or `hotfix/*`) |
-| `develop` | — | Daily integration branch |
-| `feature/*` | from `develop` → PR to `develop` | New features |
-| `release/*` | from `develop` → PR to `main` + back-PR to `develop` | Deployment prep |
-| `hotfix/*` | from `main` → PR to `main` + back-PR to `develop` | Urgent production fixes |
-
-After merge, the source branch is deleted (local + remote). **`main` and `develop` are never deleted.**
-
-| Agent | Branch authority |
-|-------|-----------------|
-| `@frontend-dev` | `feature/*` and `hotfix/*` only |
-| `@release-manager` | All remote git operations (PR, push, merge, tag, delete) |
-| `@orchestrator` | Decides **when** to merge or release — always requires user approval |
-| `@code-review` | All merges need APPROVED status first |
-
----
-
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines — scope (agent
-infrastructure only, not demo content), Git Flow, review criteria, and how to
-submit changes.
-
----
-
-## Deployment
-
-**Recommended: dual-repo flow** — private source repo, public deploy repo.
-
-1. Create a **public** repo named `<your-project>-page` on GitHub (empty, no README)
-2. Enable **GitHub Pages** → **GitHub Actions** in that repo's Settings
-3. Add this workflow to your **private source repo** (`.github/workflows/deploy.yml`):
-
-```yaml
-name: Deploy to GitHub Pages
-on:
-  push:
-    branches: [main]
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: {node-version: 20, cache: npm}
-      - run: npm ci && npm run build
-      - uses: actions/upload-pages-artifact@v3
-        with: {path: dist}
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
-```
-
-4. Push to `main` — the workflow builds and deploys automatically
-5. Site at `https://<username>.github.io/<your-project>-page/`
-
-The `base: /${folderName}-page/` in `vite.config.js` automatically matches the
-public repo name.
-
-> **Warning:** Deploying from the same repo (no `-page` suffix) is possible but
-> makes source code public. Not recommended.
-
----
-
-## Skills & Guidelines
-
-All generated code complies with these skills (defined in `.opencode/skills/`):
-
-| Skill | What it enforces |
-|-------|-----------------|
-| **HTML/CSS Best Practices** | Semantic HTML5, modular CSS layers, custom properties, mobile-first |
-| **Accessibility WCAG** | WCAG 2.1 AA — contrast ≥4.5:1, keyboard nav, ARIA landmarks, skip links |
-| **Modern JavaScript** | ES6+, pure functions, async/await, declarative pipelines, event delegation |
-| **Frontend Design** | No generic AI slop — bold typography, asymmetric layouts, distinctive palette, CSS motion |
-| **SEO** | JSON-LD structured data, semantic headings, `robots.txt`, sitemap, canonical URLs |
-| **Context7 MCP** | Live library docs for setup, API syntax, migrations (not for refactoring/debugging) |
-| **Playwright** | User-facing locators, Page Object Model, web-first assertions, test isolation |
-| **Caveman** | Terse communication mode — drops articles, filler, hedging. Active by default for all agents. Converted from [caveman-opencode](https://github.com/anthonystepvoy/caveman-opencode) (MIT). Full usage docs in the upstream repo. |
+| Tool                                                              | Purpose                                                        | Configuration                        |
+| ----------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------ |
+| **[Ponytail](https://github.com/DietrichGebert/ponytail)**        | Enforces minimal code diffs, YAGNI, and stdlib-first solutions | Pre-configured (`/ponytail`)         |
+| **[Caveman](https://github.com/anthonystepvoy/caveman-opencode)** | Token-efficient ultra-compressed communication mode            | Active by default (`/caveman`)       |
+| **[Codegraph](https://github.com/colbymchenry/codegraph)**        | SQLite codebase indexing for surgical AI context               | Indexed via `npm run setup`          |
+| **[Playwright](https://playwright.dev)**                          | Browser automation, UI exploration, and self-healing tests     | Configured in `playwright.config.ts` |
+| **[Context7](https://context7.com)**                              | Live documentation fetching for modern libraries               | Requires API key in secret file      |
 
 ---
 
 ## Troubleshooting
 
-| Error | Fix |
-|-------|-----|
-| `bad file reference: "{file:...}"` | `echo "<your-key>" > .opencode/secrets/context7-api-key` |
-| `opencode.json is not valid JSON` | `npx jsonlint opencode.json` — check for trailing commas, unquoted keys |
-| `browserType.launch: Executable doesn't exist` | `npm run setup` (installs Playwright browsers) |
-| MCP server tool unavailable | Check `"enabled": true` in `opencode.json`, restart session, run `npm run setup` |
+| Issue                                          | Solution                                                                    |
+| ---------------------------------------------- | --------------------------------------------------------------------------- |
+| `bad file reference: "{file:...}"`             | Ensure key is set: `echo "<your-key>" > .opencode/secrets/context7-api-key` |
+| `opencode.json is not valid JSON`              | Validate syntax: `npx jsonlint opencode.json`                               |
+| `browserType.launch: Executable doesn't exist` | Install browsers: `npm run setup`                                           |
+| MCP server tool unavailable                    | Check `"enabled": true` in `opencode.json` and restart session              |
