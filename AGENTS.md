@@ -74,6 +74,8 @@ Strict. No files outside schema.
 
 **Ponytail override.** CSS split into modular layers. Ponytail "fewest files" does NOT flatten CSS. HTML in `index.html`, CSS in `src/styles/`, JS in `src/js/`.
 
+**CodeGraph mandatory.** `.codegraph/` in root? **USE CODEGRAPH FIRST.** No grep/find/Read before. MCP `codegraph_codegraph_explore`: source + line nums + call paths + dynamic-dispatch grep misses. Fallback chain: MCP → shell `codegraph explore` → grep/Read. No `.codegraph/` dir? Skip. Indexing user choice.
+
 ---
 
 ## Dev Rules by Owner
