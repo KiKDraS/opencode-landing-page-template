@@ -17,12 +17,7 @@ WCAG 2.1 AA compliant, modular architecture, and zero framework lock-in.
 
 ---
 
-## Quick Start
-
-npm install && npm run setup # Dependencies + Codegraph index + Playwright
-browsers opencode # Launch AI agents pipeline
-
-### Step-by-Step Setup
+## Setup
 
 1.  **Create Repository:** Use the
     [GitHub Template](https://github.com/KiKDraS/opencode-landing-page-template/generate).
