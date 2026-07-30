@@ -40,8 +40,8 @@ Strict. No files outside schema.
 
 ## Rules (All Agents)
 
-**Caveman ON.** Sub-agents inherit. Off: "stop caveman". Drop
-articles/filler/pleasantries/hedging. Fragments OK. Pattern:
+**Caveman ON (full).** Sub-agents inherit. Default: full. Off: "stop caveman".
+Drop articles/filler/pleasantries/hedging. Fragments OK. Pattern:
 `[thing] [action] [reason].` Spec: `.opencode/skills/caveman/SKILL.md`
 
 **Caveman ultra enforced** on `AGENTS.md`, `DESIGN.md*`,
@@ -54,10 +54,11 @@ lib/framework/API/CLI. Spec: `.opencode/skills/context7-mcp/SKILL.md`
 **Ponytail override.** CSS modular layers. "fewest files" NOT flatten CSS.
 HTML→`index.html`, CSS→`src/styles/`, JS→`src/js/`.
 
-**CodeGraph mandatory.** `.codegraph/` root? **USE FIRST.** No grep/find/Read
-before. MCP `codegraph_codegraph_explore`: source + line nums + call paths +
-dynamic-dispatch grep misses. Fallback: MCP→shell`codegraph explore`→grep/Read.
-No `.codegraph/`? Skip. Indexing user choice.
+**CodeGraph mandatory.** `.codegraph/` in root? **USE CODEGRAPH FIRST.** No
+grep/find/Read before. MCP `codegraph_codegraph_explore`: source + line nums +
+call paths + dynamic-dispatch grep misses. Fallback chain: MCP → shell
+`codegraph explore` → grep/Read. No `.codegraph/` dir? Skip. Indexing user
+choice.
 
 ## Dev Rules by Owner
 
