@@ -10,32 +10,15 @@ Bund: Vite | Struct: HTML5 | Style: Native CSS (lightningcss) | Logic: JS (ES6+)
 
 Strict. No files outside schema.
 
-```bash
-├── src/
-│   ├── assets/         # Imgs, SVGs, Icons, Graphics
-│   │   └── fonts/      # TTF/WOFF2 files
-│   ├── styles/         # CSS Root
-│   │   ├── layout/     # header.css, main.css, footer.css
-│   │   ├── components/ # button.css, cards.css
-│   │   ├── boilerplate/ # variables.css, reset.css, base.css, fonts.css, utilities.css
-│   │   └── main.css    # @import aggregator
-│   ├── js/             # JS Root
-│   │   ├── layout/     # navigation.js, sticky-header.js
-│   │   ├── components/ # UI logic
-│   │   └── utils/      # debounce.js, validators.js
-│   └── main.js         # Entry (init only)
-├── tests/              # Playwright
-│   ├── e2e/
-│   └── components/
-├── public/
-│   ├── favicon/
-│   └── robots.txt
-├── DESIGN.md
-├── DESIGN.md.template  # DO NOT EDIT
-├── index.html
-├── sitemap.xml
-├── playwright.config.js
-└── package.json
+```
+src/
+├── assets/{images, icons, fonts}
+├── styles/{layout,components,boilerplate,main.css}
+├── js/{layout,components,utils,main.js}
+├── tests/{e2e,components}
+├── public/{favicon,robots.txt}
+├── DESIGN.md DESIGN.md.template   # DO NOT EDIT
+├── index.html sitemap.xml playwright.config.js package.json
 ```
 
 ## Rules (All Agents)
