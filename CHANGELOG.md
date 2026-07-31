@@ -4,6 +4,7 @@
 
 ### Changed
 - Refactor agent rules from `AGENTS.md` into docs via instructions; add anti-hallucination prompt. (PR #54)
+- Drop Rules section from `AGENTS.md`; dedup orchestrator git flow and release steps. (PR #56)
 
 ## [1.7.0] - 2026-07-30
 
