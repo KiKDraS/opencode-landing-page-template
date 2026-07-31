@@ -19,16 +19,8 @@ user ok.
 
 ## Code change protocol
 
-Before codebase change:
-
-1. `.git/` exists? No → stop, ask user. Yes → step 2.
-2. Branch `feature/*` from `develop`
-3. Changes
-4. Commit + push
-5. PR `feature/*` → `develop`
-6. Wait for user approval
-
-Never commit to `develop` or `main` directly.
+Branch `feature/*` from `develop`. PR → `develop`. Wait user approval. Never
+`develop`/`main` direct. Flow: AGENTS.md §Git Flow.
 
 ## Pipeline
 
@@ -60,18 +52,11 @@ Before merge, classify type and run gates:
 ## Deployment & release (exclusive authority)
 
 - Orchestrator only inits production release.
-- `develop` stable via QA → **MUST NOT** auto-open `release/*`.
-- **Stop + Prompt:** Summary. Wait for validation.
-- Invoke `@release-manager`:
-  1. `release/*` from `develop`
-  2. Version bump + changelog
-  3. PR `release/*` → `main` (user approval)
-  4. Merge + tag
-  5. Verify GitHub Release — create if missing
-  6. Back-merge PR `release/*` → `develop` (user approval)
-  7. Merge + delete branches
-- Micro-fixes via feature branches or direct commits to release line if
-  instructed.
+- `develop` stable → **MUST NOT** auto-open `release/*`.
+- **Stop + Prompt:** summary. Wait validation.
+- Delegate ops to `@release-manager`. Checkpoints: before release branch,
+  before merge main, before back-merge.
+- Micro-fixes: feature branches or release line if instructed.
 
 ## Quality Gate
 
