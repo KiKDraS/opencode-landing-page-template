@@ -46,13 +46,13 @@
     "frontend-dev": {
       "description": "Consolidated developer sub-agent. Builds cohesive features writing HTML structures, modular styles, and JS interaction in tandem.",
       "mode": "subagent",
-      "tools": { "write": true, "edit": true, "read": true },
+      "tools": { "write": true, "edit": true, "read": true, "task": true },
       "prompt": "{file:.opencode/prompts/agent-knowledge-awareness.md}"
     },
     "code-review": {
       "description": "Strict compliance auditor. Verifies generated code against the requested specifications and skills checklists.",
       "mode": "subagent",
-      "tools": { "read": true }
+      "tools": { "read": true, "task": true }
     },
     "release-manager": {
       "description": "Release coordinator. Creates release branches, runs pre-release checks, merges to main, tags versions.",
