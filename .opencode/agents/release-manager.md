@@ -151,7 +151,7 @@ Pre: fetch tags, determine version, create branch from develop, bump package.jso
 
 **gh to main:**
 ```bash
-gh pr create --base main --head release/vX.X.X --title "release: vX.X.X" --body $'| 📦 **Release vX.X.X** | 🔵 **Ready to Deploy** |\n|---|---|\n| `release/vX.X.X` → `main` | |\n\n---\n\n## Summary\n\n[Changelog]'
+gh pr create --base main --head release/vX.X.X --title "release: vX.X.X" --body $'| 📦 **Release vX.X.X** | 🔵 **Ready to Deploy** |\n|---|---|\n| `release/vX.X.X` → `main` | |\n\n---\n\n## Summary\n\nRelease notes inline.'
 ```
 
 **gh merge + tag + GH Release:**
@@ -159,7 +159,7 @@ gh pr create --base main --head release/vX.X.X --title "release: vX.X.X" --body 
 gh pr merge release/vX.X.X --merge --delete-branch
 git checkout main && git pull origin main
 git tag -a vX.X.X -m "Release vX.X.X" && git push origin --tags
-gh release create vX.X.X --title "Release vX.X.X" --notes "Changelog"
+gh release create vX.X.X --title "Release vX.X.X" --notes "Release vX.X.X"
 gh release view vX.X.X --json tagName  # verify
 ```
 
@@ -174,7 +174,7 @@ gh pr merge release/vX.X.X-backmerge --merge --delete-branch
 ```bash
 curl -s -X POST -H "Authorization: token $TOKEN" -H "Accept: application/vnd.github.v3+json" \
   "https://api.github.com/repos/$OWNER_REPO/pulls" \
-  -d '{"title":"release: vX.X.X","head":"release/vX.X.X","base":"main","body":"| 📦 Release vX.X.X | 🔵 Ready to Deploy |\n|---|---|\n| `release/vX.X.X` → `main` | |\n\n---\n\n## Summary\n\n[Changelog]"}'
+  -d '{"title":"release: vX.X.X","head":"release/vX.X.X","base":"main","body":"| 📦 Release vX.X.X | 🔵 Ready to Deploy |\n|---|---|\n| `release/vX.X.X` → `main` | |\n\n---\n\n## Summary\n\nRelease notes inline."}'
 ```
 
 **curl merge + tag + GH Release:**
@@ -189,7 +189,7 @@ git checkout main && git pull origin main
 git tag -a vX.X.X -m "Release vX.X.X" && git push origin --tags
 curl -s -X POST -H "Authorization: token $TOKEN" -H "Accept: application/vnd.github.v3+json" \
   "https://api.github.com/repos/$OWNER_REPO/releases" \
-  -d '{"tag_name":"vX.X.X","name":"Release vX.X.X","body":"Changelog"}'
+  -d '{"tag_name":"vX.X.X","name":"Release vX.X.X","body":"Release vX.X.X"}'
 curl -s -H "Authorization: token $TOKEN" \
   "https://api.github.com/repos/$OWNER_REPO/releases/tags/vX.X.X" | grep -q '"tag_name"'  # verify
 ```
@@ -274,7 +274,7 @@ git branch -d hotfix/fix-name-backmerge
 
 ## Constraints
 
-- No feature code. Version bumps, changelog, deleg fixes only.
+- No feature code. Version bumps, deleg fixes only.
 - ALL merges via PR. No direct merge to main/develop.
 - Never delete main/develop. Only temp branches.
 - Push immediately after local op. No batch pushes.

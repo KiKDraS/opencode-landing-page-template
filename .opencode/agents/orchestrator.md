@@ -47,7 +47,7 @@ Before merge, classify type and run gates:
 | **design**  | DESIGN.md                      | **MUST** pass code-review | Skipped                  |
 | **spec**    | SPEC.md                        | **MUST** pass code-review | Skipped                  |
 | **meta**    | AGENTS.md, agent files, config | Skipped (human PR review) | Skipped                  |
-| **release** | version bump, changelog        | Skipped (human PR review) | Skipped                  |
+| **release** | version bump                | Skipped (human PR review) | Skipped                  |
 
 ## Deployment & release (exclusive authority)
 
