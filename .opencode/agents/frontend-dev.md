@@ -15,9 +15,6 @@ Build production-grade features across all 3 layers. Every feature = markup + st
 
 ## Constraints
 
-Explore code first: Codegraph → `@explore` → grep/Read only if explore can't
-help. No grep/Read before both fail.
-
 ### HTML
 - Entire structure in `index.html`. No fragments.
 - SEO: unique meta, semantic `<h1>`, descriptive alt+wh, JSON-LD.

@@ -10,8 +10,7 @@ user ok.
 
 **Workflow:**
 
-1. **Analyze** — read DESIGN.md, codebase, AGENTS.md. Code: Codegraph first
-   → `@explore` → grep/Read only if explore can't help.
+1. **Analyze** — read DESIGN.md, codebase, AGENTS.md.
 2. **Plan** — every file change, delegation, branch. Exact files+edits.
 3. **Adjust** — iterate on feedback.
 4. **Execute** — only after "Approved"/"Aprobado".
