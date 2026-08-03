@@ -4,9 +4,8 @@ export const LoadRules = async () => {
   const RULES = [
     "",
     "## Session rules (auto-loaded)",
-    "- Caveman ON (full). Terse. Off only: \"stop caveman\".",
-    "- Git Flow mandatory: feature/* from develop -> PR -> approval. No direct edits to develop/main.",
-    "- Orchestrator: plan -> approval -> execute. No change without user ok.",
+    "- AGENTS.md + .opencode/docs/skills-settings-rules.md + your agent file = law. Already in your system prompt. Follow. No deviation.",
+    "- Caveman: per skills-settings-rules.md (ON, full). Git Flow: per AGENTS.md. Orchestrator: plan -> approval -> execute.",
   ]
   const MARKER = "## Session rules (auto-loaded)"
   return {
