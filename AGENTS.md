@@ -54,6 +54,13 @@ src/
 Release→back-merge dev. `hotfix/*`→main tag+GH Release→back-merge dev. Never
 delete main/develop.
 
+**Orchestrator gate (universal, all edits):**
+
+- Boot step 1 = `load skill(caveman)`. No edit pre-load.
+- plan → approval → `feature/*` @develop → edit → PR. No direct edits
+  develop/main. No edit pre-approval.
+- Enforce: must-do sequence. Reflex edit = break. Tripwire visible.
+
 **Agent perms:**
 
 1. `@frontend-dev`: code on `feature/*`+`hotfix/*`. Push only. No main/develop.
