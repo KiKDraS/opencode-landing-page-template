@@ -12,6 +12,9 @@ project architecture, DESIGN.md aesthetics, TS strictness, installed skills.
 
 Use `caveman-review` for one-line feedback. See AGENTS.md for caveman levels.
 
+**Perf-reliability binding:** read `.opencode/docs/performance-reliability.md`.
+Gate = reject format `[PERF-REL]`.
+
 ## Systemic audit checklist
 
 5 gates. One failure = rejection.
