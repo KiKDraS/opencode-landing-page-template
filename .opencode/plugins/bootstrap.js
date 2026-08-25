@@ -1,16 +1,15 @@
-// First-load bootstrap. Runs `npm run setup` once per machine, tracked by a
-// persistent `.opencode/.setup-done` marker (written only on full success), so
-// every opencode launch decides from the directory, not an in-memory flag.
-// `npm install` stays a manual user step; hints if `node_modules` absent.
+// First-load bootstrap. Runs `npm run setup` once per machine. The persistent
+// `.opencode/.setup-done` marker IS the guard: every launch/hook-fire reads the
+// directory, no in-memory state. Marker written only on full success → failed
+// or interrupted setups retry next launch. `npm install` stays manual; hints
+// if `node_modules` absent (re-checks each fire, so installing mid-session
+// then triggers setup).
 import { existsSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
 
 export const Bootstrap = async ({ directory, $ }) => {
-  let ran = false
   return {
     "experimental.chat.system.transform": async () => {
-      if (ran) return
-      ran = true
       const root = directory || process.cwd()
       const marker = join(root, ".opencode", ".setup-done")
       if (existsSync(marker)) return
