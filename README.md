@@ -40,7 +40,7 @@ environment variables required.
 
 | Secret / Token       | Setup Command                                       | Purpose & Notes                                                                                            |
 | -------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Context7 API Key** | `export CONTEXT7_API_KEY="<key>"` (persist in shell profile)          | Optional, for live docs. Enable `"enabled": true` under `"context7"` in `opencode.json`. |
+| **Context7 API Key** | `echo "<key>" > .opencode/secrets/context7-api-key` | Optional, project-local. File ships empty + git-hidden (`skip-worktree` via setup). Enable `"enabled": true` under `"context7"` in `opencode.json`. |
 | **GitHub Token**     | `echo "<token>" > .opencode/secrets/github-token`   | Required by `@release-manager` for automated PRs. _(Fallback: Git credential helper → `GITHUB_TOKEN` env)_ |
 
 ---
@@ -103,7 +103,7 @@ workflow:
 | **[Caveman](https://github.com/anthonystepvoy/caveman-opencode)** | Token-efficient ultra-compressed communication mode            | Active by default (`/caveman`)       |
 | **[Codegraph](https://github.com/colbymchenry/codegraph)**        | SQLite codebase indexing for surgical AI context               | Indexed via `npm run setup`          |
 | **[Playwright](https://playwright.dev)**                          | Browser automation, UI exploration, and self-healing tests     | Configured in `playwright.config.ts` |
-| **[Context7](https://context7.com)**                              | Live documentation fetching for modern libraries               | Optional; needs `CONTEXT7_API_KEY` env + `enabled: true` |
+| **[Context7](https://context7.com)**                              | Live documentation fetching for modern libraries               | Optional; local key file + `enabled: true` |
 
 ---
 
@@ -111,7 +111,7 @@ workflow:
 
 | Issue                                          | Solution                                                                    |
 | ---------------------------------------------- | --------------------------------------------------------------------------- |
-| `bad file reference: "{file:...}"`             | Only if you added a `{file:}` config ref to a missing file. Shipped config uses `{env:CONTEXT7_API_KEY}` for context7 (no file needed). |
+| `bad file reference: "{file:...}"`             | Only if you added a `{file:}` ref to a missing file. Shipped `{file:.opencode/secrets/context7-api-key}` is a committed empty placeholder, so it can't occur out of the box. |
 | `opencode.json is not valid JSON`              | Validate syntax: `npx jsonlint opencode.json`                               |
 | `browserType.launch: Executable doesn't exist` | Install browsers: `npm run setup`                                           |
 | MCP server tool unavailable                    | Check `"enabled": true` in `opencode.json` and restart session              |
