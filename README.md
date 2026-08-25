@@ -40,7 +40,7 @@ environment variables required.
 
 | Secret / Token       | Setup Command                                       | Purpose & Notes                                                                                            |
 | -------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| **Context7 API Key** | `echo "<key>" > .opencode/secrets/context7-api-key` | Optional, project-local. File ships empty + git-hidden (`skip-worktree` via setup). Enable `"enabled": true` under `"context7"` in `opencode.json`. |
+| **Context7 API Key** | `echo "<key>" > .opencode/secrets/context7-api-key` | Optional, project-local. File ships empty + git-hidden via `npm run ignore-key` (part of setup). Enable `"enabled": true` under `"context7"` in `opencode.json`. |
 | **GitHub Token**     | `echo "<token>" > .opencode/secrets/github-token`   | Required by `@release-manager` for automated PRs. _(Fallback: Git credential helper → `GITHUB_TOKEN` env)_ |
 
 ---
