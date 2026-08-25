@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "setup": "npx @colbymchenry/codegraph init && npx playwright install"
+    "setup": "npm run ignore-key && npx @colbymchenry/codegraph init && npx playwright install",
+    "ignore-key": "git update-index --skip-worktree .opencode/secrets/context7-api-key 2>/dev/null || true"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",

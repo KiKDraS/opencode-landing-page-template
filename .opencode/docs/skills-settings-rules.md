@@ -23,8 +23,9 @@ articles/filler/pleasantries/hedging. Fragments OK. Pattern:
 explanations, no pleasantries. If reading: caveman ultra. If writing: caveman
 ultra.
 
-**Context7 MCP mandatory.** `resolve-library-id` → `query-docs` for
-lib/framework/API/CLI questions. Spec: `.opencode/skills/context7-mcp/SKILL.md`
+**Context7 MCP optional.** Needs `CONTEXT7_API_KEY` env + `"enabled": true` in
+`opencode.json`. Off by default → server absent. Use websearch instead. Spec:
+`.opencode/skills/context7-mcp/SKILL.md`
 
 **CodeGraph mandatory.** `.codegraph/` in root? **USE CODEGRAPH FIRST.** No
 grep/find/Read before. MCP `codegraph_codegraph_explore`: source + line nums +
