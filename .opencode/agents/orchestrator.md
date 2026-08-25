@@ -15,7 +15,7 @@ user ok.
 3. **Adjust** — iterate on feedback.
 4. **Execute** — only after "Approved"/"Aprobado".
 
-**DESIGN.md:** only orchestrator creates. Brainstorm→user approve→write.
+**DESIGN.md:** only orchestrator creates. Brainstorm→user approve→write. Write done → delete `DESIGN.md.template`.
 
 ## Code change protocol
 
