@@ -1,6 +1,6 @@
 ![OpenCode Landing Page Header](https://capsule-render.vercel.app/api?type=waving&color=1e293b&height=200&section=header&text=OpenCode%20Landing%20Page&fontSize=42&fontColor=ffffff&fontAlignY=38)
 
-![Version](https://img.shields.io/badge/version-1.4.0-blue?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.13.0-blue?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)
 
@@ -25,6 +25,8 @@ WCAG 2.1 AA compliant, modular architecture, and zero framework lock-in.
     `git clone <your-repo> && cd <your-repo> && npm install`
     (`npm run setup` — codegraph index + Playwright browsers — runs
     automatically on first opencode load.)
+    `npm install` prompts for a project name (defaults to the folder name) and
+    resets the version to 0.1.0 — if it doesn't prompt (e.g. `ignore-scripts`), run `npm run init`.
 3.  **Git Flow Setup:** `git checkout -b develop && git push -u origin develop`
 4.  **Authenticate:** Run `opencode` then `/connect` → sign in at
     [opencode.ai/auth](https://opencode.ai/auth)

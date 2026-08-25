@@ -18,6 +18,7 @@ Strict. No files outside schema.
 |   ├── main.js
 ├── tests/{e2e,components}
 ├── public/{favicon,robots.txt}
+├── scripts/{init.mjs}
 ├── DESIGN.md DESIGN.md.template   # DO NOT EDIT
 ├── index.html sitemap.xml playwright.config.js package.json
 ```
