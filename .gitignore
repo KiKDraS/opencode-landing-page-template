@@ -40,3 +40,6 @@ test-results
 
 # Secrets
 .opencode/secrets/
+
+# Per-machine setup marker (bootstrap plugin)
+.opencode/.setup-done
