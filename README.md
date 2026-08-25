@@ -25,6 +25,8 @@ WCAG 2.1 AA compliant, modular architecture, and zero framework lock-in.
     `git clone <your-repo> && cd <your-repo> && npm install`
     (`npm run setup` — codegraph index + Playwright browsers — runs
     automatically on first opencode load.)
+    `npm install` prompts for a project name (defaults to the folder name) and
+    resets the version to 0.1.0 — if it doesn't prompt (e.g. `ignore-scripts`), run `npm run init`.
 3.  **Git Flow Setup:** `git checkout -b develop && git push -u origin develop`
 4.  **Authenticate:** Run `opencode` then `/connect` → sign in at
     [opencode.ai/auth](https://opencode.ai/auth)

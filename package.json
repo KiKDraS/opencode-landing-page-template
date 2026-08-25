@@ -1,5 +1,5 @@
 {
-  "name": "opencode-tutorial",
+  "name": "opencode-landing-page-template",
   "version": "1.12.0",
   "private": true,
   "type": "module",
@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "setup": "npm run ignore-key && npx @colbymchenry/codegraph init && npx playwright install",
-    "ignore-key": "git update-index --skip-worktree .opencode/secrets/context7-api-key 2>/dev/null || true"
+    "ignore-key": "git update-index --skip-worktree .opencode/secrets/context7-api-key 2>/dev/null || true",
+    "init": "node scripts/init.mjs",
+    "postinstall": "node scripts/init.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.61.1",
