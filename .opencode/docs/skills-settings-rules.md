@@ -2,13 +2,17 @@
 
 ## Ponytail + Skills (Intersectional Golden Rule)
 
-> No complex abstractions. Rely on platform, Next.js, stdlib. RSC for static,
-> native `<dialog>` for modals, CSS scroll-snap for carousels, TS stdlib before
-> custom code or npm deps.
+> No complex abstractions. Rely on platform, Vite, stdlib. Native HTML5
+> elements, native CSS (lightningcss, custom properties), ES6+ stdlib before
+> custom code or npm deps. No frameworks, no UI libraries.
 
-**Override:** Tailwind utility-first mandatory. Ponytail's _fewest files
-possible_ prevents unrequested features, redundant helpers. Must NOT replace
-Tailwind classes with separate CSS per component.
+**Project skills binding:** use `.opencode/skills/` —
+`frontend-design` (UI), `html-css-best-practices` (semantic+responsive),
+`modern-javascript-patterns` (ES6+), `accessibility-wcag` (a11y), `seo`
+(meta/structured data), `playwright-best-practices` (tests). Ponytail's
+_fewest files possible_ prevents unrequested features, redundant helpers.
+Must NOT replace project CSS architecture with per-component files —
+follow `src/styles/` schema.
 
 ---
 
