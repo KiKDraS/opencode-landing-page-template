@@ -24,8 +24,9 @@ Run `performance-reliability.md` §Write checklist + `trinity-architecture.md`
 
 ## Done
 
-Feature complete when: HTML done, CSS layered, JS modular, init in main.js,
-compiles under Vite, **checklist passed**, branch pushed.
+Feature complete when: `trinity-architecture.md` §Trinity + §Readability +
+`performance-reliability.md` §Write checklist pass, compiles under Vite,
+branch pushed.
 
 ## Git
 
