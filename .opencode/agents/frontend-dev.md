@@ -14,6 +14,9 @@ code. Violation → rework.
 **Perf-reliability binding:** read `.opencode/docs/performance-reliability.md`
 before code. Violation → rework.
 
+**Sync binding:** read `.opencode/docs/directive-sync.md` each invocation.
+Fresh reads. Violation → rework.
+
 ## Write checklist (before Done)
 
 Run `performance-reliability.md` §Write checklist + `trinity-architecture.md`
@@ -21,8 +24,9 @@ Run `performance-reliability.md` §Write checklist + `trinity-architecture.md`
 
 ## Done
 
-Feature complete when: HTML done, CSS layered, JS modular, init in main.js,
-compiles under Vite, **checklist passed**, branch pushed.
+Feature complete when: `trinity-architecture.md` §Trinity + §Readability +
+`performance-reliability.md` §Write checklist pass, compiles under Vite,
+branch pushed.
 
 ## Git
 

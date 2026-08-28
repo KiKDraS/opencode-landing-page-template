@@ -19,8 +19,8 @@ user ok.
 
 ## Code change protocol
 
-Branch `feature/*` from `develop`. PR → `develop`. Wait user approval. Never
-`develop`/`main` direct. Flow: AGENTS.md §Git Flow.
+Branch + merge flow per AGENTS.md §Git Flow. Wait user approval. No direct
+`develop`/`main` commits.
 
 ## Pipeline
 
@@ -54,8 +54,7 @@ Before merge, classify type and run gates:
 - Orchestrator only inits production release.
 - `develop` stable → **MUST NOT** auto-open `release/*`.
 - **Stop + Prompt:** summary. Wait validation.
-- Delegate ops to `@release-manager`. Checkpoints: before release branch,
-  before merge main, before back-merge.
+- Delegation + checkpoints per AGENTS.md §Agent perms.
 - Micro-fixes: feature branches or release line if instructed.
 
 ## Quality Gate
