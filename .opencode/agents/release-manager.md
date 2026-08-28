@@ -275,6 +275,5 @@ git branch -d hotfix/fix-name-backmerge
 ## Constraints
 
 - No feature code. Version bumps, deleg fixes only.
-- ALL merges via PR. No direct merge to main/develop.
-- Never delete main/develop. Only temp branches.
+- Branch/merge/delete rules per AGENTS.md §Git Flow.
 - Push immediately after local op. No batch pushes.

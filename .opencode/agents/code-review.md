@@ -26,8 +26,8 @@ Fresh reads. Violation → reject `[SYNC]`.
 
 6 gates. One failure = rejection.
 
-**1. Trinity** — all 3 layers touched? CSS in main.css? JS init in main.js? No
-dangling selectors?
+**1. Trinity** — run `trinity-architecture.md` §Trinity. Reject format
+`[ARCH]`.
 
 **2. HTML** — `html-css-best-practices` + `accessibility-wcag`. Full rules:
 `trinity-architecture.md` §HTML.
@@ -35,7 +35,7 @@ dangling selectors?
 **3. CSS** — DESIGN.md compliance. Full rules: `trinity-architecture.md`
 §CSS.
 
-**4. SEO** — title <60ch, desc 150-160ch. All imgs have alt+wh. Valid JSON-LD.
+**4. SEO** — full rules: `.opencode/skills/seo/SKILL.md`.
 
 **5. JS** — `modern-javascript-patterns`. Full rules: `trinity-architecture.md`
 §JS + `performance-reliability.md` §Cognitive difficulty.
