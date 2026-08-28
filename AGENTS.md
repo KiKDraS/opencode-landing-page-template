@@ -44,6 +44,9 @@ Strict. No files outside schema.
 Convention: directive for all agents → AGENTS.md. ≥2 agents → doc in
 `.opencode/docs/` + binding line in each agent file. 1 agent → agent file.
 
+**No rule copies.** Agent files + meta files reference docs/skills by pointer.
+Never copy rules — copy = stale. Edit source only.
+
 ## Git Flow
 
 **main**=prod. Merge from `release/*`/`hotfix/*` only. **develop**=daily integ.
