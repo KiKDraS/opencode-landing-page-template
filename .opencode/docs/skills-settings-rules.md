@@ -6,14 +6,6 @@
 > elements, native CSS (lightningcss, custom properties), ES6+ stdlib before
 > custom code or npm deps. No frameworks, no UI libraries.
 
-**Project skills binding:** use `.opencode/skills/` —
-`frontend-design` (UI), `html-css-best-practices` (semantic+responsive),
-`modern-javascript-patterns` (ES6+), `accessibility-wcag` (a11y), `seo`
-(meta/structured data), `playwright-best-practices` (tests). Ponytail's
-_fewest files possible_ prevents unrequested features, redundant helpers.
-Must NOT replace project CSS architecture with per-component files —
-follow `src/styles/` schema.
-
 ---
 
 ## Rules
