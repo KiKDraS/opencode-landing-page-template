@@ -20,6 +20,8 @@ No tags → v1.0.0. SemVer: MAJOR (breaking), MINOR (feature), PATCH (fix).
 # Read + bump
 CURRENT_VERSION=$(node -p "require('./package.json').version")
 node -e "const pkg = require('./package.json'); pkg.version = '1.1.0'; require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n')"
+# Bump README badge (same commit)
+node -e "const fs=require('fs');const p=require('./package.json');fs.writeFileSync('README.md',fs.readFileSync('README.md','utf8').replace(/version-[0-9.]*-blue/,'version-'+p.version+'-blue'))"
 ```
 
 Commit to release branch. Tag after merge:
@@ -29,7 +31,7 @@ git tag -a vX.X.X -m "Release vX.X.X"
 git push origin --tags
 ```
 
-**Tag MUST match package.json version.**
+**Tag MUST match package.json + README badge.**
 
 ## Auth
 

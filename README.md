@@ -1,6 +1,6 @@
 ![OpenCode Landing Page Header](https://capsule-render.vercel.app/api?type=waving&color=1e293b&height=200&section=header&text=OpenCode%20Landing%20Page&fontSize=42&fontColor=ffffff&fontAlignY=38)
 
-![Version](https://img.shields.io/badge/version-1.13.0-blue?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.13.1-blue?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)
 
