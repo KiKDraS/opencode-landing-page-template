@@ -18,6 +18,9 @@ Gate = reject format `[ARCH]`.
 **Perf-reliability binding:** read `.opencode/docs/performance-reliability.md`.
 Gate = reject format `[PERF-REL]`.
 
+**Sync binding:** read `.opencode/docs/directive-sync.md` each invocation.
+Fresh reads. Violation → reject `[SYNC]`.
+
 ## Systemic audit checklist
 
 6 gates. One failure = rejection.
