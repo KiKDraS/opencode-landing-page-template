@@ -17,12 +17,19 @@ never overrides.
 
 ## HTML
 
-- Entire structure in `index.html`. No fragments.
-- SEO: unique meta, semantic `<h1>`, descriptive alt+wh, JSON-LD.
+- Static skeleton + critical content in `index.html`: meta, JSON-LD, semantic
+  `<h1>`, landmarks, unique blocks. Short and readable.
+- Repeated blocks (cards, list items, gallery): single `<template>` in
+  `index.html`. JS clones per item. No duplicated markup in file.
+- SEO: unique meta, semantic `<h1>`, descriptive alt+wh, JSON-LD. Critical
+  content static; dynamic = non-critical repeats only.
 - Only CSS: `<link rel="stylesheet" href="/src/styles/main.css">`.
 - Only JS: `<script type="module" src="/src/main.js">` head`.
 - Forbidden: `<div>`+ARIA to fake native (use `<ul>`, `<button>`, `<dialog>`).
+  Applies to clones too.
 - Forbidden: inline styles, `<style>`, `<script>`, onclick attrs.
+- Forbidden: HTML built as JS strings (`innerHTML` template literals).
+  Templates live in `index.html`, not in JS.
 
 ## CSS
 
@@ -40,6 +47,11 @@ never overrides.
 - `src/main.js` = init only. No DOM manipulate, no feature logic.
 - Module split: `layout/` (nav, scroll), `components/` (slider, modal), `utils/`
   (debounce).
+- Component renderer: `components/*.js` exports `init()` + render fn.
+  Render = clone `<template>`, fill via `data-*` refs, batch-append via
+  `DocumentFragment`. One job, pure, guard missing template.
+- Render once at init, small-N loop. No render-in-loop reflow.
+- Clones carry semantics: real elements, real alt/aria. No ARIA fakes.
 - Each module exports `init()` — no params, guard missing DOM, return cleanup.
 - No `DOMContentLoaded` — ES modules deferred by default.
 - **Event delegation** — bind once to parent. No loop of listeners.
