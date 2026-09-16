@@ -132,7 +132,7 @@ Avoid logging in for every test. Use setup projects with storage state to authen
 
 ### Reuse Page State (serial only — trade-off with isolation)
 
-Sharing a single page/context across tests with `beforeAll`/`afterAll` is **not recommended** for most suites: it breaks test isolation, causes state leak between tests, and makes failures harder to debug. Prefer a fresh `page` per test (Playwright default). Use shared page only when you explicitly need serial execution and accept no isolation.
+Shared page/context across tests via `beforeAll`/`afterAll` **not recommended** for most suites: breaks test isolation, leaks state between tests, failures harder to debug. Prefer fresh `page` per test (Playwright default). Shared page only when you explicitly need serial execution + accept no isolation.
 
 ```typescript
 // ⚠️ Serial only, no isolation: state from one test leaks into the next.
@@ -282,7 +282,7 @@ test.beforeEach(async ({ page }) => {
 
 ### Default: one context per test
 
-Playwright gives each test its own browser context (and page). That gives isolation: no shared cookies, storage, or DOM between tests, so failures don’t carry over and you can run tests in any order or in parallel. Keep this default unless you have a clear reason to share state.
+Playwright gives each test own browser context (and page). Isolation: no shared cookies/storage/DOM between tests, failures don't carry over, tests run any order or parallel. Keep default unless clear reason to share state.
 
 ### Avoiding state leak in parallel runs
 
