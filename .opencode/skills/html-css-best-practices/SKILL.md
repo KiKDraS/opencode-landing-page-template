@@ -6,13 +6,13 @@ description:
 license: Apache-2.0
 ---
 
+<!-- MODIFIED: token-compressed, semantics preserved. License: Apache-2.0. -->
+
 # HTML/CSS Best Practices Skill
 
 ## Purpose
 
-This skill defines HTML and CSS best practices for building accessible,
-performant, and maintainable web interfaces, specifically tailored for modular
-development using Vite.
+HTML + CSS best practices: accessible, performant, maintainable web interfaces. Tailored for modular dev w/ Vite.
 
 ---
 
@@ -90,8 +90,7 @@ development using Vite.
 
 **MUST:**
 
-- Separate CSS files strictly by responsibility inside `src/styles/` using the
-  following architectural layers:
+- Separate CSS by responsibility in `src/styles/`, architectural layers:
   1.  **Config/Tokens:** `variables.css` (Custom properties only)
   2.  **Boilerplate:** `reset.css` (Normalization) and `base.css` (Global
       defaults, HTML/Body element styling)
@@ -100,36 +99,32 @@ development using Vite.
   4.  **Components:** Standalone UI units (`components/button.css`,
       `components/card.css`, etc.)
   5.  **Utilities:** Single-purpose global modifiers (`utilities.css`)
-- Use an entry point file `src/styles/main.css` that aggregates all modules
-  using standard `@import` statements.
-- Use CSS Nesting natively for structural scope hierarchy (see "CSS Nesting"
-  subsection below for rules and examples).
-- Use meaningful class names following a flat, component-scoped convention.
-- Avoid `!important` (solve styling conflicts using CSS specificity or cascading
-  order layers).
+- Entry point `src/styles/main.css` aggregates all modules via `@import`.
+- CSS Nesting natively for structural scope hierarchy (rules + examples below).
+- Meaningful class names, flat component-scoped convention.
+- Avoid `!important` (solve conflicts via specificity/cascade order layers).
 - Use shorthand properties where appropriate
 - Comment complex sections
 
 ### CSS Nesting
 
-CSS Nesting replaces flat selector repetition by colocating pseudo-classes,
-pseudo-elements, media queries, and child selectors inside their parent block.
-This eliminates selector duplication, improves readability, and enforces
-structural scope.
+Nesting replaces flat selector repetition: colocate pseudo-classes,
+pseudo-elements, media queries, child selectors inside parent block. No
+selector duplication, better readability, enforced structural scope.
 
-**MUST nest the following inside their parent selector:**
+**MUST nest inside parent selector:**
 
 - Pseudo-classes (`&:hover`, `&:focus-visible`, `&:nth-child()`, `&:not()`)
 - Pseudo-elements (`&::before`, `&::after`)
-- Media queries (`@media`) that modify the parent component at a breakpoint
-- Child selectors that exist only as descendants of the parent
+- Media queries (`@media`) modifying parent at breakpoint
+- Child selectors existing only as descendants of parent
 
 **MUST NOT:**
 
 - Nest sibling components inside each other (e.g., `.header` rules inside
   `.footer`)
 - Exceed 3 levels of nesting depth
-- Nest unrelated selectors just to colocate them in the same file
+- Nest unrelated selectors just to colocate
 
 **Before (flat repetition — REJECTED):**
 
@@ -170,9 +165,8 @@ structural scope.
 }
 ```
 
-**Parent-referencing suffix (`&` at the end):** When a child element needs
-different styling based on a modifier on an ancestor, place `&` after the
-ancestor selector:
+**Parent-referencing suffix (`&` at end):** child needs different styling by
+ancestor modifier → place `&` after ancestor selector:
 
 ```css
 .badge {
@@ -208,21 +202,20 @@ ancestor selector:
 
 - Design mobile-first (base styles for mobile, media queries for larger screens)
 - Use relative units (`rem`, `em`, `%`, `vw`, `vh`) over fixed `px`
-- Test at multiple breakpoints (320px, 768px, 1024px, 1440px+)
-- Use CSS Grid or Flexbox for layouts
-- Ensure touch targets are at least 44×44px
-- Avoid horizontal scrolling
-- Use `max-width` for readability (60-80 characters per line)
+- Test breakpoints (320px, 768px, 1024px, 1440px+)
+- CSS Grid or Flexbox layouts
+- Touch targets ≥44×44px
+- No horizontal scrolling
+- `max-width` for readability (60-80 chars/line)
 
 ### Performance Optimization
 
 **MUST:**
 
-- Minimize CSS file size by avoiding dead styles.
-- Rely on Vite + LightningCSS to minify, parse nesting, and handle vendor
-  autoprefixing at build time.
-- Avoid deep selector nesting (maximum 3 levels deep).
-- Optimize images using asset pipelines (WebP format, native `loading="lazy"`).
+- Minimize CSS size: no dead styles.
+- Vite + LightningCSS: minify, parse nesting, vendor autoprefixing at build time.
+- No deep selector nesting (max 3 levels).
+- Optimize images via asset pipelines (WebP, native `loading="lazy"`).
 
 ### Browser Compatibility
 
@@ -314,8 +307,8 @@ ancestor selector:
 
 ### Example 2: Modular CSS Architecture Split
 
-Below is the directory map and contents breakdown demonstrating how stylesheets
-must be separated by responsibility under `src/styles/`:
+Directory map + contents breakdown, how stylesheets separate by responsibility
+under `src/styles/`:
 
 src/styles/ ├── layout/ │ ├── header.css │ ├── main.css │ └── footer.css ├──
 components/ │ ├── button.css │ └── card.css ├── variables.css ├── reset.css ├──
