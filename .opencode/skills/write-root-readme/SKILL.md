@@ -9,13 +9,13 @@ description: Write or rewrite the repo-root README.md.
 
 - files to update:
   - `README.md` in the repo root
-- Read [example-readme.md](./references/example-readme.md) for a reference structure and style.
+- Read [example-readme.md](./references/example-readme.md): reference structure + style.
 - Badges are encouraged. See example README for useful badges.
   - Prefer badges in example README when applicable.
   - Prefer badges with live data over static badges.
 - Emojis are encouraged in headers.
 - Hero section is encouraged. Follow the format in example README strictly.
-  - Use GitHub Socialify to generate a project image. The generated image already includes logo, title, description, badges for stars, forks, issues, pulls.
+  - GitHub Socialify for project image. Generated image includes logo, title, description, badges: stars, forks, issues, pulls.
   - Include link to docs if exists.
   - Badges in hero section are encouraged. Limit hero section to 8 badges.
   - Limit hero section to 4 links.
