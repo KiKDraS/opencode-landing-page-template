@@ -1,6 +1,6 @@
 # Multi-Tab, Window & Popup Testing
 
-This file covers **single-user scenarios** with multiple browser tabs, windows, and popups. For **multi-user collaboration testing** (multiple users interacting simultaneously), see [multi-user.md](multi-user.md).
+Covers **single-user scenarios** w/ multiple tabs, windows, popups. **Multi-user collaboration testing** (multiple users interacting simultaneously): [multi-user.md](multi-user.md).
 
 ## Table of Contents
 
@@ -197,7 +197,7 @@ test("mock OAuth flow", async ({ page, context }) => {
 
 ### OAuth Fixture
 
-> **For comprehensive OAuth mocking patterns** (fixtures, multiple providers, SAML SSO), see [third-party.md](third-party.md#oauthsso-mocking). This section focuses on popup window handling mechanics for OAuth flows.
+> **Comprehensive OAuth mocking patterns** (fixtures, multiple providers, SAML SSO): [third-party.md](third-party.md#oauthsso-mocking). This section: popup window handling mechanics for OAuth flows.
 
 ## Multiple Windows
 
@@ -224,7 +224,7 @@ test("sync between windows", async ({ context }) => {
 
 ### Different Users in Different Windows
 
-> **For multi-user collaboration patterns** (admin/user interactions, real-time collaboration, role-based testing, concurrent actions), see [multi-user.md](multi-user.md). This file focuses on single-user scenarios with multiple tabs/windows/popups.
+> **Multi-user collaboration patterns** (admin/user interactions, real-time collaboration, role-based testing, concurrent actions): [multi-user.md](multi-user.md). This file: single-user scenarios w/ multiple tabs/windows/popups.
 
 ## Tab Coordination
 

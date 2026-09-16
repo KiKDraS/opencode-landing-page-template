@@ -489,8 +489,8 @@ export default defineConfig({
 
 ## Related References
 
-- **Debugging**: See [debugging.md](debugging.md) for trace viewer and inspector
-- **Fixtures**: See [fixtures-hooks.md](../core/fixtures-hooks.md) for worker-scoped isolation
-- **Performance**: See [performance.md](../infrastructure-ci-cd/performance.md) for parallel execution patterns
-- **Assertions**: See [assertions-waiting.md](../core/assertions-waiting.md) for auto-waiting patterns
-- **Global Setup**: See [global-setup.md](../core/global-setup.md) for setup vs fixtures decision
+- **Debugging**: [debugging.md](debugging.md) trace viewer and inspector
+- **Fixtures**: [fixtures-hooks.md](../core/fixtures-hooks.md) worker-scoped isolation
+- **Performance**: [performance.md](../infrastructure-ci-cd/performance.md) parallel execution patterns
+- **Assertions**: [assertions-waiting.md](../core/assertions-waiting.md) auto-waiting patterns
+- **Global Setup**: [global-setup.md](../core/global-setup.md) setup vs fixtures decision

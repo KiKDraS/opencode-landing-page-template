@@ -293,6 +293,6 @@ test.describe(
 
 ## Related References
 
-- **Test Organization**: See [test-suite-structure.md](test-suite-structure.md) for structuring tests
-- **Annotations**: See [annotations.md](annotations.md) for skip, fixme, fail, slow
-- **CI/CD Integration**: See [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) for pipeline setup
+- **Test Organization**: [test-suite-structure.md](test-suite-structure.md) structuring tests
+- **Annotations**: [annotations.md](annotations.md) skip, fixme, fail, slow
+- **CI/CD Integration**: [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) pipeline setup

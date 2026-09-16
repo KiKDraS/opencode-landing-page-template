@@ -1,9 +1,9 @@
 # Test Data Factories & Generators
 
-This file covers **reusable test data builders** (factories, Faker, data generators). For related topics:
+Covers **reusable test data builders** (factories, Faker, data generators). Related:
 
-- **Per-test database fixtures** (isolation, transaction rollback): See [fixtures-hooks.md](fixtures-hooks.md#database-fixtures)
-- **One-time database setup** (migrations, snapshots): See [global-setup.md](global-setup.md#database-patterns)
+- **Per-test database fixtures** (isolation, transaction rollback): [fixtures-hooks.md](fixtures-hooks.md#database-fixtures)
+- **One-time database setup** (migrations, snapshots): [global-setup.md](global-setup.md#database-patterns)
 
 ## Table of Contents
 
@@ -488,5 +488,5 @@ export const test = base.extend<{}, { db: DbTransaction }>({
 
 ## Related References
 
-- **Fixtures**: See [fixtures-hooks.md](fixtures-hooks.md) for fixture patterns
-- **API Testing**: See [test-suite-structure.md](test-suite-structure.md) for API mocking
+- **Fixtures**: [fixtures-hooks.md](fixtures-hooks.md) fixture patterns
+- **API Testing**: [test-suite-structure.md](test-suite-structure.md) API mocking

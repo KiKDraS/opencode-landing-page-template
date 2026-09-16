@@ -419,6 +419,6 @@ test.describe("Desktop features", () => {
 
 ## Related References
 
-- **Test Tags**: See [test-tags.md](test-tags.md) for tagging and filtering tests with `--grep`
-- **Test Organization**: See [test-suite-structure.md](test-suite-structure.md) for structuring tests
-- **Debugging**: See [debugging.md](../debugging/debugging.md) for troubleshooting
+- **Test Tags**: [test-tags.md](test-tags.md) tagging and filtering tests with `--grep`
+- **Test Organization**: [test-suite-structure.md](test-suite-structure.md) structuring tests
+- **Debugging**: [debugging.md](../debugging/debugging.md) troubleshooting

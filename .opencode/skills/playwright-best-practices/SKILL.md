@@ -9,7 +9,7 @@ metadata:
 
 # Playwright Best Practices
 
-This skill provides comprehensive guidance for all aspects of Playwright test development, from writing new tests to debugging and maintaining existing test suites.
+Comprehensive guidance for Playwright test development: writing new tests, debugging, maintaining test suites.
 
 ## Activity-Based Reference Guide
 
@@ -17,7 +17,7 @@ Consult these references based on what you're doing:
 
 ### Writing New Tests
 
-**When to use**: Creating new test files, writing test cases, implementing test scenarios
+**When to use**: New test files, test cases, test scenarios
 
 | Activity                            | Reference Files                                                                                                                               |
 | ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -45,7 +45,7 @@ Consult these references based on what you're doing:
 
 ### Mobile & Responsive Testing
 
-**When to use**: Testing mobile devices, touch interactions, responsive layouts
+**When to use**: Mobile devices, touch interactions, responsive layouts
 
 | Activity                        | Reference Files                                                                  |
 | ------------------------------- | -------------------------------------------------------------------------------- |
@@ -56,7 +56,7 @@ Consult these references based on what you're doing:
 
 ### Real-Time & Browser APIs
 
-**When to use**: Testing WebSockets, geolocation, permissions, multi-tab flows
+**When to use**: WebSockets, geolocation, permissions, multi-tab flows
 
 | Activity                        | Reference Files                                                                          |
 | ------------------------------- | ---------------------------------------------------------------------------------------- |
@@ -86,7 +86,7 @@ Consult these references based on what you're doing:
 
 ### Error & Edge Case Testing
 
-**When to use**: Testing error states, offline mode, network failures, validation
+**When to use**: Error states, offline mode, network failures, validation
 
 | Activity                       | Reference Files                                                                                       |
 | ------------------------------ | ----------------------------------------------------------------------------------------------------- |
@@ -99,7 +99,7 @@ Consult these references based on what you're doing:
 
 ### Multi-User & Collaboration Testing
 
-**When to use**: Testing features involving multiple users, roles, or real-time collaboration
+**When to use**: Features involving multiple users, roles, real-time collaboration
 
 | Activity                       | Reference Files                                                                      |
 | ------------------------------ | ------------------------------------------------------------------------------------ |
@@ -121,7 +121,7 @@ Consult these references based on what you're doing:
 
 ### Framework-Specific Testing
 
-**When to use**: Testing React, Angular, Vue, or Next.js applications
+**When to use**: React, Angular, Vue, or Next.js applications
 
 | Activity                  | Reference Files                     |
 | ------------------------- | ----------------------------------- |

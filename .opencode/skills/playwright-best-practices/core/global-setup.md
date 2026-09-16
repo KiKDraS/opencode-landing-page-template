@@ -37,7 +37,7 @@ export default defineConfig({
 });
 ```
 
-> **Authentication in Global Setup**: For authentication patterns using storage state in global setup, see [fixtures-hooks.md](fixtures-hooks.md#authentication-patterns). Setup projects are generally preferred for authentication as they provide access to Playwright fixtures.
+> **Authentication in Global Setup**: storage-state auth patterns: [fixtures-hooks.md](fixtures-hooks.md#authentication-patterns). Setup projects generally preferred for auth — access to Playwright fixtures.
 
 ### Global Setup with Return Value
 
@@ -123,10 +123,10 @@ export default globalTeardown;
 
 ## Database Patterns
 
-This section covers **one-time database setup** (migrations, snapshots, per-worker databases). For related topics:
+Covers **one-time database setup** (migrations, snapshots, per-worker databases). Related:
 
-- **Per-test database fixtures** (isolation, transaction rollback): See [fixtures-hooks.md](fixtures-hooks.md#database-fixtures)
-- **Test data factories** (builders, Faker): See [test-data.md](test-data.md)
+- **Per-test database fixtures** (isolation, transaction rollback): [fixtures-hooks.md](fixtures-hooks.md#database-fixtures)
+- **Test data factories** (builders, Faker): [test-data.md](test-data.md)
 
 ### Database Migration in Setup
 
@@ -341,7 +341,7 @@ export default defineConfig({
 });
 ```
 
-> **For complete authentication setup patterns**, see [fixtures-hooks.md](fixtures-hooks.md#authentication-patterns).
+> **For complete authentication setup patterns**: [fixtures-hooks.md](fixtures-hooks.md#authentication-patterns).
 
 ### Combining Both
 
@@ -414,7 +414,7 @@ async function globalSetup() {
 // Uses workerInfo.workerIndex to create unique data per worker
 ```
 
-> **For worker-scoped fixture patterns** (per-worker databases, unique test data, `workerIndex` isolation), see [fixtures-hooks.md](fixtures-hooks.md#isolate-test-data-between-parallel-workers).
+> **For worker-scoped fixture patterns** (per-worker databases, unique test data, `workerIndex` isolation): [fixtures-hooks.md](fixtures-hooks.md#isolate-test-data-between-parallel-workers).
 
 ## Anti-Patterns to Avoid
 
@@ -429,6 +429,6 @@ async function globalSetup() {
 
 ## Related References
 
-- **Fixtures & Auth**: See [fixtures-hooks.md](fixtures-hooks.md) for worker-scoped fixtures and auth patterns
-- **CI/CD**: See [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) for CI setup patterns
-- **Projects**: See [projects-dependencies.md](projects-dependencies.md) for project configuration
+- **Fixtures & Auth**: [fixtures-hooks.md](fixtures-hooks.md) worker-scoped fixtures and auth patterns
+- **CI/CD**: [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) CI setup patterns
+- **Projects**: [projects-dependencies.md](projects-dependencies.md) project configuration

@@ -6,24 +6,24 @@ description:
 license: Apache-2.0
 ---
 
+<!-- MODIFIED: token-compressed, semantics preserved. License: Apache-2.0. -->
+
 # Accessibility WCAG Skill
 
 ## Purpose
 
-This skill ensures all web content meets WCAG 2.1 Level AA standards for
-accessibility, making websites usable by people with disabilities including
-visual, auditory, motor, and cognitive impairments.
+All web content meets WCAG 2.1 Level AA. Usable by people w/ disabilities: visual, auditory, motor, cognitive.
 
 ## Rules
 
 ### WCAG 2.1 AA Requirements
 
-WCAG is organized around four principles (POUR):
+Four principles (POUR):
 
-1. **Perceivable** - Information must be presentable in ways users can perceive
-2. **Operable** - Interface must be operable by all users
-3. **Understandable** - Information and operation must be understandable
-4. **Robust** - Content must be robust enough for assistive technologies
+1. **Perceivable** - Info presentable in ways users can perceive
+2. **Operable** - Interface operable by all users
+3. **Understandable** - Info + operation understandable
+4. **Robust** - Content robust for assistive tech
 
 ### Perceivable Requirements
 
@@ -31,11 +31,11 @@ WCAG is organized around four principles (POUR):
 
 **MUST:**
 
-- Provide `alt` text for all meaningful images
-- Use empty `alt=""` for decorative images
-- Provide captions for audio/video content
-- Provide transcripts for audio-only content
-- Use descriptive link text (not "click here")
+- `alt` text for all meaningful images
+- Empty `alt=""` for decorative images
+- Captions for audio/video content
+- Transcripts for audio-only content
+- Descriptive link text (not "click here")
 
 **Examples:**
 
@@ -60,18 +60,18 @@ WCAG is organized around four principles (POUR):
 
 **MUST:**
 
-- Provide captions for videos (prerecorded and live)
-- Provide audio descriptions for video content
-- Provide transcripts for audio content
+- Captions for videos (prerecorded + live)
+- Audio descriptions for video content
+- Transcripts for audio content
 
 #### Adaptable Content (1.3)
 
 **MUST:**
 
-- Use semantic HTML (headings, lists, tables correctly)
-- Ensure content is accessible without CSS
-- Don't rely on sensory characteristics alone (color, shape, position)
-- Use proper reading order in DOM
+- Semantic HTML (headings, lists, tables correct)
+- Content accessible without CSS
+- No sensory-only cues (color, shape, position)
+- Proper reading order in DOM
 
 **Examples:**
 
@@ -95,13 +95,12 @@ WCAG is organized around four principles (POUR):
 
 **MUST:**
 
-- Maintain color contrast ratio of at least 4.5:1 for normal text
-- Maintain color contrast ratio of at least 3:1 for large text (18pt+ or 14pt+
-  bold)
-- Don't use color alone to convey information
-- Allow text resize up to 200% without loss of functionality
-- Avoid background audio that can't be paused/stopped
-- Ensure text can be selected and copied
+- Contrast ratio ≥4.5:1 normal text
+- Contrast ratio ≥3:1 large text (18pt+ or 14pt+ bold)
+- No color-only information
+- Text resize 200% w/o loss of functionality
+- No background audio that can't be paused/stopped
+- Text selectable + copyable
 
 **Color Contrast Examples:**
 
@@ -131,11 +130,11 @@ WCAG is organized around four principles (POUR):
 
 **MUST:**
 
-- Make all functionality available via keyboard
-- Provide visible focus indicators
-- Don't create keyboard traps
-- Ensure logical tab order
-- Provide keyboard shortcuts for complex interfaces
+- All functionality via keyboard
+- Visible focus indicators
+- No keyboard traps
+- Logical tab order
+- Keyboard shortcuts for complex interfaces
 
 **Examples:**
 
@@ -165,28 +164,28 @@ button:focus {
 
 **MUST:**
 
-- Allow users to turn off, adjust, or extend time limits
-- Provide pause, stop, hide for auto-updating content
+- Time limits can be turned off, adjusted, or extended
+- Pause, stop, hide for auto-updating content
 - No time limits unless essential (auctions, real-time games)
 
 #### Seizures and Physical Reactions (2.3)
 
 **MUST NOT:**
 
-- Use content that flashes more than 3 times per second
-- Create large flashing areas
+- Content flashing >3 times/sec
+- Large flashing areas
 
 #### Navigable (2.4)
 
 **MUST:**
 
-- Provide skip links to bypass repeated content
-- Use descriptive page titles
-- Ensure logical focus order
-- Provide clear link purposes
-- Offer multiple ways to navigate (menu, search, sitemap)
-- Provide visible focus indicators
-- Use clear headings and labels
+- Skip links bypass repeated content
+- Descriptive page titles
+- Logical focus order
+- Clear link purposes
+- Multiple nav ways (menu, search, sitemap)
+- Visible focus indicators
+- Clear headings + labels
 
 **Examples:**
 
@@ -209,10 +208,10 @@ button:focus {
 
 **MUST:**
 
-- Ensure touch targets are at least 44×44 pixels
-- Don't rely on device motion alone
-- Allow cancellation of pointer events
-- Make clickable label text match accessible name
+- Touch targets ≥44×44 pixels
+- No device-motion-only cues
+- Pointer events cancellable
+- Clickable label text matches accessible name
 
 ### Understandable Requirements
 
@@ -220,9 +219,9 @@ button:focus {
 
 **MUST:**
 
-- Specify language of page with `lang` attribute
-- Specify language of passages that differ from page language
-- Keep content at appropriate reading level (when possible)
+- Page language via `lang` attribute
+- Language of passages differing from page language
+- Appropriate reading level (when possible)
 
 **Examples:**
 
@@ -238,20 +237,20 @@ button:focus {
 
 **MUST:**
 
-- Don't change context on focus
-- Don't change context on input (without warning)
-- Use consistent navigation across pages
-- Use consistent identification of components
+- No context change on focus
+- No context change on input (w/o warning)
+- Consistent nav across pages
+- Consistent component identification
 
 #### Input Assistance (3.3)
 
 **MUST:**
 
-- Identify input errors clearly
-- Provide labels or instructions for user input
-- Provide error suggestions when possible
+- Input errors identified clearly
+- Labels/instructions for user input
+- Error suggestions when possible
 - Prevent errors in legal/financial transactions
-- Allow review/confirmation before final submission
+- Review/confirmation before final submission
 
 **Examples:**
 
@@ -282,58 +281,51 @@ button:focus {
 
 **MUST:**
 
-- Ensure HTML is valid (no duplicate IDs, proper nesting)
-- Use ARIA correctly (roles, states, properties)
-- Provide name, role, value for all UI components
-- Ensure status messages can be programmatically determined
+- Valid HTML (no duplicate IDs, proper nesting)
+- ARIA correct (roles, states, properties)
+- Name, role, value for all UI components
+- Status messages programmatically determinable
 
 **MUST REASON:**
 
 - **Tabindex on Containers — Reasoning Required:**
 
-  Adding `tabindex="0"` (or any positive integer) to a structural container
-  (`<div>`, `<section>`, `<article>`, `<nav>`, `<p>`, etc.) creates an explicit
-  tab stop in the focus order. Before adding it, you **MUST** reason through
-  each of the following questions:
+  `tabindex="0"` (or any positive integer) on structural container (`<div>`,
+  `<section>`, `<article>`, `<nav>`, `<p>`, etc.) creates explicit tab stop in
+  focus order. Before adding, **MUST** reason through each question:
 
-  **1. Does the container already contain native interactive elements?**
+  **1. Container already has native interactive elements?**
   - `<button>`, `<a>`, `<input>`, `<select>`, `<textarea>`, `<details>`, etc.
-    are already focusable.
-  - If yes: `tabindex` on the container adds an extra tab stop the user must Tab
-    through before reaching those elements. Proceed to question 2.
-  - If no (the container has only static text/images): `tabindex` may be
-    appropriate (e.g., a clickable card wrapper). Proceed to question 3.
+    already focusable.
+  - Yes: `tabindex` adds extra tab stop user must Tab through first. → Q2.
+  - No (only static text/images): `tabindex` may fit (e.g. clickable card
+    wrapper). → Q3.
 
-  **2. Does a WAI-ARIA pattern mandate it?**
+  **2. WAI-ARIA pattern mandates it?**
   - Some ARIA patterns require `tabindex="0"` on non-interactive containers —
-    for example:
-    - `role="tabpanel"` that has **no** focusable children
-    - `role="dialog"` with no focusable close button
+    e.g.:
+    - `role="tabpanel"` w/ **no** focusable children
+    - `role="dialog"` w/o focusable close button
     - `role="gridcell"` in interactive grids
-  - If the pattern **requires** it: document the reasoning in a code comment and
-    add `tabindex`.
-  - If the pattern **recommends** it but the container already has focusable
-    children: default to **no** `tabindex` to avoid the double-tab trap. The
-    native children provide sufficient keyboard access.
+  - Pattern **requires** it: document reasoning in code comment, add `tabindex`.
+  - Pattern **recommends** it but container has focusable children: default
+    **no** `tabindex` — avoid double-tab trap. Native children give keyboard
+    access.
 
-  **3. Can keyboard users reach all interactive content efficiently without
-  it?**
-  - Mentally tab through the page. Count tab stops. Does `tabindex` on the
-    container add a redundant stop?
-  - If the container's children are already reachable in 1–2 Tab presses:
-    **omit** `tabindex`.
-  - If the container wraps a large block that the user would otherwise skip over
-    entirely: `tabindex` may be warranted.
+  **3. Keyboard users reach all interactive content efficiently w/o it?**
+  - Mentally tab through page. Count tab stops. Container `tabindex` add
+    redundant stop?
+  - Children already reachable in 1–2 Tab presses: **omit** `tabindex`.
+  - Container wraps large block user would skip entirely: `tabindex` may be
+    warranted.
 
-  **4. Are you using `tabindex` as a CSS hook or for event delegation?**
-  - **If yes: stop.** Use a different selector or `data-*` attribute. `tabindex`
-    must only be used for focus semantics, never for styling or scripting
-    convenience.
+  **4. `tabindex` as CSS hook or event delegation?**
+  - **Yes: stop.** Use different selector or `data-*` attribute. `tabindex` only
+    for focus semantics, never styling/scripting convenience.
 
-  **Decision rule:** By default, **do not** add `tabindex` to containers that
-  have native interactive children. The only acceptable exceptions are
-  documented ARIA-mandated cases, and those must be justified with an inline
-  code comment.
+  **Decision rule:** default **do not** add `tabindex` to containers w/ native
+  interactive children. Only exceptions: documented ARIA-mandated cases,
+  justified w/ inline code comment.
 
 **ARIA Examples:**
 
@@ -364,9 +356,9 @@ button:focus {
 
 **Use ARIA When:**
 
-- Native HTML element doesn't exist for your component
-- Need to enhance semantic meaning
-- Need to communicate state or property not available in HTML
+- No native HTML element for component
+- Need enhanced semantic meaning
+- Need state/property not available in HTML
 
 **ARIA Landmarks:**
 
@@ -399,25 +391,25 @@ button:focus {
 
 1. **Keyboard Navigation**
    - Tab through all interactive elements
-   - Use Enter/Space to activate buttons/links
+   - Enter/Space activates buttons/links
    - Verify visible focus indicators
-   - Check for keyboard traps
+   - Check keyboard traps
 
 2. **Screen Reader**
-   - Test with NVDA (Windows), VoiceOver (Mac), or JAWS
-   - Verify all content is announced
-   - Check heading structure
-   - Test form labels and error messages
+   - NVDA (Windows), VoiceOver (Mac), or JAWS
+   - All content announced
+   - Heading structure
+   - Form labels + error messages
 
 3. **Color Contrast**
-   - Use WebAIM Contrast Checker
-   - Test all text/background combinations
-   - Check focus indicators
+   - WebAIM Contrast Checker
+   - All text/background combos
+   - Focus indicators
 
 4. **Zoom/Resize**
-   - Zoom to 200% and verify functionality
-   - Test with browser text-only zoom
-   - Verify responsive design works
+   - Zoom 200%, verify functionality
+   - Browser text-only zoom
+   - Responsive design works
 
 5. **Automated Tools**
    - WAVE (browser extension)
