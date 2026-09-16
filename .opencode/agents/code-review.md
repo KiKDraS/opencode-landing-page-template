@@ -13,18 +13,12 @@ skills.
 
 Use `caveman-review` for one-line feedback. See AGENTS.md for caveman levels.
 
-**Architecture binding:** read `.opencode/docs/trinity-architecture.md`.
-Gate = reject format `[ARCH]`.
-
-**Perf-reliability binding:** read `.opencode/docs/performance-reliability.md`.
-Gate = reject format `[PERF-REL]`.
-
 **Sync binding:** read `.opencode/docs/directive-sync.md` each invocation.
 Fresh reads. Violation → reject `[SYNC]`.
 
 ## Systemic audit checklist
 
-6 gates. One failure = rejection.
+7 gates. One failure = rejection.
 
 **1. Trinity** — run `trinity-architecture.md` §Trinity. Reject format
 `[ARCH]`.
@@ -42,6 +36,8 @@ Fresh reads. Violation → reject `[SYNC]`.
 
 **6. Perf-reliability** — run `performance-reliability.md` §Review checklist.
 Reject format `[PERF-REL]`.
+
+**7. Copy** — run `ux-writing/SKILL.md` standards. Reject format `[UX-W]`.
 
 ## Output
 
