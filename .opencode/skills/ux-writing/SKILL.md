@@ -5,21 +5,21 @@ description: Create user-centered, accessible interface copy (microcopy) for dig
 
 # UX Writing
 
-Write clear, concise, user-centered interface copy (UX text/microcopy) for digital products and experiences. This skill provides frameworks, patterns, and best practices for creating text that helps users accomplish their goals.
+Clear, concise, user-centered interface copy (UX text/microcopy) for digital products. Frameworks, patterns, best practices for text that helps users accomplish goals.
 
-**Compatible with:** Claude, Codex, Cursor, and other agents that support the agent skills specification.
+**Compatible with:** Claude, Codex, Cursor, other agents supporting the agent skills specification.
 
-**Note:** This skill works with Codex CLI/IDE, not ChatGPT. ChatGPT cannot install or use skills.
+**Note:** Works w/ Codex CLI/IDE, not ChatGPT. ChatGPT cannot install or use skills.
 
 ## When to Use This Skill
 
-Use this skill when:
-- Writing interface copy (buttons, labels, titles, messages, forms)
-- Editing existing UX text for clarity and effectiveness
-- Creating error messages, notifications, or success messages
-- Designing conversational flows or onboarding experiences
-- Establishing voice and tone for a product
-- Auditing product content for consistency and usability
+Use when:
+- Interface copy (buttons, labels, titles, messages, forms)
+- Editing UX text for clarity + effectiveness
+- Error messages, notifications, or success messages
+- Conversational flows or onboarding experiences
+- Establishing voice + tone for a product
+- Auditing product content for consistency + usability
 
 ## Core UX Writing Principles
 
@@ -28,35 +28,35 @@ Use this skill when:
 Every piece of UX text should be:
 
 1. **Purposeful** — Helps users or the business achieve goals
-2. **Concise** — Uses the fewest words possible without losing meaning
-3. **Conversational** — Sounds natural and human, not robotic
-4. **Clear** — Unambiguous, accurate, and easy to understand
+2. **Concise** — Fewest words possible w/o losing meaning
+3. **Conversational** — Natural + human, not robotic
+4. **Clear** — Unambiguous, accurate, easy to understand
 
 ### Key Best Practices
 
 **Conciseness**
-- Use 40-60 characters per line maximum
+- 40-60 characters per line maximum
 - Every word must have a job
 - Break dense text into scannable chunks
 - Front-load important information
 
 **Clarity**
-- Use plain language (7th grade reading level for general, 10th for professional)
-- Avoid jargon, idioms, and technical terms
-- Use consistent terminology throughout
-- Choose meaningful, specific verbs
+- Plain language (7th grade general, 10th professional)
+- No jargon, idioms, technical terms
+- Consistent terminology throughout
+- Meaningful, specific verbs
 
 **Conversational Tone**
 - Write how you speak
-- Use active voice 85% of the time
-- Include prepositions and articles
-- Avoid robotic phrasing
+- Active voice 85% of the time
+- Include prepositions + articles
+- No robotic phrasing
 
 **User-Centered**
-- Focus on user benefits, not features
-- Anticipate and answer user questions
-- Use second-person ("you") language
-- Match user's language and mental models
+- User benefits, not features
+- Anticipate + answer user questions
+- Second-person ("you") language
+- Match user's language + mental models
 
 ## UX Text Patterns
 
@@ -159,15 +159,15 @@ Apply these common patterns for interface elements.
 ## Voice and Tone
 
 ### Voice (Consistent Brand Personality)
-Voice is the consistent personality of the product. Establish voice using:
+Voice = consistent personality of the product. Establish via:
 - **Concepts**: 3-5 key brand principles/values
 - **Voice characteristics**: Descriptive adjectives for each concept
 - **Do/Don't examples**: Concrete examples showing voice in action
 
-See references/voice-chart-template.md for creating a voice chart.
+Voice chart: references/voice-chart-template.md
 
 ### Tone (Adaptive to Context)
-Tone is how voice adapts to specific situations. While voice remains constant, tone shifts based on user context and emotional state.
+Tone = how voice adapts to specific situations. Voice constant, tone shifts by user context + emotional state.
 
 **Tone Variables**
 - **Purpose**: Why user is seeing this text (information, action, confirmation)
@@ -241,7 +241,7 @@ Tone is how voice adapts to specific situations. While voice remains constant, t
 
 ## Editing Process
 
-Edit UX text in four phases:
+Edit UX text in 4 phases:
 
 ### Phase 1: Purposeful
 - Does text help user achieve their goal?
@@ -295,7 +295,7 @@ Edit UX text in four phases:
 
 ## Accessibility in UX Writing
 
-Writing accessible content ensures all users, including those using assistive technology, can understand and interact with your product.
+Accessible content: all users, incl. assistive tech users, understand + interact w/ your product.
 
 ### Core Accessibility Principles
 
@@ -343,7 +343,7 @@ Writing accessible content ensures all users, including those using assistive te
 
 ## UX Text Benchmarks
 
-Use these research-backed metrics to create effective UX text.
+Research-backed metrics for effective UX text.
 
 ### Sentence Length Targets
 
@@ -406,12 +406,12 @@ Use these research-backed metrics to create effective UX text.
 ## Resources
 
 This skill includes:
-- **references/accessibility-guidelines.md**: Comprehensive guide to writing accessible UX text for all users
-- **references/voice-chart-template.md**: Template for creating a product voice chart
-- **references/content-usability-checklist.md**: Comprehensive checklist for evaluating UX text quality
-- **references/patterns-detailed.md**: Extended examples of UX text patterns in different voices
-- **examples/real-world-improvements.md**: Before/after transformations with detailed analysis and scoring
-- **templates/error-message-template.md**: Fillable template for writing effective error messages
-- **templates/empty-state-template.md**: Guide for creating helpful empty states
-- **templates/onboarding-flow-template.md**: Framework for designing clear onboarding experiences
-- **docs/figma-integration.md**: Guide for using this skill with Figma MCP (Claude Code, Codex, and Cursor)
+- **references/accessibility-guidelines.md**: Comprehensive guide: accessible UX text for all users
+- **references/voice-chart-template.md**: Template: product voice chart
+- **references/content-usability-checklist.md**: Comprehensive checklist: UX text quality evaluation
+- **references/patterns-detailed.md**: Extended examples: UX text patterns in different voices
+- **examples/real-world-improvements.md**: Before/after transformations w/ detailed analysis + scoring
+- **templates/error-message-template.md**: Fillable template: effective error messages
+- **templates/empty-state-template.md**: Guide: helpful empty states
+- **templates/onboarding-flow-template.md**: Framework: clear onboarding experiences
+- **docs/figma-integration.md**: Guide: this skill w/ Figma MCP (Claude Code, Codex, Cursor)

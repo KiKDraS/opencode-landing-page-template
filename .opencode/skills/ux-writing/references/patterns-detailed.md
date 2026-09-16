@@ -1,6 +1,6 @@
 # UX Text Patterns — Detailed Examples
 
-This document provides extended examples of common UX text patterns applied across three different product voices: TAPP Transit (helpful, efficient, trustworthy), 'appee Social Game (playful, competitive, rewarding), and Sturgeon Club (sophisticated, exclusive, elegant).
+Extended examples of common UX text patterns across 3 product voices: TAPP Transit (helpful, efficient, trustworthy), 'appee Social Game (playful, competitive, rewarding), Sturgeon Club (sophisticated, exclusive, elegant).
 
 ## Titles
 

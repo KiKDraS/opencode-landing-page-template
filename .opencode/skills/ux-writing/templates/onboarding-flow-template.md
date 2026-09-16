@@ -1,6 +1,6 @@
 # Onboarding Flow Template
 
-Use this template to design clear, encouraging onboarding experiences that help users succeed quickly.
+Template: clear, encouraging onboarding experiences, users succeed quickly.
 
 ## Onboarding Principles
 

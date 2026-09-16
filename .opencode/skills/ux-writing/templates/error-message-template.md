@@ -1,6 +1,6 @@
 # Error Message Template
 
-Use this template to write clear, actionable error messages that help users recover.
+Template: clear, actionable error messages that help users recover.
 
 ## Structure
 
