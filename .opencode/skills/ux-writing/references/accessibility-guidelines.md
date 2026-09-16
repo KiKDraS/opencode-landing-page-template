@@ -1,11 +1,11 @@
 # Accessibility Guidelines for UX Writing
 
-Writing accessible content ensures all users—including those using assistive technology, experiencing cognitive differences, or facing situational limitations—can understand and interact with your product.
+Accessible content: all users — assistive tech users, cognitive differences, situational limitations — understand + interact w/ your product.
 
 ## Core Principles
 
 ### 1. Perceivable
-Users must be able to perceive the information being presented.
+Users must perceive presented information.
 
 **For UX Writers:**
 - Provide text alternatives for non-text content
@@ -69,7 +69,7 @@ Screen readers announce content linearly, reading:
 - ✅ Example: Label: "Email address", Placeholder: "name@example.com"
 
 **Error Messages**
-Screen readers read the field label + error message together, so write errors that make sense in that context.
+Screen readers read field label + error message together — write errors making sense in that context.
 - ❌ Poor: "Invalid" (announced as "Email address, invalid")
 - ✅ Good: "Must include @" (announced as "Email address, must include @")
 - ✅ Better: "Email must include @" (complete sentence)
@@ -387,4 +387,4 @@ Users experiencing stress, frustration, or urgency have reduced cognitive capaci
 
 ---
 
-**Remember**: Accessibility isn't a feature—it's a baseline requirement. Writing accessibly makes your product better for everyone, not just users with disabilities.
+**Remember**: Accessibility = baseline requirement, not a feature. Accessible writing = better product for everyone, not just users w/ disabilities.

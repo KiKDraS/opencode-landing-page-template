@@ -1,10 +1,10 @@
 # Voice Chart Template
 
-A voice chart helps establish consistent brand personality across all UX text. Use this template to define your product's voice.
+Voice chart: consistent brand personality across all UX text. Template to define product's voice.
 
 ## Structure
 
-A voice chart contains three key elements for each brand concept:
+Voice chart has 3 key elements per brand concept:
 
 1. **Concept** — A core brand principle or value
 2. **Voice Characteristics** — Adjectives describing how the concept manifests in writing
@@ -129,4 +129,4 @@ A voice chart contains three key elements for each brand concept:
 
 **Personality traits**: Playful, witty, conversational, casual, technical, sophisticated, humble, confident, empowering
 
-Choose characteristics that align with your brand and serve your users' needs in context.
+Choose characteristics aligning w/ brand + serving users' needs in context.

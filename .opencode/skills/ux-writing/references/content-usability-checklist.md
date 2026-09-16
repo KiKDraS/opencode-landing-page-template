@@ -1,6 +1,6 @@
 # Content Usability Checklist
 
-Use this checklist to evaluate UX text quality. Rate each criterion 0-10.
+Evaluate UX text quality. Rate each criterion 0-10.
 
 ## Concise
 

@@ -1,6 +1,6 @@
 # Empty State Template
 
-Use this template to guide users when content is absent and help them take action to populate the space.
+Template: guide users when content absent, help them take action to populate.
 
 ## Structure
 
