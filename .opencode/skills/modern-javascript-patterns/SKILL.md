@@ -5,7 +5,7 @@ description: Master ES6+ features including async/await, destructuring, spread o
 
 # Modern JavaScript Patterns
 
-Comprehensive guide for mastering modern JavaScript (ES6+) features, functional programming patterns, and best practices for writing clean, maintainable, and performant code.
+Comprehensive guide: modern JavaScript (ES6+) features, functional programming patterns, best practices for clean, maintainable, performant code.
 
 ## When to Use This Skill
 

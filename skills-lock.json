@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "ux-writing": {
+      "source": "content-designer/ux-writing-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "7a9be24c109c69070451aaa30f75417825cb6b85435c775ad58185c52449cbfc"
+    },
+    "write-root-readme": {
+      "source": "liblaf/skills",
+      "sourceType": "github",
+      "skillPath": "skills/write-root-readme/SKILL.md",
+      "computedHash": "5e6a21b14327b3fbd3e23c6146d778e899e135a272e4e63cd5902425029ab951"
+    }
+  }
+}

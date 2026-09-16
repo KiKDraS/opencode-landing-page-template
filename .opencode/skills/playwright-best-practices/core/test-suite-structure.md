@@ -110,13 +110,13 @@ test.describe("Checkout Flow", () => {
 
 ## Component Tests
 
-Test individual components in isolation using Playwright Component Testing.
+Components in isolation via Playwright Component Testing.
 
 ```bash
 npm init playwright@latest -- --ct
 ```
 
-For comprehensive component testing patterns including mounting, props, events, slots, mocking, and framework-specific examples (React, Vue, Svelte), see **[component-testing.md](../testing-patterns/component-testing.md)**.
+Comprehensive CT patterns — mounting, props, events, slots, mocking, framework examples (React, Vue, Svelte): **[component-testing.md](../testing-patterns/component-testing.md)**.
 
 ## API Tests
 
@@ -179,7 +179,7 @@ test("handles slow API", async ({ page }) => {
 });
 ```
 
-For advanced patterns (GraphQL mocking, HAR recording, request modification, network throttling), see **[network-advanced.md](../advanced/network-advanced.md)**.
+Advanced — GraphQL mocking, HAR recording, request modification, network throttling: **[network-advanced.md](../advanced/network-advanced.md)**.
 
 ## Visual Regression Tests
 
@@ -320,10 +320,10 @@ tests/
 
 ## Related References
 
-- **Component Testing**: See [component-testing.md](../testing-patterns/component-testing.md) for comprehensive CT patterns
-- **Projects**: See [projects-dependencies.md](projects-dependencies.md) for project-based filtering
-- **Page Objects**: See [page-object-model.md](page-object-model.md) for organizing page interactions
-- **Test Data**: See [fixtures-hooks.md](fixtures-hooks.md) for managing test data
+- **Component Testing**: [component-testing.md](../testing-patterns/component-testing.md) comprehensive CT patterns
+- **Projects**: [projects-dependencies.md](projects-dependencies.md) project-based filtering
+- **Page Objects**: [page-object-model.md](page-object-model.md) organizing page interactions
+- **Test Data**: [fixtures-hooks.md](fixtures-hooks.md) managing test data
 
 ## Tagging & Filtering
 
@@ -358,4 +358,4 @@ npx playwright test --grep-invert @slow
 npx playwright test --grep "@smoke|@critical"
 ```
 
-For project-based filtering and advanced project configuration, see **[projects-dependencies.md](projects-dependencies.md)**.
+Project-based filtering + advanced project config: **[projects-dependencies.md](projects-dependencies.md)**.

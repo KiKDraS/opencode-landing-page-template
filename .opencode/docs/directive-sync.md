@@ -2,6 +2,11 @@
 
 Bound docs + skills live. Change → adapt same run.
 
+**Bound set** (`@frontend-dev`, `@code-review`):
+- Docs: `trinity-architecture.md`, `performance-reliability.md`, this file.
+- Skills: `ux-writing`, `seo`, `html-css-best-practices`,
+  `accessibility-wcag`, `modern-javascript-patterns`.
+
 **Mandate** (`@frontend-dev`, `@code-review`):
 - Load linked skills via Skill tool every run.
 - Docs/skills updated → apply new rules immediately, same run. No defer.

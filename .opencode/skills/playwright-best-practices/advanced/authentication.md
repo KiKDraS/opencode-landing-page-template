@@ -355,7 +355,7 @@ A typical OAuth flow works like this:
 
 In tests you can short-circuit step 2 with `page.route()`: intercept the outbound request to the provider and respond with a `302` redirect straight to your callback route, supplying a mock `code` and `state`. Your backend still executes its normal callback handler — the only part that's mocked is the provider's authorization page.
 
-For cases where you want to skip the browser redirect entirely, a second approach calls a **test-only API endpoint** that creates the session server-side and returns the session cookie directly.
+Skip browser redirect entirely: second approach calls **test-only API endpoint** creating session server-side, returns session cookie directly.
 
 ```typescript
 // tests/oauth-login.spec.ts — mock the callback route

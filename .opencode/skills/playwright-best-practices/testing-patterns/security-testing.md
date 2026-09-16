@@ -412,7 +412,7 @@ test("CSP blocks inline scripts", async ({ page }) => {
 });
 ```
 
-> **For comprehensive console monitoring** (fixtures, allowed patterns, fail on errors), see [console-errors.md](../debugging/console-errors.md).
+> **For comprehensive console monitoring** (fixtures, allowed patterns, fail on errors): [console-errors.md](../debugging/console-errors.md).
 
 ## Anti-Patterns to Avoid
 
@@ -425,6 +425,6 @@ test("CSP blocks inline scripts", async ({ page }) => {
 
 ## Related References
 
-- **Authentication**: See [fixtures-hooks.md](../core/fixtures-hooks.md) for auth fixtures
-- **Multi-User**: See [multi-user.md](../advanced/multi-user.md) for role-based testing
-- **Error Testing**: See [error-testing.md](../debugging/error-testing.md) for validation testing
+- **Authentication**: [fixtures-hooks.md](../core/fixtures-hooks.md) auth fixtures
+- **Multi-User**: [multi-user.md](../advanced/multi-user.md) role-based testing
+- **Error Testing**: [error-testing.md](../debugging/error-testing.md) validation testing

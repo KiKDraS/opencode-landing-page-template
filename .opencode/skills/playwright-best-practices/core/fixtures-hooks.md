@@ -142,7 +142,7 @@ test.extend({
 
 ### Worker Scope
 
-Shared across tests in the same worker (each worker gets its own instance; tests in different workers do not share it):
+Shared across tests in same worker (each worker gets own instance; tests in different workers don't share it):
 
 ```typescript
 type WorkerFixtures = {
@@ -164,7 +164,7 @@ export const test = base.extend<{}, WorkerFixtures>({
 
 ### Isolate test data between parallel workers
 
-When tests in different workers touch the same backend or DB (e.g. same user, same tenant), they can collide and cause flaky failures. Use `testInfo.workerIndex` (or `process.env.TEST_WORKER_INDEX`) in a worker-scoped fixture to create unique data per worker:
+Tests in different workers touching same backend/DB (same user, tenant) collide → flaky failures. Use `testInfo.workerIndex` (or `process.env.TEST_WORKER_INDEX`) in worker-scoped fixture to create unique data per worker:
 
 ```typescript
 import { test as baseTest } from "@playwright/test";
@@ -186,7 +186,7 @@ export const test = baseTest.extend<{}, WorkerFixtures>({
 });
 ```
 
-Then each worker uses a distinct user (e.g. `user-1`, `user-2`), so parallel workers do not overwrite each other’s data.
+Then each worker uses distinct user (e.g. `user-1`, `user-2`) → parallel workers don't overwrite each other's data.
 
 ## Hooks
 
@@ -335,10 +335,10 @@ export const test = base.extend<{ adminPage: Page; userPage: Page }>({
 
 ## Database Fixtures
 
-This section covers **per-test database fixtures** (isolation, transaction rollback). For related topics:
+Covers **per-test database fixtures** (isolation, transaction rollback). Related:
 
-- **Test data factories** (builders, Faker): See [test-data.md](test-data.md)
-- **One-time database setup** (migrations, snapshots): See [global-setup.md](global-setup.md#database-patterns)
+- **Test data factories** (builders, Faker): [test-data.md](test-data.md)
+- **One-time database setup** (migrations, snapshots): [global-setup.md](global-setup.md#database-patterns)
 
 ### Transaction Rollback Pattern
 
@@ -412,6 +412,6 @@ export const test = base.extend<TestData>({
 
 ## Related References
 
-- **Page Objects with fixtures**: See [page-object-model.md](page-object-model.md) for POM patterns
-- **Test organization**: See [test-suite-structure.md](test-suite-structure.md) for test structure
-- **Debugging fixture issues**: See [debugging.md](../debugging/debugging.md) for troubleshooting
+- **Page Objects with fixtures**: [page-object-model.md](page-object-model.md) POM patterns
+- **Test organization**: [test-suite-structure.md](test-suite-structure.md) test structure
+- **Debugging fixture issues**: [debugging.md](../debugging/debugging.md) troubleshooting

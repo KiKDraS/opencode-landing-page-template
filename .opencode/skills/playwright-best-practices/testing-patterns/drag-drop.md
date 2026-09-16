@@ -11,7 +11,7 @@
 7. [Variations](#variations)
 8. [Tips](#tips)
 
-> **When to use**: Testing drag-and-drop interactions — sortable lists, kanban boards, file drop zones, or repositionable elements.
+> **When to use**: Drag-and-drop interactions — sortable lists, kanban boards, file drop zones, repositionable elements.
 
 ---
 

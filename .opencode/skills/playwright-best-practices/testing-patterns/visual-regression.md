@@ -40,7 +40,7 @@ npx playwright test --update-snapshots
 
 **Use when**: Page contains timestamps, avatars, ad slots, relative dates, random images, or A/B variants.
 
-The `mask` option overlays a solid box over specified locators before capturing.
+`mask` overlays solid box over specified locators before capture.
 
 ```typescript
 test('analytics panel with masked dynamic elements', async ({ page }) => {
@@ -84,7 +84,7 @@ test('freeze timestamps before capture', async ({ page }) => {
 
 ### Disabling Animations
 
-**Use when**: Always. CSS animations and transitions are the primary cause of flaky visual diffs.
+**Use when**: Always. CSS animations + transitions = primary cause of flaky visual diffs.
 
 ```typescript
 test('renders without animation interference', async ({ page }) => {
@@ -109,7 +109,7 @@ export default defineConfig({
 });
 ```
 
-When `animations: 'disabled'` is set, Playwright injects CSS forcing animation/transition duration to 0s, waits for running animations to finish, then captures.
+`animations: 'disabled'` → Playwright injects CSS forcing animation/transition duration 0s, waits for running animations to finish, then captures.
 
 For JavaScript-driven animations (GSAP, Framer Motion), wait for stability:
 
@@ -131,7 +131,7 @@ test('page with JS animations', async ({ page }) => {
 
 ### Configuring Thresholds
 
-**Use when**: Minor rendering differences from anti-aliasing, font hinting, or sub-pixel rendering cause false failures.
+**Use when**: Anti-aliasing, font hinting, sub-pixel rendering differences cause false failures.
 
 | Option | Controls | Typical Value |
 |---|---|---|
@@ -184,11 +184,11 @@ export default defineConfig({
 
 ### CI Configuration
 
-**Use when**: Running visual tests in CI. Consistent rendering is critical—the same test must produce identical screenshots every time.
+**Use when**: Visual tests in CI. Consistent rendering critical — same test must produce identical screenshots every time.
 
-**The problem**: Font rendering and anti-aliasing differ across operating systems. macOS snapshots won't match Linux.
+**The problem**: Font rendering + anti-aliasing differ across OS. macOS snapshots won't match Linux.
 
-**The solution**: Run visual tests in Docker using the official Playwright container. Generate and update snapshots from the same container.
+**The solution**: Visual tests in Docker via official Playwright container. Generate + update snapshots from same container.
 
 **GitHub Actions with Docker**
 
@@ -289,7 +289,7 @@ test('element screenshot isolates component', async ({ page }) => {
 
 ### Responsive Visual Testing
 
-**Use when**: Application has responsive breakpoints requiring verification at different viewport sizes.
+**Use when**: Responsive breakpoints need verification at different viewport sizes.
 
 ```typescript
 const breakpoints = [
@@ -419,7 +419,7 @@ npx playwright test --project=chromium --update-snapshots
    npx playwright test
    npx playwright show-report
    ```
-   The report shows expected, actual, and diff images side-by-side.
+   The report shows expected, actual, diff images side-by-side.
 
 2. If changes are intentional, update:
    ```bash
@@ -448,9 +448,9 @@ npx playwright test --grep @visual --update-snapshots
 
 ### Cross-Browser Visual Testing
 
-**Use when**: Users span Chrome, Firefox, Safari and you need per-browser rendering verification.
+**Use when**: Users span Chrome, Firefox, Safari, need per-browser rendering verification.
 
-Playwright separates snapshots by project name automatically. Each browser gets its own baseline—browsers render fonts and shadows differently.
+Playwright separates snapshots by project name automatically. Each browser gets own baseline — browsers render fonts + shadows differently.
 
 ```typescript
 // playwright.config.ts
@@ -478,7 +478,7 @@ export default defineConfig({
 });
 ```
 
-**Strategy**: Run visual tests in a single browser (Chromium on Linux in CI) to minimize snapshot count. Add other browsers only when you have actual cross-browser rendering bugs:
+**Strategy**: single browser (Chromium on Linux in CI) minimizes snapshot count. Add browsers only for actual cross-browser rendering bugs:
 
 ```typescript
 // playwright.config.ts

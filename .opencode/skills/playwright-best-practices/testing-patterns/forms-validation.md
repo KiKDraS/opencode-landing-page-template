@@ -41,7 +41,7 @@ await expect(page.getByText("Username is required")).toBeVisible();
 
 ### Auto-Complete and Typeahead Fields
 
-**Use when**: Testing search fields, address lookups, mention pickers, or any input that shows suggestions as the user types.
+**Use when**: Search fields, address lookups, mention pickers, any input showing suggestions as user types.
 
 ```typescript
 test("select from typeahead suggestions", async ({ page }) => {
@@ -142,7 +142,7 @@ test("dependent dropdown chains", async ({ page }) => {
 
 ### Multi-Step Forms and Wizards
 
-**Use when**: The form spans multiple pages or steps, with next/previous navigation and per-step validation.
+**Use when**: Form spans multiple pages/steps, next/previous navigation, per-step validation.
 
 ```typescript
 test("complete a multi-step booking wizard", async ({ page }) => {
@@ -214,7 +214,7 @@ test("wizard supports going back without losing data", async ({ page }) => {
 
 ### Form Submission and Response Handling
 
-**Use when**: Testing what happens after a form is submitted — success messages, redirects, error responses from the server, and loading states during submission.
+**Use when**: Post-submit behavior — success messages, redirects, server error responses, loading states during submission.
 
 ```typescript
 test("successful form submission shows confirmation", async ({ page }) => {
@@ -279,7 +279,7 @@ test("form redirects after successful submission", async ({ page }) => {
 
 ### Filling Basic Form Fields
 
-**Use when**: Testing any form with standard HTML inputs — text, email, password, number, textarea, select, checkbox, radio.
+**Use when**: Any form w/ standard HTML inputs — text, email, password, number, textarea, select, checkbox, radio.
 
 ```typescript
 test("fill and submit a signup form", async ({ page }) => {
@@ -313,7 +313,7 @@ test("fill and submit a signup form", async ({ page }) => {
 
 ### Date and Time Inputs
 
-**Use when**: Testing native `<input type="date">`, `<input type="time">`, `<input type="datetime-local">`, or third-party date pickers.
+**Use when**: Native `<input type="date">`, `<input type="time">`, `<input type="datetime-local">`, or third-party date pickers.
 
 ```typescript
 test("fill native date and time inputs", async ({ page }) => {
@@ -339,7 +339,7 @@ test("interact with a third-party date picker", async ({ page }) => {
 
 ### Required Field Validation
 
-**Use when**: Testing that the form shows appropriate error messages when required fields are empty.
+**Use when**: Form shows appropriate error messages when required fields empty.
 
 ```typescript
 test("shows validation errors for empty required fields", async ({ page }) => {
@@ -381,7 +381,7 @@ test("native HTML5 validation with required attribute", async ({ page }) => {
 
 ### Format Validation and Custom Rules
 
-**Use when**: Testing email format, phone number format, password strength, and business-specific validation rules.
+**Use when**: Email/phone format, password strength, business-specific validation rules.
 
 ```typescript
 test("validates email format", async ({ page }) => {
@@ -444,7 +444,7 @@ test("validates custom business rule — minimum amount", async ({ page }) => {
 
 ### Form Reset Testing
 
-**Use when**: Testing "clear form" or "reset" functionality, verifying that fields return to their default values.
+**Use when**: "clear form"/"reset" functionality, fields return to default values.
 
 ```typescript
 test("reset button clears all fields to defaults", async ({ page }) => {

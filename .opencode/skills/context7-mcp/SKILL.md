@@ -3,54 +3,54 @@ name: context7-mcp
 description: This skill should be used when the user asks about libraries, frameworks, API references, or needs code examples. Activates for setup questions, code generation involving libraries, or mentions of specific frameworks like React, Vue, Next.js, Prisma, Supabase, etc.
 ---
 
-When the user asks about libraries, frameworks, or needs code examples, use Context7 to fetch current documentation instead of relying on training data.
+User asks libs/frameworks/API refs/code examples → fetch current docs via Context7. Never training-data answers.
 
 ## When to Use This Skill
 
-Activate this skill when the user:
+Activate when user:
 
-- Asks setup or configuration questions ("How do I configure Next.js middleware?")
-- Requests code involving libraries ("Write a Prisma query for...")
-- Needs API references ("What are the Supabase auth methods?")
-- Mentions specific frameworks (React, Vue, Svelte, Express, Tailwind, etc.)
+- Setup/config Q ("How do I configure Next.js middleware?")
+- Code w/ libs ("Write a Prisma query for...")
+- API refs ("What are the Supabase auth methods?")
+- Framework mentions (React, Vue, Svelte, Express, Tailwind, etc.)
 
 ## How to Fetch Documentation
 
 ### Step 1: Resolve the Library ID
 
-Call `resolve-library-id` with:
+Call `resolve-library-id`:
 
-- `libraryName`: The library name extracted from the user's question
-- `query`: The user's full question (improves relevance ranking)
+- `libraryName`: lib name from user Q
+- `query`: user full Q (better relevance ranking)
 
 ### Step 2: Select the Best Match
 
-From the resolution results, choose based on:
+From resolution results:
 
-- Exact or closest name match to what the user asked for
-- Higher benchmark scores indicate better documentation quality
-- If the user mentioned a version (e.g., "React 19"), prefer version-specific IDs
+- Exact/closest name match to user ask
+- Higher benchmark score → better docs quality
+- Version mentioned (e.g. "React 19") → prefer version-specific IDs
 
 ### Step 3: Fetch the Documentation
 
-Call `query-docs` with:
+Call `query-docs`:
 
-- `libraryId`: The selected Context7 library ID (e.g., `/vercel/next.js`)
-- `query`: The user's specific question, scoped to a single concept
+- `libraryId`: selected Context7 ID (e.g. `/vercel/next.js`)
+- `query`: user specific Q, one concept only
 
-If the user's question spans multiple distinct concepts (e.g. routing and auth and caching), make a separate `query-docs` call per concept with the same library ID, unless the question is about how the concepts interact — combined queries dilute ranking and return shallow results for each topic.
+Multi-concept Q (e.g. routing+auth+caching) → separate `query-docs` per concept, same libraryId. Exception: Q about concepts interacting → single query. Combined queries dilute ranking → shallow results per topic.
 
 ### Step 4: Use the Documentation
 
-Incorporate the fetched documentation into your response:
+Into response:
 
-- Answer the user's question using current, accurate information
-- Include relevant code examples from the docs
-- Cite the library version when relevant
+- Answer user Q w/ current accurate info
+- Relevant code examples from docs
+- Cite lib version when relevant
 
 ## Guidelines
 
-- **Be specific**: Pass the user's full question as the query for better results, but keep each query to a single concept
-- **One topic per query**: Split multi-topic questions into separate `query-docs` calls — resolve the library ID once, then query per concept, unless the question is about how the concepts interact
-- **Version awareness**: When users mention versions ("Next.js 15", "React 19"), use version-specific library IDs if available from the resolution step
-- **Prefer official sources**: When multiple matches exist, prefer official/primary packages over community forks
+- **Be specific**: user full Q as query, best results. One concept per query.
+- **One topic per query**: split multi-topic Q → separate `query-docs`. Resolve library ID once → query per concept. Exception: Q about concepts interacting.
+- **Version awareness**: version mentioned ("Next.js 15", "React 19") → version-specific IDs if available from resolution
+- **Prefer official sources**: multiple matches → official/primary over community forks
