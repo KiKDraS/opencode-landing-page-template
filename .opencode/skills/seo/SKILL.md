@@ -9,7 +9,7 @@ metadata:
 
 # SEO optimization
 
-Search engine optimization based on Lighthouse SEO audits and Google Search guidelines. Focus on technical SEO, on-page optimization, and structured data.
+SEO per Lighthouse audits + Google Search guidelines. Focus: technical SEO, on-page, structured data.
 
 ## SEO fundamentals
 
@@ -95,9 +95,9 @@ Sitemap: https://example.com/sitemap.xml
 ```
 
 **Sitemap best practices:**
-- Maximum 50,000 URLs or 50MB per sitemap
-- Use sitemap index for larger sites
-- Include only canonical, indexable URLs
+- Max 50,000 URLs or 50MB per sitemap
+- Sitemap index for larger sites
+- Only canonical, indexable URLs
 - Update `lastmod` when content changes
 - Submit to Google Search Console
 
@@ -114,12 +114,12 @@ https://example.com/products/item/category/subcategory/blue-widget-2024-sale-dis
 ```
 
 **URL guidelines:**
-- Use hyphens, not underscores
+- Hyphens, not underscores
 - Lowercase only
-- Keep short (< 75 characters)
-- Include target keywords naturally
+- Short (< 75 chars)
+- Target keywords naturally
 - Avoid parameters when possible
-- Use HTTPS always
+- HTTPS always
 
 ### HTTPS & security
 
@@ -154,9 +154,9 @@ X-Frame-Options: DENY
 ```
 
 **Title tag guidelines:**
-- 50-60 characters (Google truncates ~60)
-- Primary keyword near the beginning
-- Unique for every page
+- 50-60 chars (Google truncates ~60)
+- Primary keyword near beginning
+- Unique per page
 - Brand name at end (unless homepage)
 - Action-oriented when appropriate
 
@@ -171,10 +171,10 @@ X-Frame-Options: DENY
 ```
 
 **Meta description guidelines:**
-- 150-160 characters
-- Include primary keyword naturally
+- 150-160 chars
+- Primary keyword naturally
 - Compelling call-to-action
-- Unique for every page
+- Unique per page
 - Matches page content
 
 ### Heading structure
@@ -195,9 +195,9 @@ X-Frame-Options: DENY
 ```
 
 **Heading guidelines:**
-- Single `<h1>` per page (the main topic)
-- Logical hierarchy (don't skip levels)
-- Include keywords naturally
+- Single `<h1>` per page (main topic)
+- Logical hierarchy (no skipped levels)
+- Keywords naturally
 - Descriptive, not generic
 
 ### Image SEO
@@ -215,10 +215,10 @@ X-Frame-Options: DENY
 ```
 
 **Image guidelines:**
-- Descriptive filenames with keywords
-- Alt text describes the image content
-- Compressed and properly sized
-- WebP/AVIF with fallbacks
+- Descriptive filenames w/ keywords
+- Alt text describes image content
+- Compressed + properly sized
+- WebP/AVIF w/ fallbacks
 - Lazy load below-fold images
 
 ### Internal linking
@@ -234,11 +234,11 @@ X-Frame-Options: DENY
 ```
 
 **Linking guidelines:**
-- Descriptive anchor text with keywords
-- Link to relevant internal pages
-- Reasonable number of links per page
+- Descriptive anchor text w/ keywords
+- Link relevant internal pages
+- Reasonable link count per page
 - Fix broken links promptly
-- Use breadcrumbs for hierarchy
+- Breadcrumbs for hierarchy
 
 ---
 
