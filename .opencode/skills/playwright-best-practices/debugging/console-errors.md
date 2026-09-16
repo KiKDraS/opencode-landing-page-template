@@ -416,5 +416,5 @@ test("capture console for debugging", async ({ page }, testInfo) => {
 
 ## Related References
 
-- **Debugging**: See [debugging.md](debugging.md) for troubleshooting
-- **Error Testing**: See [error-testing.md](error-testing.md) for error scenarios
+- **Debugging**: [debugging.md](debugging.md) troubleshooting
+- **Error Testing**: [error-testing.md](error-testing.md) error scenarios

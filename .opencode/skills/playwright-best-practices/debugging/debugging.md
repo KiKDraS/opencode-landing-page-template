@@ -40,7 +40,7 @@ npx playwright test --headed
 npx playwright test --debug
 ```
 
-You can also set `slowMo` to add an `N` ms delay per action, making test execution easier to follow while debugging.
+You can also set `slowMo` to add an `N` ms delay per action, easier to follow while debugging.
 
 ```typescript
 // playwright.config.ts
@@ -497,8 +497,8 @@ test("with attachments", async ({ page }, testInfo) => {
 
 ## Related References
 
-- **Flaky tests**: See [flaky-tests.md](flaky-tests.md) for comprehensive flaky test guide
-- **Locator issues**: See [locators.md](../core/locators.md) for selector strategies
-- **Waiting problems**: See [assertions-waiting.md](../core/assertions-waiting.md) for waiting patterns
-- **Test isolation**: See [fixtures-hooks.md](../core/fixtures-hooks.md) for fixtures and isolation
-- **CI issues**: See [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) for CI configuration
+- **Flaky tests**: [flaky-tests.md](flaky-tests.md) comprehensive flaky test guide
+- **Locator issues**: [locators.md](../core/locators.md) selector strategies
+- **Waiting problems**: [assertions-waiting.md](../core/assertions-waiting.md) waiting patterns
+- **Test isolation**: [fixtures-hooks.md](../core/fixtures-hooks.md) fixtures and isolation
+- **CI issues**: [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) CI configuration

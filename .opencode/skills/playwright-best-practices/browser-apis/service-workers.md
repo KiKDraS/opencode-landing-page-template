@@ -254,7 +254,7 @@ test("cache updates on new version", async ({ page }) => {
 
 ## Offline Testing
 
-This section covers **offline-first apps (PWAs)** that are designed to work offline using service workers, caching, and background sync. For testing **unexpected network failures** (error recovery, graceful degradation), see [error-testing.md](error-testing.md#offline-testing).
+Covers **offline-first apps (PWAs)** designed to work offline via service workers, caching, background sync. **Unexpected network failures** (error recovery, graceful degradation): [error-testing.md](error-testing.md#offline-testing).
 
 ### Simulating Offline Mode
 
