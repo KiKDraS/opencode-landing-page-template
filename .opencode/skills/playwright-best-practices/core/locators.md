@@ -23,7 +23,7 @@ Use locators in this order of preference:
 
 ### getByRole
 
-Most robust approach - matches how users and assistive technology perceive the page.
+Most robust — matches how users + assistive technology perceive page.
 
 ```typescript
 // Buttons
@@ -152,7 +152,7 @@ page.getByRole("listitem").nth(2); // 0-indexed
 
 ### Waiting for Elements
 
-Locators auto-wait for actionability by default. For explicit state waiting:
+Locators auto-wait for actionability by default. Explicit state waiting:
 
 ```typescript
 await page.getByRole("button").waitFor({ state: "visible" });
@@ -237,6 +237,6 @@ const exists = (await page.getByRole("button").count()) > 0;
 
 ## Related References
 
-- **Debugging selector issues**: See [debugging.md](../debugging/debugging.md) for troubleshooting
-- **Waiting for elements**: See [assertions-waiting.md](assertions-waiting.md) for waiting strategies
-- **Using in Page Objects**: See [page-object-model.md](page-object-model.md) for organizing locators
+- **Debugging selector issues**: [debugging.md](../debugging/debugging.md) troubleshooting
+- **Waiting for elements**: [assertions-waiting.md](assertions-waiting.md) waiting strategies
+- **Using in Page Objects**: [page-object-model.md](page-object-model.md) organizing locators

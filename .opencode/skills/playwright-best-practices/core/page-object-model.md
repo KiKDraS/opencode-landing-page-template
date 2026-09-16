@@ -11,7 +11,7 @@
 
 ## Overview
 
-Page Object Model encapsulates page structure and interactions, providing:
+POM encapsulates page structure + interactions:
 
 - **Maintainability**: Change selectors in one place
 - **Reusability**: Share page interactions across tests
@@ -310,6 +310,6 @@ test("can login", async ({ loginPage }) => {
 
 ## Related References
 
-- **Locator strategies**: See [locators.md](locators.md) for selecting elements
-- **Fixtures**: See [fixtures-hooks.md](fixtures-hooks.md) for advanced fixture patterns
-- **Test organization**: See [test-suite-structure.md](test-suite-structure.md) for structuring test suites
+- **Locator strategies**: [locators.md](locators.md) selecting elements
+- **Fixtures**: [fixtures-hooks.md](fixtures-hooks.md) advanced fixture patterns
+- **Test organization**: [test-suite-structure.md](test-suite-structure.md) structuring test suites

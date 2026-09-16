@@ -203,7 +203,7 @@ export default defineConfig({
 
 ### Authentication Setup
 
-Setup projects are the recommended way to handle authentication. They run before your main test projects and can use Playwright fixtures.
+Setup projects = recommended way to handle authentication. Run before main test projects, can use Playwright fixtures.
 
 > **For complete authentication patterns** (storage state, multiple auth states, auth fixtures), see [fixtures-hooks.md](fixtures-hooks.md#authentication-patterns).
 
@@ -448,6 +448,6 @@ teardown("cleanup", async ({ request }) => {
 
 ## Related References
 
-- **Global Setup**: See [global-setup.md](global-setup.md) for globalSetup vs setup projects
-- **Fixtures**: See [fixtures-hooks.md](fixtures-hooks.md) for authentication patterns
-- **CI/CD**: See [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) for running projects in CI
+- **Global Setup**: [global-setup.md](global-setup.md) globalSetup vs setup projects
+- **Fixtures**: [fixtures-hooks.md](fixtures-hooks.md) authentication patterns
+- **CI/CD**: [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) running projects in CI

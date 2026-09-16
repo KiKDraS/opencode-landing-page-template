@@ -11,7 +11,7 @@
 
 ## Web-First Assertions
 
-Auto-retry until condition is met or timeout. Always prefer these over generic assertions.
+Auto-retry until condition met or timeout. Always prefer over generic assertions.
 
 ### Locator Assertions
 
@@ -80,7 +80,7 @@ await expect(response).not.toBeOK();
 
 ## Generic Assertions
 
-Use for non-UI values. Do NOT retry - execute immediately.
+For non-UI values. Do NOT retry — execute immediately.
 
 ```typescript
 // Equality
@@ -356,6 +356,6 @@ await expect(page.getByRole("button")).toBeVisible({ timeout: 10000 });
 
 ## Related References
 
-- **Debugging timeout issues**: See [debugging.md](../debugging/debugging.md) for troubleshooting
-- **Fixing flaky tests**: See [debugging.md](../debugging/debugging.md) for race condition solutions
-- **Network interception**: See [test-suite-structure.md](test-suite-structure.md) for API mocking
+- **Debugging timeout issues**: [debugging.md](../debugging/debugging.md) troubleshooting
+- **Fixing flaky tests**: [debugging.md](../debugging/debugging.md) race condition solutions
+- **Network interception**: [test-suite-structure.md](test-suite-structure.md) API mocking

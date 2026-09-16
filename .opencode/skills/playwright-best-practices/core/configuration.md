@@ -10,7 +10,7 @@
 6. [Troubleshooting](#troubleshooting)
 7. [Related](#related)
 
-> **When to use**: Setting up a new project, adjusting timeouts, adding browser targets, configuring CI behavior, or managing environment-specific settings.
+> **When to use**: New project setup, adjusting timeouts, adding browser targets, configuring CI behavior, managing environment-specific settings.
 
 ## CLI Quick Reference
 
@@ -125,7 +125,7 @@ export default defineConfig({
 
 ### Environment-Specific Configuration
 
-**Use when**: Tests run against dev, staging, and production environments.
+**Use when**: Tests against dev, staging, prod environments.
 
 ```ts
 // playwright.config.ts
@@ -156,7 +156,7 @@ TEST_ENV=prod npx playwright test --grep @smoke
 
 ### Setup Project with Dependencies
 
-**Use when**: Tests need shared authentication state before running.
+**Use when**: Tests need shared auth state before running.
 
 ```ts
 // playwright.config.ts
@@ -207,7 +207,7 @@ setup('authenticate', async ({ page }) => {
 
 ### webServer with Build Step
 
-**Use when**: Tests need a running application server managed by Playwright.
+**Use when**: Tests need app server managed by Playwright.
 
 ```ts
 // playwright.config.ts
@@ -233,7 +233,7 @@ export default defineConfig({
 
 ### globalSetup / globalTeardown
 
-**Use when**: One-time non-browser work like seeding a database. Runs once per test run.
+**Use when**: One-time non-browser work (e.g. DB seeding). Runs once per test run.
 
 ```ts
 // playwright.config.ts
@@ -269,7 +269,7 @@ export default async function globalTeardown(config: FullConfig) {
 
 ### Environment Variables with .env
 
-**Use when**: Managing secrets, URLs, or feature flags without hardcoding.
+**Use when**: Secrets, URLs, feature flags w/o hardcoding.
 
 ```bash
 # .env.example (commit this)
@@ -305,7 +305,7 @@ npm install -D dotenv
 
 ### Tag-Based Test Filtering
 
-**Use when**: Running subsets of tests in different CI stages (PR vs nightly).
+**Use when**: Test subsets in different CI stages (PR vs nightly).
 
 ```ts
 // playwright.config.ts
