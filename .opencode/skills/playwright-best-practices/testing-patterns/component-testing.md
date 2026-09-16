@@ -496,5 +496,5 @@ test("Svelte component", async ({ mount }) => {
 
 ## Related References
 
-- **Accessibility**: See [accessibility.md](accessibility.md) for a11y testing in components
-- **Fixtures**: See [fixtures-hooks.md](../core/fixtures-hooks.md) for shared test setup
+- **Accessibility**: [accessibility.md](accessibility.md) a11y testing in components
+- **Fixtures**: [fixtures-hooks.md](../core/fixtures-hooks.md) shared test setup

@@ -1,6 +1,6 @@
 # File Upload & Download Testing
 
-> For advanced patterns (progress tracking, cancellation, retry logic), see [file-upload-download.md](./file-upload-download.md)
+> Advanced patterns (progress tracking, cancellation, retry logic): [file-upload-download.md](./file-upload-download.md)
 
 ## Table of Contents
 
@@ -373,5 +373,5 @@ test("verify JSON export", async ({ page }, testInfo) => {
 
 ## Related References
 
-- **Fixtures**: See [fixtures-hooks.md](../core/fixtures-hooks.md) for download fixture patterns
-- **Debugging**: See [debugging.md](../debugging/debugging.md) for troubleshooting download issues
+- **Fixtures**: [fixtures-hooks.md](../core/fixtures-hooks.md) download fixture patterns
+- **Debugging**: [debugging.md](../debugging/debugging.md) troubleshooting download issues

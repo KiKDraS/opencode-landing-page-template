@@ -504,6 +504,6 @@ export const test = base.extend({
 
 ## Related References
 
-- **Fixtures**: See [fixtures-hooks.md](../core/fixtures-hooks.md) for custom fixture patterns
-- **Component Testing**: See [component-testing.md](component-testing.md) for renderer testing patterns
-- **Debugging**: See [debugging.md](../debugging/debugging.md) for troubleshooting
+- **Fixtures**: [fixtures-hooks.md](../core/fixtures-hooks.md) custom fixture patterns
+- **Component Testing**: [component-testing.md](component-testing.md) renderer testing patterns
+- **Debugging**: [debugging.md](../debugging/debugging.md) troubleshooting

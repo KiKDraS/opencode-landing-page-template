@@ -472,5 +472,5 @@ test("no performance regression", async ({ page }) => {
 
 ## Related References
 
-- **Performance Optimization**: See [performance.md](../infrastructure-ci-cd/performance.md) for test execution performance
-- **CI/CD**: See [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) for CI integration
+- **Performance Optimization**: [performance.md](../infrastructure-ci-cd/performance.md) test execution performance
+- **CI/CD**: [ci-cd.md](../infrastructure-ci-cd/ci-cd.md) CI integration

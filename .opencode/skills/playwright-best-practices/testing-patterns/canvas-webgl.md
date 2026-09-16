@@ -488,6 +488,6 @@ test("game state changes", async ({ page }) => {
 
 ## Related References
 
-- **Visual Testing**: See [test-suite-structure.md](../core/test-suite-structure.md) for visual regression setup
-- **Mobile Gestures**: See [mobile-testing.md](../advanced/mobile-testing.md) for touch interactions
-- **Performance**: See [performance-testing.md](performance-testing.md) for FPS monitoring
+- **Visual Testing**: [test-suite-structure.md](../core/test-suite-structure.md) visual regression setup
+- **Mobile Gestures**: [mobile-testing.md](../advanced/mobile-testing.md) touch interactions
+- **Performance**: [performance-testing.md](performance-testing.md) FPS monitoring
