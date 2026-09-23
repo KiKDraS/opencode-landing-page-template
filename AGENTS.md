@@ -39,6 +39,7 @@ Strict. No files outside schema.
 | All agents                        | this AGENTS.md                              |
 | `frontend-dev`+`code-review` arch | `.opencode/docs/trinity-architecture.md`    |
 | `frontend-dev`+`code-review` perf | `.opencode/docs/performance-reliability.md` |
+| Writing (UI copy + docs prose)    | `.opencode/skills/no-ai-slop/SKILL.md`      |
 | Single agent                      | its agent file                              |
 
 Convention: directive for all agents → AGENTS.md. ≥2 agents → doc in
