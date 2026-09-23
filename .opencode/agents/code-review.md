@@ -37,7 +37,8 @@ Fresh reads. Violation → reject `[SYNC]`.
 **6. Perf-reliability** — run `performance-reliability.md` §Review checklist.
 Reject format `[PERF-REL]`.
 
-**7. Copy** — run `ux-writing/SKILL.md` standards. Reject format `[UX-W]`.
+**7. Copy** — `ux-writing/SKILL.md` + `no-ai-slop/SKILL.md` (detect mode).
+Reject `[UX-W]`/`[SLOP]`.
 
 ## Output
 
