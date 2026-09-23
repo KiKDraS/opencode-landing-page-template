@@ -16,6 +16,9 @@ Fresh reads. Violation → rework.
 Run `performance-reliability.md` §Write checklist + `trinity-architecture.md`
 §Readability. Fail → rework.
 
+UI copy: run `.opencode/skills/no-ai-slop/SKILL.md` (edit mode) on all copy
+before submit. Fail → rework.
+
 ## Done
 
 Feature complete when: `trinity-architecture.md` §Trinity + §Readability +
