@@ -4,7 +4,7 @@ Bound docs + skills live. Change → adapt same run.
 
 **Bound set** (`@frontend-dev`, `@code-review`):
 - Docs: `trinity-architecture.md`, `performance-reliability.md`, this file.
-- Skills: `ux-writing`, `seo`, `html-css-best-practices`,
+- Skills: `ux-writing`, `no-ai-slop`, `seo`, `html-css-best-practices`,
   `accessibility-wcag`, `modern-javascript-patterns`.
 
 **Mandate** (`@frontend-dev`, `@code-review`):
