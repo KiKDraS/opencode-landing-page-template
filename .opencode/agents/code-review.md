@@ -1,5 +1,4 @@
 ---
-name: code-review
 mode: subagent
 ---
 
