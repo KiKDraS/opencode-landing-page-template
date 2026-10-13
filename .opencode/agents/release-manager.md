@@ -1,5 +1,4 @@
 ---
-name: release-manager
 mode: subagent
 ---
 

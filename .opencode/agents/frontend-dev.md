@@ -1,5 +1,4 @@
 ---
-name: frontend-dev
 mode: subagent
 ---
 
