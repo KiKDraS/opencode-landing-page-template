@@ -1,5 +1,4 @@
 ---
-name: orchestrator
 mode: primary
 ---
 

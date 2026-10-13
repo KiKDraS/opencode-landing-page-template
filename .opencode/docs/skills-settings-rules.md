@@ -19,7 +19,7 @@ articles/filler/pleasantries/hedging. Fragments OK. Pattern:
 explanations, no pleasantries. If reading: caveman ultra. If writing: caveman
 ultra.
 
-**Context7 MCP optional.** Needs `CONTEXT7_API_KEY` env + `"enabled": true` in
+**Context7 MCP optional.** Needs `CONTEXT7_API_KEY` env + `"disabled": false` in
 `opencode.json`. Off by default → server absent. Use websearch instead. Spec:
 `.opencode/skills/context7-mcp/SKILL.md`
 
