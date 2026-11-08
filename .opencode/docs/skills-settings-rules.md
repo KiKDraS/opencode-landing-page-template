@@ -29,4 +29,7 @@ call paths + dynamic-dispatch grep misses. Insufficient/empty context? →
 `@explore` (Task tool, subagent `explore`). Still no answer → grep/Read last.
 No `.codegraph/` dir or no index? → `@explore` first. Indexing user choice.
 
+**Reads use tools.** `read`/`glob`/`grep` for file reads. Unlisted shell reads
+prompt. `find` banned — `-exec` can mutate.
+
 ---
