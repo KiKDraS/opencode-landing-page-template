@@ -37,30 +37,10 @@ opencode-landing-page-template).**
 
 ## Auth
 
-**Token priority:**
-```bash
-# 1. Secret file
-if [ -f .opencode/secrets/github-token ]; then
-  TOKEN=$(cat .opencode/secrets/github-token | tr -d '\n')
-# 2. Git credential helper
-elif TOKEN=$(echo "protocol=https
-host=github.com
-" | git credential fill 2>/dev/null | grep "^password=" | cut -d= -f2) && [ -n "$TOKEN" ]; then
-  : # Token found
-# 3. Environment variable
-elif [ -n "$GITHUB_TOKEN" ]; then
-  TOKEN="$GITHUB_TOKEN"
-else
-  echo "Error: No GitHub token found."
-  echo "Options:"
-  echo "  1. Create .opencode/secrets/github-token"
-  echo "  2. Configure git credentials"
-  echo "  3. Export GITHUB_TOKEN"
-  exit 1
-fi
-```
-
-**CLI check:** `command -v gh`. Present → `gh` commands. Missing → `curl`+REST.
+`gh auth status` ok → `gh`. No token file read: `.opencode/secrets/` blocked by
+env-protection.
+`gh` missing/unauthenticated → `$GITHUB_TOKEN` + `curl` REST. Token missing →
+stop, ask user.
 
 ## PR Template
 
