@@ -6,12 +6,16 @@
   ],
   "permissions": [
     { "action": "shell", "resource": "*", "effect": "ask" },
-    { "action": "shell", "resource": "git *", "effect": "allow" },
-    { "action": "shell", "resource": "npm *", "effect": "allow" },
-    { "action": "shell", "resource": "pnpm *", "effect": "allow" },
-    { "action": "shell", "resource": "rm *", "effect": "deny" },
+    { "action": "shell", "resource": "ls *", "effect": "allow" },
+    { "action": "shell", "resource": "cat *", "effect": "allow" },
     { "action": "shell", "resource": "grep *", "effect": "allow" },
-    { "action": "playwright*", "resource": "*", "effect": "ask" }
+    { "action": "shell", "resource": "git status *", "effect": "allow" },
+    { "action": "shell", "resource": "git diff *", "effect": "allow" },
+    { "action": "shell", "resource": "git log *", "effect": "allow" },
+    { "action": "shell", "resource": "npm run build *", "effect": "allow" },
+    { "action": "shell", "resource": "npm run dev *", "effect": "allow" },
+    { "action": "shell", "resource": "npx playwright test *", "effect": "allow" },
+    { "action": "shell", "resource": "rm *", "effect": "deny" }
   ],
   "plugins": ["@dietrichgebert/ponytail"],
   "mcp": {
@@ -52,34 +56,29 @@
     },
     "release-manager": {
       "description": "Release coordinator. Creates release branches, runs pre-release checks, merges to main, tags versions.",
-      "mode": "subagent"
+      "mode": "subagent",
+      "permissions": [
+        { "action": "shell", "resource": "*", "effect": "allow" },
+        { "action": "shell", "resource": "rm *", "effect": "deny" },
+        { "action": "shell", "resource": "git push --force*", "effect": "deny" },
+        { "action": "shell", "resource": "git reset --hard *", "effect": "deny" },
+        { "action": "shell", "resource": "git clean *", "effect": "deny" }
+      ]
     },
     "playwright-test-planner": {
       "description": "Use this agent to create a comprehensive test plan markdown by exploring the web interface.",
       "mode": "subagent",
-      "system": "{file:.opencode/prompts/playwright-test-planner.md}",
-      "permissions": [
-        { "action": "playwright-test*browser_*", "resource": "*", "effect": "allow" },
-        { "action": "playwright-test*planner_*", "resource": "*", "effect": "allow" }
-      ]
+      "system": "{file:.opencode/prompts/playwright-test-planner.md}"
     },
     "playwright-test-generator": {
       "description": "Use this agent to automatically generate real Playwright TypeScript source code files from written test plans.",
       "mode": "subagent",
-      "system": "{file:.opencode/prompts/playwright-test-generator.md}",
-      "permissions": [
-        { "action": "playwright-test*browser_*", "resource": "*", "effect": "allow" },
-        { "action": "playwright-test*generator_*", "resource": "*", "effect": "allow" }
-      ]
+      "system": "{file:.opencode/prompts/playwright-test-generator.md}"
     },
     "playwright-test-healer": {
       "description": "Use this agent to run, debug, and auto-heal/fix failing Playwright tests dynamically.",
       "mode": "subagent",
-      "system": "{file:.opencode/prompts/playwright-test-healer.md}",
-      "permissions": [
-        { "action": "playwright-test*browser_*", "resource": "*", "effect": "allow" },
-        { "action": "playwright-test*test_*", "resource": "*", "effect": "allow" }
-      ]
+      "system": "{file:.opencode/prompts/playwright-test-healer.md}"
     }
   }
 }
